@@ -1,20 +1,1046 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultation des paiements</title>
-</head>
+<script>
 
-<body>
+/************************************************************
+ * URL APPS SCRIPT
+ ************************************************************/
 
-    <h1>Consultation des paiements</h1>
+const APPS_SCRIPT_URL =
+  'TON_URL_APPS_SCRIPT_ICI';
 
-    <p>La page de consultation fonctionne.</p>
 
-    <a href="index.html">
-        ← Retour à l'accueil
-    </a>
+/************************************************************
+ * STOCKAGE LOCAL
+ ************************************************************/
 
-</body>
-</html>
+const DB_NAME =
+  'GestionPaiementDB';
+
+const DB_VERSION = 1;
+
+const STORE_PAIEMENTS =
+  'paiements_en_attente';
+
+
+/************************************************************
+ * OUVERTURE INDEXEDDB
+ ************************************************************/
+
+function ouvrirDB() {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const request =
+        indexedDB.open(
+          DB_NAME,
+          DB_VERSION
+        );
+
+
+      request.onupgradeneeded =
+        function(event) {
+
+          const db =
+            event.target.result;
+
+
+          if (
+            !db.objectStoreNames.contains(
+              STORE_PAIEMENTS
+            )
+          ) {
+
+            db.createObjectStore(
+              STORE_PAIEMENTS,
+              {
+                keyPath: 'id',
+                autoIncrement: true
+              }
+            );
+
+          }
+
+        };
+
+
+      request.onsuccess =
+        function() {
+
+          resolve(
+            request.result
+          );
+
+        };
+
+
+      request.onerror =
+        function() {
+
+          reject(
+            request.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * CONSULTATION SERVEUR
+ ************************************************************/
+
+async function rechercherServeur(
+  dateDebut,
+  dateFin,
+  etablissement
+) {
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method: 'POST',
+
+        headers: {
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'rechercherPaiements',
+
+            dateDebut:
+              dateDebut,
+
+            dateFin:
+              dateFin,
+
+            etablissement:
+              etablissement
+
+          })
+
+      }
+    );
+
+
+  const resultat =
+    await response.json();
+
+
+  if (
+    !resultat.success
+  ) {
+
+    throw new Error(
+      resultat.message
+    );
+
+  }
+
+
+  return resultat.paiements;
+
+}
+
+
+/************************************************************
+ * CONSULTATION LOCALE
+ ************************************************************/
+
+async function rechercherLocal(
+  dateDebut,
+  dateFin,
+  etablissement
+) {
+
+  /*
+   * Ici on ne possède que les paiements
+   * qui ont été enregistrés hors connexion
+   * sur cet appareil.
+   */
+
+  const db =
+    await ouvrirDB();
+
+
+  const elements =
+    await new Promise(
+      function(resolve, reject) {
+
+        const transaction =
+          db.transaction(
+            STORE_PAIEMENTS,
+            'readonly'
+          );
+
+
+        const store =
+          transaction.objectStore(
+            STORE_PAIEMENTS
+          );
+
+
+        const request =
+          store.getAll();
+
+
+        request.onsuccess =
+          function() {
+
+            resolve(
+              request.result
+            );
+
+          };
+
+
+        request.onerror =
+          function() {
+
+            reject(
+              request.error
+            );
+
+          };
+
+      }
+    );
+
+
+  const debut =
+    new Date(
+      dateDebut +
+      'T00:00:00'
+    );
+
+
+  const fin =
+    new Date(
+      dateFin +
+      'T23:59:59'
+    );
+
+
+  const resultat = [];
+
+
+  elements.forEach(
+    function(element) {
+
+      const data =
+        element.data;
+
+
+      const date =
+        new Date(
+          element.dateCreation
+        );
+
+
+      /*
+       * Filtre établissement
+       */
+
+      if (
+        etablissement &&
+        data.etablissement !==
+        etablissement
+      ) {
+
+        return;
+
+      }
+
+
+      /*
+       * Filtre date
+       */
+
+      if (
+        date >= debut &&
+        date <= fin
+      ) {
+
+        const montant =
+          calculerMontantLocal(
+            data
+          );
+
+
+        const motif =
+          construireMotifLocal(
+            data
+          );
+
+
+        resultat.push({
+
+          date:
+            formatDateLocale(
+              date
+            ),
+
+          matricule:
+            data.matricule,
+
+          nom:
+            data.nom,
+
+          prenom:
+            data.prenom,
+
+          classe:
+            data.classe,
+
+          montant:
+            montant,
+
+          etablissement:
+            data.etablissement,
+
+          motif:
+            motif
+
+        });
+
+      }
+
+    }
+  );
+
+
+  resultat.reverse();
+
+
+  return resultat;
+
+}
+
+
+/************************************************************
+ * CALCUL LOCAL
+ ************************************************************/
+
+function valeurOuZero(
+  valeur
+) {
+
+  const nombre =
+    Number(
+      valeur || 0
+    );
+
+
+  return isNaN(nombre)
+    ? 0
+    : nombre;
+
+}
+
+
+function calculerMontantLocal(
+  data
+) {
+
+  let total = 0;
+
+
+  total +=
+    valeurOuZero(
+      data.fraisGeneraux
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.droit
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.cravate
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.teeShirt
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.extra
+    );
+
+
+  if (
+    data.ecolage === true
+  ) {
+
+    total +=
+      valeurOuZero(
+        data.montantEcolage
+      ) *
+      valeurOuZero(
+        data.nombreMois
+      );
+
+  }
+
+
+  return total;
+
+}
+
+
+/************************************************************
+ * MOTIF LOCAL
+ ************************************************************/
+
+function construireMotifLocal(
+  data
+) {
+
+  const motifs = [];
+
+
+  if (
+    valeurOuZero(
+      data.fraisGeneraux
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Frais généraux'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.droit
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Droit'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.cravate
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Cravate'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.teeShirt
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Tee-shirt'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.extra
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Extra'
+    );
+
+  }
+
+
+  if (
+    data.ecolage === true &&
+    valeurOuZero(
+      data.montantEcolage
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Écolage ' +
+      data.nombreMois +
+      ' mois'
+    );
+
+  }
+
+
+  return motifs.join(
+    ' + '
+  );
+
+}
+
+
+/************************************************************
+ * FORMAT DATE
+ ************************************************************/
+
+function formatDateLocale(
+  date
+) {
+
+  const jour =
+    String(
+      date.getDate()
+    ).padStart(2, '0');
+
+
+  const mois =
+    String(
+      date.getMonth() + 1
+    ).padStart(2, '0');
+
+
+  const annee =
+    date.getFullYear();
+
+
+  const heures =
+    String(
+      date.getHours()
+    ).padStart(2, '0');
+
+
+  const minutes =
+    String(
+      date.getMinutes()
+    ).padStart(2, '0');
+
+
+  return (
+    jour +
+    '/' +
+    mois +
+    '/' +
+    annee +
+    ' ' +
+    heures +
+    ':' +
+    minutes
+  );
+
+}
+
+
+/************************************************************
+ * RECHERCHE PRINCIPALE
+ ************************************************************/
+
+async function rechercher() {
+
+  const dateDebut =
+    document
+      .getElementById(
+        'dateDebut'
+      )
+      .value;
+
+
+  const dateFin =
+    document
+      .getElementById(
+        'dateFin'
+      )
+      .value;
+
+
+  const etablissement =
+    document
+      .getElementById(
+        'etablissement'
+      )
+      .value;
+
+
+  if (
+    !dateDebut ||
+    !dateFin
+  ) {
+
+    alert(
+      'Veuillez sélectionner les deux dates.'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    dateDebut >
+    dateFin
+  ) {
+
+    alert(
+      'La date de début doit être antérieure ou égale à la date de fin.'
+    );
+
+    return;
+
+  }
+
+
+  afficherLoading();
+
+
+  try {
+
+    let paiements;
+
+
+    /*
+     * INTERNET
+     */
+
+    if (
+      navigator.onLine
+    ) {
+
+      try {
+
+        paiements =
+          await rechercherServeur(
+            dateDebut,
+            dateFin,
+            etablissement
+          );
+
+      } catch (erreur) {
+
+        /*
+         * Serveur inaccessible :
+         * consultation locale
+         */
+
+        paiements =
+          await rechercherLocal(
+            dateDebut,
+            dateFin,
+            etablissement
+          );
+
+      }
+
+    }
+
+    /*
+     * HORS CONNEXION
+     */
+
+    else {
+
+      paiements =
+        await rechercherLocal(
+          dateDebut,
+          dateFin,
+          etablissement
+        );
+
+    }
+
+
+    afficherResultats(
+      paiements
+    );
+
+
+  } catch (erreur) {
+
+    afficherErreur(
+      erreur
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * AFFICHAGE LOADING
+ ************************************************************/
+
+function afficherLoading() {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
+
+}
+
+
+/************************************************************
+ * PROTECTION HTML
+ ************************************************************/
+
+function echapperHTML(
+  valeur
+) {
+
+  return String(
+    valeur ?? ''
+  )
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+/************************************************************
+ * RESULTATS
+ ************************************************************/
+
+function afficherResultats(
+  paiements
+) {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+
+  const tbody =
+    document.getElementById(
+      'paymentsTable'
+    );
+
+
+  tbody.innerHTML = '';
+
+
+  let total = 0;
+
+
+  if (
+    !paiements ||
+    paiements.length === 0
+  ) {
+
+    document
+      .getElementById(
+        'tableContainer'
+      )
+      .style.display =
+      'none';
+
+
+    document
+      .getElementById(
+        'emptyMessage'
+      )
+      .style.display =
+      'block';
+
+
+    document
+      .getElementById(
+        'nombreResultats'
+      )
+      .textContent =
+      '0';
+
+
+    document
+      .getElementById(
+        'totalPaiements'
+      )
+      .textContent =
+      '0';
+
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
+
+
+  paiements.forEach(
+    function(paiement) {
+
+      const montant =
+        Number(
+          paiement.montant
+        ) || 0;
+
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+          ${echapperHTML(
+            paiement.date
+          )}
+        </td>
+
+        <td>
+          <strong>
+            ${echapperHTML(
+              paiement.matricule
+            )}
+          </strong>
+        </td>
+
+        <td>
+          <strong>
+            ${echapperHTML(
+              paiement.nom
+            )}
+          </strong>
+        </td>
+
+        <td>
+          ${echapperHTML(
+            paiement.prenom
+          )}
+        </td>
+
+        <td>
+          ${echapperHTML(
+            paiement.classe
+          )}
+        </td>
+
+        <td>
+          ${echapperHTML(
+            paiement.etablissement
+          )}
+        </td>
+
+        <td>
+          <span class="motif">
+            ${echapperHTML(
+              paiement.motif
+            )}
+          </span>
+        </td>
+
+        <td class="amount">
+          ${montant.toLocaleString(
+            'fr-FR'
+          )} Ar
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        tr
+      );
+
+
+      total +=
+        montant;
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      'nombreResultats'
+    )
+    .textContent =
+    paiements.length;
+
+
+  document
+    .getElementById(
+      'totalPaiements'
+    )
+    .textContent =
+    total.toLocaleString(
+      'fr-FR'
+    );
+
+}
+
+
+/************************************************************
+ * ERREUR
+ ************************************************************/
+
+function afficherErreur(
+  erreur
+) {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+
+  alert(
+    'Une erreur est survenue : ' +
+    (
+      erreur.message ||
+      erreur
+    )
+  );
+
+}
+
+
+/************************************************************
+ * RETOUR INDEX
+ ************************************************************/
+
+function retourIndex() {
+
+  window.location.href =
+    'index.html';
+
+}
+
+
+/************************************************************
+ * DATES PAR DEFAUT
+ ************************************************************/
+
+function dateAujourdhui() {
+
+  const maintenant =
+    new Date();
+
+
+  const annee =
+    maintenant.getFullYear();
+
+
+  const mois =
+    String(
+      maintenant.getMonth() + 1
+    ).padStart(2, '0');
+
+
+  const jour =
+    String(
+      maintenant.getDate()
+    ).padStart(2, '0');
+
+
+  return (
+    annee +
+    '-' +
+    mois +
+    '-' +
+    jour
+  );
+
+}
+
+
+document
+  .getElementById(
+    'dateDebut'
+  )
+  .value =
+  dateAujourdhui();
+
+
+document
+  .getElementById(
+    'dateFin'
+  )
+  .value =
+  dateAujourdhui();
+
+</script>
