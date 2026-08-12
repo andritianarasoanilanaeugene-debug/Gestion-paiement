@@ -5,10 +5,18 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#7f1734"
+>
 
 <title>Consultation des paiements</title>
+
 
 <style>
 
@@ -19,576 +27,267 @@
 }
 
 body {
-
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
+  font-family: "Segoe UI", Arial, sans-serif;
   background: #f1f5f9;
-
   color: #1e293b;
-
   min-height: 100vh;
-
-  padding: 25px 20px;
-
+  padding: 20px;
 }
 
 .container {
-
-  max-width: 1200px;
-
+  max-width: 1250px;
   margin: auto;
-
 }
 
 .header {
-
-  background:
-    linear-gradient(
-      135deg,
-      #6b1026,
-      #8f1d3e
-    );
+  background: linear-gradient(
+    135deg,
+    #6b1026,
+    #8f1d3e
+  );
 
   color: white;
-
-  padding: 22px 25px;
-
+  padding: 20px 25px;
   border-radius: 16px;
-
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 
   box-shadow:
     0 10px 30px
-    rgba(107,16,38,0.25);
+    rgba(107,16,38,.22);
 
   display: flex;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   align-items: center;
-
   gap: 20px;
-
 }
 
 .header h1 {
-
   font-size: 25px;
-
   margin-bottom: 5px;
-
 }
 
 .header p {
-
-  opacity: 0.85;
-
+  opacity: .85;
   font-size: 13px;
-
 }
 
-.btn-back {
-
+.btn-navigation {
   border: none;
-
-  background:
-    rgba(255,255,255,0.16);
-
+  background: rgba(255,255,255,.16);
   color: white;
-
-  padding: 11px 17px;
-
+  padding: 11px 16px;
   border-radius: 10px;
-
   font-size: 13px;
-
   font-weight: 600;
-
   cursor: pointer;
-
-  white-space: nowrap;
-
-  transition: 0.2s;
-
-}
-
-.btn-back:hover {
-
-  background:
-    rgba(255,255,255,0.25);
-
-  transform:
-    translateY(-1px);
-
 }
 
 .card {
-
   background: white;
-
   border-radius: 15px;
-
-  padding: 22px;
-
-  margin-bottom: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
 
   box-shadow:
     0 4px 15px
-    rgba(15,23,42,0.06);
+    rgba(15,23,42,.06);
 
-  border:
-    1px solid #e5e7eb;
-
+  border: 1px solid #e5e7eb;
 }
 
 .card-title {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  font-size: 17px;
-
+  font-size: 16px;
   font-weight: 700;
-
-  margin-bottom: 18px;
-
+  margin-bottom: 16px;
 }
 
-.icon {
-
-  width: 34px;
-
-  height: 34px;
-
-  border-radius: 9px;
-
-  background: #f9e8ed;
-
-  color: #7f1734;
-
+.source-selector {
   display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
 }
 
-.filter-grid {
+.source-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.source-option input {
+  width: auto;
+  height: auto;
+}
+
+.filters {
   display: grid;
-
   grid-template-columns:
     1fr 1fr 1fr auto;
 
-  gap: 15px;
-
+  gap: 13px;
   align-items: end;
-
 }
 
 .form-group {
-
   display: flex;
-
   flex-direction: column;
-
 }
 
 label {
-
   font-size: 12px;
-
   font-weight: 600;
-
-  margin-bottom: 6px;
-
   color: #475569;
-
+  margin-bottom: 6px;
 }
 
 input,
 select {
-
   width: 100%;
-
-  height: 43px;
-
+  height: 42px;
   padding: 0 12px;
-
-  border:
-    1px solid #dbe2ea;
-
+  border: 1px solid #dbe2ea;
   border-radius: 9px;
-
   background: #f8fafc;
-
   font-size: 13px;
-
   outline: none;
-
 }
 
 input:focus,
 select:focus {
-
   background: white;
-
   border-color: #7f1734;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(127,23,52,0.10);
-
 }
 
 .btn-search {
-
-  height: 43px;
-
-  padding: 0 22px;
-
+  height: 42px;
+  padding: 0 20px;
   border: none;
-
   border-radius: 9px;
-
   background: #7f1734;
-
   color: white;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
+  font-weight: 700;
   cursor: pointer;
-
-  transition: 0.2s;
-
 }
 
-.btn-search:hover {
-
-  background: #641129;
-
-  transform:
-    translateY(-1px);
-
-}
-
-.results-header {
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items: center;
-
-  margin-bottom: 15px;
-
-}
-
-.results-count {
-
-  color: #64748b;
-
-  font-size: 13px;
-
-}
-
-.results-count strong {
-
-  color: #7f1734;
-
-}
-
-.table-container {
-
-  width: 100%;
-
-  overflow-x: auto;
-
-}
-
-table {
-
-  width: 100%;
-
-  border-collapse:
-    collapse;
-
-  min-width: 850px;
-
-}
-
-thead {
-
-  background: #f8fafc;
-
-}
-
-th {
-
-  padding: 13px 11px;
-
-  text-align: left;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  color: #64748b;
-
-  border-bottom:
-    2px solid #e2e8f0;
-
-  white-space: nowrap;
-
-}
-
-td {
-
-  padding: 14px 11px;
-
-  font-size: 13px;
-
-  border-bottom:
-    1px solid #edf2f7;
-
-}
-
-tbody tr {
-
-  transition: 0.15s;
-
-}
-
-tbody tr:hover {
-
-  background: #fff7f9;
-
-}
-
-.amount {
-
-  text-align: right;
-
-  font-weight: 700;
-
-  color: #7f1734;
-
-  white-space: nowrap;
-
-}
-
-.motif {
-
-  display: inline-block;
-
-  padding: 5px 10px;
-
-  background: #f9e8ed;
-
-  color: #7f1734;
-
-  border-radius: 20px;
-
-  font-size: 11px;
-
-  font-weight: 600;
-
-}
-
-.total-card {
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items: center;
-
-  background: #0f172a;
-
-  color: white;
-
-  padding: 18px 22px;
-
-  border-radius: 13px;
-
-  margin-top: 18px;
-
-}
-
-.total-label {
-
-  font-size: 12px;
-
-  color: #cbd5e1;
-
-  margin-bottom: 3px;
-
-}
-
-.total-value {
-
-  font-size: 26px;
-
-  font-weight: 700;
-
-}
-
-.currency {
-
-  font-size: 13px;
-
-  color: #94a3b8;
-
-}
-
-.empty {
-
-  text-align: center;
-
-  padding: 45px 20px;
-
-  color: #94a3b8;
-
-}
-
-.empty-icon {
-
-  font-size: 38px;
-
-  margin-bottom: 8px;
-
-}
-
-.empty p {
-
-  font-size: 13px;
-
+.btn-search:disabled {
+  opacity: .6;
+  cursor: wait;
 }
 
 .loading {
-
-  text-align: center;
-
-  padding: 35px;
-
-  color: #64748b;
-
   display: none;
-
-}
-
-.spinner {
-
-  width: 30px;
-
-  height: 30px;
-
-  border:
-    3px solid #e2e8f0;
-
-  border-top-color:
-    #7f1734;
-
-  border-radius: 50%;
-
-  margin:
-    0 auto 12px;
-
-  animation:
-    spin 0.8s linear infinite;
-
-}
-
-@keyframes spin {
-
-  to {
-    transform: rotate(360deg);
-  }
-
-}
-
-.status {
-
-  margin-top: 10px;
-
-  padding: 9px 12px;
-
-  border-radius: 8px;
-
-  font-size: 12px;
-
-  background: #f8fafc;
-
+  padding: 20px;
+  text-align: center;
   color: #64748b;
-
 }
 
-@media (max-width: 850px) {
+.empty {
+  display: none;
+  padding: 30px;
+  text-align: center;
+  color: #64748b;
+}
 
-  .filter-grid {
+.stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
 
-    grid-template-columns:
-      1fr 1fr;
+.stat {
+  flex: 1;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px;
+}
 
+.stat-label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.stat-value {
+  font-size: 21px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.table-container {
+  display: none;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+th {
+  text-align: left;
+  background: #f8fafc;
+  color: #475569;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #eef2f7;
+  white-space: nowrap;
+}
+
+.amount {
+  text-align: right;
+  font-weight: 700;
+}
+
+.motif {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: #f9e8ed;
+  color: #7f1734;
+}
+
+@media(max-width:800px) {
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn-search {
+    width: 100%;
   }
 
 }
 
-@media (max-width: 750px) {
+@media(max-width:600px) {
 
   body {
     padding: 12px;
   }
 
   .header {
-
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
-
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .btn-back {
+  .btn-navigation {
     width: 100%;
   }
 
-  .filter-grid {
-
-    grid-template-columns:
-      1fr;
-
+  .filters {
+    grid-template-columns: 1fr;
   }
 
-  .btn-search {
-
-    width: 100%;
-
-  }
-
-  .total-card {
-
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
-
-    gap: 8px;
-
+  .stats {
+    flex-direction: column;
   }
 
 }
@@ -597,7 +296,9 @@ tbody tr:hover {
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
@@ -611,17 +312,17 @@ tbody tr:hover {
     </h1>
 
     <p>
-      Consultez les paiements enregistrés
-      selon une période et un établissement
+      Consultation locale ou Google Sheets
     </p>
 
   </div>
 
+
   <button
-    class="btn-back"
+    class="btn-navigation"
     onclick="retourIndex()">
 
-    ← Nouveau paiement
+    ← Retour à l'enregistrement
 
   </button>
 
@@ -631,17 +332,44 @@ tbody tr:hover {
 <div class="card">
 
   <div class="card-title">
+    Source des données
+  </div>
 
-    <div class="icon">
-      📅
-    </div>
 
-    Filtrer les paiements
+  <div class="source-selector">
+
+    <label class="source-option">
+
+      <input
+        type="radio"
+        name="source"
+        id="sourceLocal"
+        value="local"
+        checked
+      >
+
+      📱 Données locales
+
+    </label>
+
+
+    <label class="source-option">
+
+      <input
+        type="radio"
+        name="source"
+        id="sourceGoogle"
+        value="google"
+      >
+
+      ☁️ Google Sheets
+
+    </label>
 
   </div>
 
 
-  <div class="filter-grid">
+  <div class="filters">
 
 
     <div class="form-group">
@@ -652,7 +380,8 @@ tbody tr:hover {
 
       <input
         type="date"
-        id="dateDebut">
+        id="dateDebut"
+      >
 
     </div>
 
@@ -665,7 +394,8 @@ tbody tr:hover {
 
       <input
         type="date"
-        id="dateFin">
+        id="dateFin"
+      >
 
     </div>
 
@@ -676,8 +406,7 @@ tbody tr:hover {
         Établissement
       </label>
 
-      <select
-        id="etablissement">
+      <select id="etablissement">
 
         <option value="">
           Tous les établissements
@@ -702,6 +431,7 @@ tbody tr:hover {
 
     <button
       class="btn-search"
+      id="btnSearch"
       onclick="rechercher()">
 
       🔎 Rechercher
@@ -714,151 +444,90 @@ tbody tr:hover {
 </div>
 
 
-<div class="card">
+<div
+  class="loading"
+  id="loading">
 
-
-  <div class="results-header">
-
-    <div
-      class="card-title"
-      style="margin-bottom:0;">
-
-      <div class="icon">
-        💳
-      </div>
-
-      Liste des paiements
-
-    </div>
-
-
-    <div class="results-count">
-
-      <strong
-        id="nombreResultats">
-        0
-      </strong>
-
-      paiement(s)
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="loading"
-    id="loading">
-
-    <div class="spinner"></div>
-
-    Recherche des paiements...
-
-  </div>
-
-
-  <div
-    class="table-container"
-    id="tableContainer"
-    style="display:none;">
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th>Date</th>
-
-          <th>Matricule</th>
-
-          <th>Nom</th>
-
-          <th>Prénom</th>
-
-          <th>Classe</th>
-
-          <th>Établissement</th>
-
-          <th>Motif</th>
-
-          <th
-            style="text-align:right;">
-
-            Montant
-
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <tbody
-        id="paymentsTable">
-      </tbody>
-
-    </table>
-
-  </div>
-
-
-  <div
-    class="empty"
-    id="emptyMessage">
-
-    <div class="empty-icon">
-      📭
-    </div>
-
-    <p>
-      Aucun paiement trouvé pour cette période.
-    </p>
-
-  </div>
-
-
-  <div class="total-card">
-
-    <div>
-
-      <div class="total-label">
-        Total des paiements
-      </div>
-
-      <div class="total-value">
-
-        <span
-          id="totalPaiements">
-
-          0
-
-        </span>
-
-        <span class="currency">
-          Ar
-        </span>
-
-      </div>
-
-    </div>
-
-    <div>
-      💰
-    </div>
-
-  </div>
-
-
-  <div
-    class="status"
-    id="status">
-
-    🟢 Connexion disponible
-
-  </div>
-
+  ⏳ Recherche en cours...
 
 </div>
+
+
+<div class="stats">
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Nombre de paiements
+    </div>
+
+    <div
+      class="stat-value"
+      id="nombreResultats">
+
+      0
+
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Total
+    </div>
+
+    <div
+      class="stat-value"
+      id="totalPaiements">
+
+      0 Ar
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="card table-container"
+  id="tableContainer">
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>Date</th>
+        <th>Matricule</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Classe</th>
+        <th>Établissement</th>
+        <th>Motif</th>
+        <th>Montant</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody id="paymentsTable">
+    </tbody>
+
+  </table>
+
+</div>
+
+
+<div
+  class="card empty"
+  id="emptyMessage">
+
+  Aucun paiement trouvé pour ces critères.
 
 </div>
 
@@ -866,16 +535,12 @@ tbody tr:hover {
 <script>
 
 /************************************************************
- * URL APPS SCRIPT
+ * CONFIGURATION
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycby8s3FKTOd8frY8mI6_zH2YUOXjm3of-JhG8Zk1UiIE_6XFMsq6R50e2XBvRPb7px_d/exec';
+  'https://script.google.com/macros/s/AKfycbzocTzSSVaTc7ThJQTrMdE4wjYg5yXrq58A5_KboS6kPXHD0mGEzh7GT7Jy7DOqOEiI/exec';
 
-
-/************************************************************
- * INDEXEDDB
- ************************************************************/
 
 const DB_NAME =
   'GestionPaiementDB';
@@ -887,7 +552,40 @@ const STORE_PAIEMENTS =
 
 
 /************************************************************
- * OUVERTURE DB
+ * SERVICE WORKER
+ ************************************************************/
+
+if (
+  'serviceWorker' in navigator
+) {
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      navigator.serviceWorker
+        .register(
+          './service-worker.js'
+        )
+        .catch(
+          function(erreur) {
+
+            console.error(
+              'Service Worker :',
+              erreur
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * INDEXEDDB
  ************************************************************/
 
 function ouvrirDB() {
@@ -918,8 +616,7 @@ function ouvrirDB() {
             db.createObjectStore(
               STORE_PAIEMENTS,
               {
-                keyPath: 'id',
-                autoIncrement: true
+                keyPath: 'id'
               }
             );
 
@@ -954,72 +651,6 @@ function ouvrirDB() {
 
 
 /************************************************************
- * RECHERCHE SERVEUR
- ************************************************************/
-
-async function rechercherServeur(
-  dateDebut,
-  dateFin,
-  etablissement
-) {
-
-  const response =
-    await fetch(
-      APPS_SCRIPT_URL,
-      {
-
-        method: 'POST',
-
-        headers: {
-
-          'Content-Type':
-            'text/plain;charset=utf-8'
-
-        },
-
-        body:
-          JSON.stringify({
-
-            action:
-              'rechercherPaiements',
-
-            dateDebut:
-              dateDebut,
-
-            dateFin:
-              dateFin,
-
-            etablissement:
-              etablissement
-
-          })
-
-      }
-    );
-
-
-  const resultat =
-    await response.json();
-
-
-  if (
-    !resultat.success
-  ) {
-
-    throw new Error(
-      resultat.message ||
-      'Erreur lors de la consultation.'
-    );
-
-  }
-
-
-  return resultat.paiements || [];
-
-}
-
-
-/************************************************************
  * RECHERCHE LOCALE
  ************************************************************/
 
@@ -1044,14 +675,12 @@ async function rechercherLocal(
           );
 
 
-        const store =
-          transaction.objectStore(
-            STORE_PAIEMENTS
-          );
-
-
         const request =
-          store.getAll();
+          transaction
+            .objectStore(
+              STORE_PAIEMENTS
+            )
+            .getAll();
 
 
         request.onsuccess =
@@ -1123,18 +752,6 @@ async function rechercherLocal(
         date <= fin
       ) {
 
-        const montant =
-          calculerMontantLocal(
-            data
-          );
-
-
-        const motif =
-          construireMotifLocal(
-            data
-          );
-
-
         resultat.push({
 
           date:
@@ -1155,13 +772,17 @@ async function rechercherLocal(
             data.classe,
 
           montant:
-            montant,
+            calculerMontantLocal(
+              data
+            ),
 
           etablissement:
             data.etablissement,
 
           motif:
-            motif
+            construireMotifLocal(
+              data
+            )
 
         });
 
@@ -1171,7 +792,19 @@ async function rechercherLocal(
   );
 
 
-  resultat.reverse();
+  resultat.sort(
+    function(a, b) {
+
+      return
+        convertirDateAffichage(
+          b.date
+        ) -
+        convertirDateAffichage(
+          a.date
+        );
+
+    }
+  );
 
 
   return resultat;
@@ -1180,229 +813,91 @@ async function rechercherLocal(
 
 
 /************************************************************
- * CALCUL LOCAL
+ * RECHERCHE GOOGLE SHEETS
  ************************************************************/
 
-function valeurOuZero(
-  valeur
+async function rechercherGoogle(
+  dateDebut,
+  dateFin,
+  etablissement
 ) {
 
-  const nombre =
-    Number(
-      valeur || 0
-    );
-
-
-  return isNaN(nombre)
-    ? 0
-    : nombre;
-
-}
-
-
-function calculerMontantLocal(
-  data
-) {
-
-  let total = 0;
-
-
-  total +=
-    valeurOuZero(
-      data.fraisGeneraux
-    );
-
-
-  total +=
-    valeurOuZero(
-      data.droit
-    );
-
-
-  total +=
-    valeurOuZero(
-      data.cravate
-    );
-
-
-  total +=
-    valeurOuZero(
-      data.teeShirt
-    );
-
-
-  total +=
-    valeurOuZero(
-      data.extra
-    );
-
-
   if (
-    data.ecolage === true
+    !navigator.onLine
   ) {
 
-    total +=
-      valeurOuZero(
-        data.montantEcolage
-      ) *
-      valeurOuZero(
-        data.nombreMois
-      );
-
-  }
-
-
-  return total;
-
-}
-
-
-/************************************************************
- * MOTIF LOCAL
- ************************************************************/
-
-function construireMotifLocal(
-  data
-) {
-
-  const motifs = [];
-
-
-  if (
-    valeurOuZero(
-      data.fraisGeneraux
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Frais généraux'
+    throw new Error(
+      'Une connexion Internet est nécessaire pour consulter Google Sheets.'
     );
 
   }
 
 
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method: 'POST',
+
+        redirect: 'follow',
+
+        headers: {
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'rechercherPaiements',
+
+            dateDebut:
+              dateDebut,
+
+            dateFin:
+              dateFin,
+
+            etablissement:
+              etablissement
+
+          })
+
+      }
+    );
+
+
   if (
-    valeurOuZero(
-      data.droit
-    ) > 0
+    !response.ok
   ) {
 
-    motifs.push(
-      'Droit'
+    throw new Error(
+      'Erreur HTTP ' +
+      response.status
     );
 
   }
 
 
+  const resultat =
+    await response.json();
+
+
   if (
-    valeurOuZero(
-      data.cravate
-    ) > 0
+    !resultat.success
   ) {
 
-    motifs.push(
-      'Cravate'
+    throw new Error(
+      resultat.message
     );
 
   }
 
 
-  if (
-    valeurOuZero(
-      data.teeShirt
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Tee-shirt'
-    );
-
-  }
-
-
-  if (
-    valeurOuZero(
-      data.extra
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Extra'
-    );
-
-  }
-
-
-  if (
-    data.ecolage === true &&
-    valeurOuZero(
-      data.montantEcolage
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Écolage ' +
-      data.nombreMois +
-      ' mois'
-    );
-
-  }
-
-
-  return motifs.join(
-    ' + '
-  );
-
-}
-
-
-/************************************************************
- * FORMAT DATE
- ************************************************************/
-
-function formatDateLocale(
-  date
-) {
-
-  const jour =
-    String(
-      date.getDate()
-    ).padStart(2, '0');
-
-
-  const mois =
-    String(
-      date.getMonth() + 1
-    ).padStart(2, '0');
-
-
-  const annee =
-    date.getFullYear();
-
-
-  const heures =
-    String(
-      date.getHours()
-    ).padStart(2, '0');
-
-
-  const minutes =
-    String(
-      date.getMinutes()
-    ).padStart(2, '0');
-
-
-  return (
-    jour +
-    '/' +
-    mois +
-    '/' +
-    annee +
-    ' ' +
-    heures +
-    ':' +
-    minutes
-  );
+  return resultat.paiements;
 
 }
 
@@ -1433,6 +928,14 @@ async function rechercher() {
     document
       .getElementById(
         'etablissement'
+      )
+      .value;
+
+
+  const source =
+    document
+      .querySelector(
+        'input[name="source"]:checked'
       )
       .value;
 
@@ -1468,69 +971,30 @@ async function rechercher() {
   afficherLoading();
 
 
+  const bouton =
+    document
+      .getElementById(
+        'btnSearch'
+      );
+
+
+  bouton.disabled =
+    true;
+
+
   try {
 
     let paiements;
 
 
-    /******************************************************
-     * AVEC INTERNET
-     ******************************************************/
-
     if (
-      navigator.onLine
+      source ===
+      'local'
     ) {
 
-      try {
-
-        paiements =
-          await rechercherServeur(
-            dateDebut,
-            dateFin,
-            etablissement
-          );
-
-
-        document
-          .getElementById(
-            'status'
-          )
-          .textContent =
-          '🟢 Données consultées depuis Google Sheets';
-
-
-      } catch (erreur) {
-
-        /*
-         * Si le serveur ne répond pas,
-         * consultation locale.
-         */
-
-        paiements =
-          await rechercherLocal(
-            dateDebut,
-            dateFin,
-            etablissement
-          );
-
-
-        document
-          .getElementById(
-            'status'
-          )
-          .textContent =
-          '🟠 Serveur inaccessible — données locales';
-
-      }
-
-    }
-
-
-    /******************************************************
-     * HORS CONNEXION
-     ******************************************************/
-
-    else {
+      /*
+       * AUCUN INTERNET
+       */
 
       paiements =
         await rechercherLocal(
@@ -1539,13 +1003,18 @@ async function rechercher() {
           etablissement
         );
 
+    } else {
 
-      document
-        .getElementById(
-          'status'
-        )
-        .textContent =
-        '🔴 Hors connexion — données locales';
+      /*
+       * GOOGLE SHEETS
+       */
+
+      paiements =
+        await rechercherGoogle(
+          dateDebut,
+          dateFin,
+          etablissement
+        );
 
     }
 
@@ -1563,11 +1032,15 @@ async function rechercher() {
 
   }
 
+
+  bouton.disabled =
+    false;
+
 }
 
 
 /************************************************************
- * LOADING
+ * AFFICHAGE
  ************************************************************/
 
 function afficherLoading() {
@@ -1598,50 +1071,6 @@ function afficherLoading() {
 }
 
 
-/************************************************************
- * PROTECTION HTML
- ************************************************************/
-
-function echapperHTML(
-  valeur
-) {
-
-  return String(
-    valeur ?? ''
-  )
-
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-
-    .replace(
-      /</g,
-      '&lt;'
-    )
-
-    .replace(
-      />/g,
-      '&gt;'
-    )
-
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-
-    .replace(
-      /'/g,
-      '&#039;'
-    );
-
-}
-
-
-/************************************************************
- * RESULTATS
- ************************************************************/
-
 function afficherResultats(
   paiements
 ) {
@@ -1655,12 +1084,14 @@ function afficherResultats(
 
 
   const tbody =
-    document.getElementById(
-      'paymentsTable'
-    );
+    document
+      .getElementById(
+        'paymentsTable'
+      );
 
 
-  tbody.innerHTML = '';
+  tbody.innerHTML =
+    '';
 
 
   let total = 0;
@@ -1700,7 +1131,7 @@ function afficherResultats(
         'totalPaiements'
       )
       .textContent =
-      '0';
+      '0 Ar';
 
 
     return;
@@ -1825,6 +1256,321 @@ function afficherResultats(
     .textContent =
     total.toLocaleString(
       'fr-FR'
+    ) +
+    ' Ar';
+
+}
+
+
+/************************************************************
+ * CALCUL LOCAL
+ ************************************************************/
+
+function valeurOuZero(
+  valeur
+) {
+
+  const nombre =
+    Number(
+      valeur || 0
+    );
+
+
+  return isNaN(nombre)
+    ? 0
+    : nombre;
+
+}
+
+
+function calculerMontantLocal(
+  data
+) {
+
+  let total = 0;
+
+
+  total +=
+    valeurOuZero(
+      data.fraisGeneraux
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.droit
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.cravate
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.teeShirt
+    );
+
+
+  total +=
+    valeurOuZero(
+      data.extra
+    );
+
+
+  if (
+    data.ecolage === true
+  ) {
+
+    total +=
+      valeurOuZero(
+        data.montantEcolage
+      )
+      *
+      valeurOuZero(
+        data.nombreMois
+      );
+
+  }
+
+
+  return total;
+
+}
+
+
+/************************************************************
+ * MOTIF LOCAL
+ ************************************************************/
+
+function construireMotifLocal(
+  data
+) {
+
+  const motifs = [];
+
+
+  if (
+    valeurOuZero(
+      data.fraisGeneraux
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Frais généraux'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.droit
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Droit'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.cravate
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Cravate'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.teeShirt
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Tee-shirt'
+    );
+
+  }
+
+
+  if (
+    valeurOuZero(
+      data.extra
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Extra'
+    );
+
+  }
+
+
+  if (
+    data.ecolage === true &&
+    valeurOuZero(
+      data.montantEcolage
+    ) > 0
+  ) {
+
+    motifs.push(
+      'Écolage ' +
+      data.nombreMois +
+      ' mois'
+    );
+
+  }
+
+
+  return motifs.join(
+    ' + '
+  );
+
+}
+
+
+/************************************************************
+ * DATE
+ ************************************************************/
+
+function formatDateLocale(
+  date
+) {
+
+  const jour =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      '0'
+    );
+
+
+  const mois =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      '0'
+    );
+
+
+  const annee =
+    date.getFullYear();
+
+
+  const heures =
+    String(
+      date.getHours()
+    ).padStart(
+      2,
+      '0'
+    );
+
+
+  const minutes =
+    String(
+      date.getMinutes()
+    ).padStart(
+      2,
+      '0'
+    );
+
+
+  return (
+    jour +
+    '/' +
+    mois +
+    '/' +
+    annee +
+    ' ' +
+    heures +
+    ':' +
+    minutes
+  );
+
+}
+
+
+function convertirDateAffichage(
+  texte
+) {
+
+  const morceaux =
+    texte.split(
+      ' '
+    );
+
+
+  const date =
+    morceaux[0].split(
+      '/'
+    );
+
+
+  const heure =
+    morceaux[1]
+      ? morceaux[1].split(':')
+      : ['00','00'];
+
+
+  return new Date(
+    Number(date[2]),
+    Number(date[1]) - 1,
+    Number(date[0]),
+    Number(heure[0]),
+    Number(heure[1])
+  );
+
+}
+
+
+/************************************************************
+ * PROTECTION HTML
+ ************************************************************/
+
+function echapperHTML(
+  valeur
+) {
+
+  return String(
+    valeur ?? ''
+  )
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
     );
 
 }
@@ -1848,10 +1594,10 @@ function afficherErreur(
 
   document
     .getElementById(
-      'emptyMessage'
+      'tableContainer'
     )
     .style.display =
-    'block';
+    'none';
 
 
   alert(
@@ -1866,7 +1612,7 @@ function afficherErreur(
 
 
 /************************************************************
- * RETOUR INDEX
+ * RETOUR
  ************************************************************/
 
 function retourIndex() {
@@ -1894,13 +1640,19 @@ function dateAujourdhui() {
   const mois =
     String(
       maintenant.getMonth() + 1
-    ).padStart(2, '0');
+    ).padStart(
+      2,
+      '0'
+    );
 
 
   const jour =
     String(
       maintenant.getDate()
-    ).padStart(2, '0');
+    ).padStart(
+      2,
+      '0'
+    );
 
 
   return (
@@ -1914,20 +1666,35 @@ function dateAujourdhui() {
 }
 
 
-document
-  .getElementById(
-    'dateDebut'
-  )
-  .value =
-  dateAujourdhui();
+/************************************************************
+ * DEMARRAGE
+ ************************************************************/
+
+window.addEventListener(
+  'load',
+  function() {
+
+    const aujourdHui =
+      dateAujourdhui();
 
 
-document
-  .getElementById(
-    'dateFin'
-  )
-  .value =
-  dateAujourdhui();
+    document
+      .getElementById(
+        'dateDebut'
+      )
+      .value =
+      aujourdHui;
+
+
+    document
+      .getElementById(
+        'dateFin'
+      )
+      .value =
+      aujourdHui;
+
+  }
+);
 
 </script>
 
