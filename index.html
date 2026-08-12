@@ -1,1480 +1,508 @@
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Gestion des paiements</title>
-
-<style>
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #f1f5f9;
-  color: #1e293b;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  background: linear-gradient(
-    135deg,
-    #6b1026,
-    #8f1d3e
-  );
-
-  color: white;
-  padding: 20px 25px;
-  border-radius: 16px;
-  margin-bottom: 18px;
-
-  box-shadow:
-    0 10px 30px
-    rgba(107, 16, 38, 0.22);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.header h1 {
-  font-size: 25px;
-  margin-bottom: 5px;
-}
-
-.header p {
-  opacity: 0.85;
-  font-size: 13px;
-}
-
-.btn-navigation {
-  border: none;
-  background: rgba(255,255,255,0.16);
-  color: white;
-  padding: 11px 16px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: 0.2s;
-}
-
-.btn-navigation:hover {
-  background: rgba(255,255,255,0.25);
-  transform: translateY(-1px);
-}
-
-/* =========================
-   CARD
-========================= */
-
-.card {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 15px;
-
-  box-shadow:
-    0 4px 15px
-    rgba(15,23,42,0.06);
-
-  border: 1px solid #e5e7eb;
-}
-
-.card-title {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  font-size: 16px;
-  font-weight: 700;
-
-  margin-bottom: 16px;
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-
-  border-radius: 9px;
-
-  background: #f9e8ed;
-  color: #7f1734;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 13px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 6px;
-}
-
-input,
-select {
-  width: 100%;
-  height: 42px;
-
-  padding: 0 12px;
-
-  border:
-    1px solid #dbe2ea;
-
-  border-radius: 9px;
-
-  background: #f8fafc;
-
-  font-size: 13px;
-
-  outline: none;
-}
-
-input:focus,
-select:focus {
-
-  background: white;
-
-  border-color: #7f1734;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(127,23,52,0.10);
-
-}
-
-/* =========================
-   FRAIS
-========================= */
-
-.frais-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(5, 1fr);
-
-  gap: 12px;
-
-}
-
-.money-input {
-  position: relative;
-}
-
-.money-input input {
-  padding-right: 35px;
-}
-
-.money-input span {
-
-  position: absolute;
-
-  right: 10px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  color: #94a3b8;
-
-  font-size: 11px;
-
-}
-
-/* =========================
-   ECOLAGE
-========================= */
-
-.ecolage-header {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  margin-bottom: 12px;
-
-}
-
-.toggle-container {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-}
-
-.switch {
-
-  position: relative;
-
-  width: 48px;
-  height: 25px;
-
-}
-
-.switch input {
-  display: none;
-}
-
-.slider {
-
-  position: absolute;
-
-  cursor: pointer;
-
-  inset: 0;
-
-  background: #cbd5e1;
-
-  border-radius: 30px;
-
-  transition: 0.25s;
-
-}
-
-.slider:before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 19px;
-  height: 19px;
-
-  left: 3px;
-  top: 3px;
-
-  background: white;
-
-  border-radius: 50%;
-
-  transition: 0.25s;
-
-  box-shadow:
-    0 2px 5px
-    rgba(0,0,0,0.15);
-
-}
-
-.switch input:checked + .slider {
-
-  background: #7f1734;
-
-}
-
-.switch input:checked + .slider:before {
-
-  transform:
-    translateX(23px);
-
-}
-
-.toggle-text {
-
-  font-weight: 700;
-
-  font-size: 13px;
-
-  color: #64748b;
-
-}
-
-.toggle-text.active {
-
-  color: #7f1734;
-
-}
-
-.ecolage-fields {
-
-  display: none;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 13px;
-
-  padding-top: 10px;
-
-}
-
-.ecolage-fields.visible {
-
-  display: grid;
-
-}
-
-/* =========================
-   TOTAL
-========================= */
-
-.total-box {
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items: center;
-
-  background: #0f172a;
-
-  color: white;
-
-  padding: 16px 20px;
-
-  border-radius: 13px;
-
-  margin-top: 15px;
-
-}
-
-.total-label {
-
-  font-size: 12px;
-
-  color: #cbd5e1;
-
-}
-
-.total-value {
-
-  font-size: 24px;
-
-  font-weight: 700;
-
-}
-
-.currency {
-
-  font-size: 13px;
-
-  color: #94a3b8;
-
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-.btn-submit {
-
-  width: 100%;
-
-  height: 46px;
-
-  margin-top: 15px;
-
-  border: none;
-
-  border-radius: 10px;
-
-  background: #7f1734;
-
-  color: white;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-}
-
-.btn-submit:hover {
-
-  background: #641129;
-
-  transform:
-    translateY(-1px);
-
-}
-
-.btn-submit:disabled {
-
-  opacity: 0.6;
-
-  cursor: wait;
-
-  transform: none;
-
-}
-
-/* =========================
-   MESSAGE
-========================= */
-
-.message {
-
-  display: none;
-
-  margin-top: 12px;
-
-  padding: 12px;
-
-  border-radius: 9px;
-
-  font-size: 13px;
-
-}
-
-.message.success {
-
-  display: block;
-
-  background: #ecfdf5;
-
-  color: #047857;
-
-}
-
-.message.error {
-
-  display: block;
-
-  background: #fef2f2;
-
-  color: #b91c1c;
-
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 850px) {
-
-  .form-grid {
-    grid-template-columns:
-      repeat(2, 1fr);
-  }
-
-  .frais-grid {
-    grid-template-columns:
-      repeat(2, 1fr);
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  body {
-    padding: 12px;
-  }
-
-  .header {
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-  }
-
-  .btn-navigation {
-    width: 100%;
-  }
-
-  .form-grid,
-  .frais-grid,
-  .ecolage-fields {
-
-    grid-template-columns: 1fr;
-
-  }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<div class="header">
-
-  <div>
-
-    <h1>
-      Gestion des paiements
-    </h1>
-
-    <p>
-      Enregistrement d'un nouveau paiement
-    </p>
-
-  </div>
-
-
-  <button
-    class="btn-navigation"
-    onclick="ouvrirPaiements()">
-
-    💳 Consultation des paiements
-
-  </button>
-
-</div>
-
-
-<!-- =========================
-     INFORMATIONS ÉTUDIANT
-========================= -->
-
-<div class="card">
-
-  <div class="card-title">
-
-    <div class="icon">
-      👤
-    </div>
-
-    Informations de l'étudiant
-
-  </div>
-
-
-  <div class="form-grid">
-
-
-    <div class="form-group">
-
-      <label>
-        Matricule *
-      </label>
-
-      <input
-        type="text"
-        id="matricule"
-        placeholder="Ex : 00002">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Nom *
-      </label>
-
-      <input
-        type="text"
-        id="nom"
-        placeholder="Nom">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Prénom *
-      </label>
-
-      <input
-        type="text"
-        id="prenom"
-        placeholder="Prénom">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Classe *
-      </label>
-
-      <select id="classe">
-
-        <option value="">
-          Sélectionner
-        </option>
-
-        <option>PS</option>
-        <option>MS</option>
-
-        <option>11ème</option>
-        <option>10ème</option>
-        <option>9ème</option>
-        <option>8ème</option>
-        <option>7ème</option>
-        <option>6ème</option>
-        <option>5ème</option>
-        <option>4ème</option>
-        <option>3ème</option>
-        <option>2nde</option>
-        <option>1ère</option>
-        <option>Terminale</option>
-
-      </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Établissement *
-      </label>
-
-      <select id="etablissement">
-
-        <option value="">
-          Sélectionner
-        </option>
-
-        <option>LS1</option>
-        <option>LS2</option>
-        <option>LS3</option>
-
-      </select>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     FRAIS
-========================= -->
-
-<div class="card">
-
-  <div class="card-title">
-
-    <div class="icon">
-      💰
-    </div>
-
-    Frais à payer
-
-  </div>
-
-
-  <div class="frais-grid">
-
-
-    <div class="form-group">
-
-      <label>
-        Frais généraux
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="fraisGeneraux"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Droit
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="droit"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Cravate
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="cravate"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Tee-shirt
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="teeShirt"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Extra
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="extra"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     ECOLAGE
-========================= -->
-
-<div class="card">
-
-  <div class="ecolage-header">
-
-    <div class="card-title"
-         style="margin-bottom:0;">
-
-      <div class="icon">
-        📚
-      </div>
-
-      Écolage
-
-    </div>
-
-
-    <div class="toggle-container">
-
-      <span
-        class="toggle-text"
-        id="toggleText">
-
-        Non
-
-      </span>
-
-
-      <label class="switch">
-
-        <input
-          type="checkbox"
-          id="ecolageToggle"
-          onchange="gererEcolage()">
-
-        <span class="slider"></span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="ecolage-fields"
-    id="ecolageFields">
-
-
-    <div class="form-group">
-
-      <label>
-        Montant mensuel
-      </label>
-
-      <div class="money-input">
-
-        <input
-          type="number"
-          id="montantEcolage"
-          min="0"
-          placeholder="0">
-
-        <span>Ar</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Nombre de mois
-      </label>
-
-      <input
-        type="number"
-        id="nombreMois"
-        min="1"
-        max="10"
-        placeholder="Ex : 2">
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     TOTAL
-========================= -->
-
-<div class="total-box">
-
-  <div>
-
-    <div class="total-label">
-      Montant total du paiement
-    </div>
-
-    <div class="total-value">
-
-      <span id="total">
-        0
-      </span>
-
-      <span class="currency">
-        Ar
-      </span>
-
-    </div>
-
-  </div>
-
-  <div>
-    💰
-  </div>
-
-</div>
-
-
-<!-- =========================
-     ENREGISTRER
-========================= -->
-
-<button
-  class="btn-submit"
-  id="btnSubmit"
-  onclick="enregistrer()">
-
-  ✓ Enregistrer le paiement
-
-</button>
-
-
-<div
-  class="message"
-  id="message">
-</div>
-
-
-</div>
-
-
 <script>
 
-/*******************************************************
- * NAVIGATION
- *******************************************************/
+/************************************************************
+ * URL GOOGLE APPS SCRIPT
+ ************************************************************/
 
-function ouvrirPaiements() {
+const APPS_SCRIPT_URL =
+  'TON_URL_APPS_SCRIPT_ICI';
 
-  google.script.run
-    .withSuccessHandler(function(url) {
 
-      window.top.location.href =
-        url + "?page=paiements";
+/************************************************************
+ * STOCKAGE LOCAL
+ ************************************************************/
 
-    })
-    .withFailureHandler(function(error) {
+const DB_NAME = 'GestionPaiementDB';
 
-      alert(
-        "Impossible d'ouvrir la page : " +
-        error.message
-      );
+const DB_VERSION = 1;
 
-    })
-    .getAppUrl();
-}
+const STORE_PAIEMENTS =
+  'paiements_en_attente';
 
 
-/*******************************************************
- * ÉCOLAGE
- *******************************************************/
+/************************************************************
+ * OUVERTURE INDEXEDDB
+ ************************************************************/
 
-function gererEcolage() {
+function ouvrirDB() {
 
-  const toggle =
-    document.getElementById(
-      'ecolageToggle'
-    );
+  return new Promise(
+    function(resolve, reject) {
 
-  const fields =
-    document.getElementById(
-      'ecolageFields'
-    );
-
-  const text =
-    document.getElementById(
-      'toggleText'
-    );
-
-
-  if (toggle.checked) {
-
-    fields.classList.add(
-      'visible'
-    );
-
-    text.textContent = 'Oui';
-
-    text.classList.add(
-      'active'
-    );
-
-  } else {
-
-    fields.classList.remove(
-      'visible'
-    );
-
-    text.textContent = 'Non';
-
-    text.classList.remove(
-      'active'
-    );
-
-  }
-
-
-  calculerTotal();
-
-}
-
-
-/*******************************************************
- * CALCUL DU TOTAL
- *******************************************************/
-
-function valeur(id) {
-
-  return Number(
-    document.getElementById(id).value
-  ) || 0;
-
-}
-
-
-function calculerTotal() {
-
-  let total = 0;
-
-
-  total += valeur(
-    'fraisGeneraux'
-  );
-
-  total += valeur(
-    'droit'
-  );
-
-  total += valeur(
-    'cravate'
-  );
-
-  total += valeur(
-    'teeShirt'
-  );
-
-  total += valeur(
-    'extra'
-  );
-
-
-  const ecolage =
-    document.getElementById(
-      'ecolageToggle'
-    ).checked;
-
-
-  if (ecolage) {
-
-    total +=
-      valeur('montantEcolage')
-      *
-      valeur('nombreMois');
-
-  }
-
-
-  document.getElementById(
-    'total'
-  ).textContent =
-    total.toLocaleString('fr-FR');
-
-}
-
-
-/*******************************************************
- * RECALCUL AUTOMATIQUE
- *******************************************************/
-
-document
-  .querySelectorAll(
-    'input[type="number"]'
-  )
-  .forEach(
-    function(input) {
-
-      input.addEventListener(
-        'input',
-        calculerTotal
-      );
-
-    }
-  );
-
-
-/*******************************************************
- * ENREGISTREMENT
- *******************************************************/
-
-function enregistrer() {
-
-  cacherMessage();
-
-
-  const matricule =
-    document.getElementById(
-      'matricule'
-    ).value.trim();
-
-  const nom =
-    document.getElementById(
-      'nom'
-    ).value.trim();
-
-  const prenom =
-    document.getElementById(
-      'prenom'
-    ).value.trim();
-
-  const classe =
-    document.getElementById(
-      'classe'
-    ).value;
-
-  const etablissement =
-    document.getElementById(
-      'etablissement'
-    ).value;
-
-
-  const ecolage =
-    document.getElementById(
-      'ecolageToggle'
-    ).checked;
-
-
-  if (
-    !matricule ||
-    !nom ||
-    !prenom ||
-    !classe ||
-    !etablissement
-  ) {
-
-    afficherMessage(
-      'Veuillez remplir toutes les informations obligatoires.',
-      'error'
-    );
-
-    return;
-
-  }
-
-
-  const total =
-    valeur('fraisGeneraux')
-    +
-    valeur('droit')
-    +
-    valeur('cravate')
-    +
-    valeur('teeShirt')
-    +
-    valeur('extra')
-    +
-    (
-      ecolage
-        ? valeur('montantEcolage')
-          *
-          valeur('nombreMois')
-        : 0
-    );
-
-
-  if (total <= 0) {
-
-    afficherMessage(
-      'Veuillez renseigner au moins un montant.',
-      'error'
-    );
-
-    return;
-
-  }
-
-
-  if (ecolage) {
-
-    if (
-      valeur('montantEcolage') <= 0
-    ) {
-
-      afficherMessage(
-        'Veuillez renseigner le montant mensuel de l’écolage.',
-        'error'
-      );
-
-      return;
-
-    }
-
-
-    if (
-      valeur('nombreMois') <= 0
-    ) {
-
-      afficherMessage(
-        'Veuillez renseigner le nombre de mois.',
-        'error'
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  const data = {
-
-    matricule:
-      matricule,
-
-    nom:
-      nom,
-
-    prenom:
-      prenom,
-
-    classe:
-      classe,
-
-    etablissement:
-      etablissement,
-
-    fraisGeneraux:
-      valeur('fraisGeneraux'),
-
-    droit:
-      valeur('droit'),
-
-    cravate:
-      valeur('cravate'),
-
-    teeShirt:
-      valeur('teeShirt'),
-
-    extra:
-      valeur('extra'),
-
-    ecolage:
-      ecolage,
-
-    montantEcolage:
-      valeur('montantEcolage'),
-
-    nombreMois:
-      valeur('nombreMois')
-
-  };
-
-
-  const bouton =
-    document.getElementById(
-      'btnSubmit'
-    );
-
-
-  bouton.disabled = true;
-
-  bouton.textContent =
-    '⏳ Enregistrement...';
-
-
-  google.script.run
-
-    .withSuccessHandler(
-      function(resultat) {
-
-        bouton.disabled = false;
-
-        bouton.textContent =
-          '✓ Enregistrer le paiement';
-
-
-        afficherMessage(
-          'Paiement enregistré avec succès — ' +
-          Number(
-            resultat.montant
-          ).toLocaleString('fr-FR') +
-          ' Ar — ' +
-          resultat.motif,
-          'success'
+      const request =
+        indexedDB.open(
+          DB_NAME,
+          DB_VERSION
         );
 
 
-        /*
-         * Nettoyage du formulaire
-         */
+      request.onupgradeneeded =
+        function(event) {
 
-        document
-          .getElementById(
-            'matricule'
-          )
-          .value = '';
-
-        document
-          .getElementById(
-            'nom'
-          )
-          .value = '';
-
-        document
-          .getElementById(
-            'prenom'
-          )
-          .value = '';
-
-        document
-          .getElementById(
-            'classe'
-          )
-          .value = '';
-
-        document
-          .getElementById(
-            'etablissement'
-          )
-          .value = '';
+          const db =
+            event.target.result;
 
 
-        [
-          'fraisGeneraux',
-          'droit',
-          'cravate',
-          'teeShirt',
-          'extra',
-          'montantEcolage',
-          'nombreMois'
-        ].forEach(
-          function(id) {
+          if (
+            !db.objectStoreNames.contains(
+              STORE_PAIEMENTS
+            )
+          ) {
 
-            document
-              .getElementById(id)
-              .value = '';
+            db.createObjectStore(
+              STORE_PAIEMENTS,
+              {
+                keyPath: 'id',
+                autoIncrement: true
+              }
+            );
+
+          }
+
+        };
+
+
+      request.onsuccess =
+        function() {
+
+          resolve(
+            request.result
+          );
+
+        };
+
+
+      request.onerror =
+        function() {
+
+          reject(
+            request.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * AJOUT HORS LIGNE
+ ************************************************************/
+
+async function sauvegarderPaiementLocal(
+  data
+) {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readwrite'
+        );
+
+
+      const store =
+        transaction.objectStore(
+          STORE_PAIEMENTS
+        );
+
+
+      store.add({
+
+        data: data,
+
+        dateCreation:
+          new Date().toISOString(),
+
+        synchronise: false
+
+      });
+
+
+      transaction.oncomplete =
+        function() {
+
+          resolve();
+
+        };
+
+
+      transaction.onerror =
+        function() {
+
+          reject(
+            transaction.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * ENREGISTREMENT
+ ************************************************************/
+
+async function envoyerPaiement(
+  data
+) {
+
+  /*
+   * Pas d'Internet
+   */
+
+  if (
+    !navigator.onLine
+  ) {
+
+    await sauvegarderPaiementLocal(
+      data
+    );
+
+
+    alert(
+      'Pas de connexion Internet.\n\n' +
+      'Le paiement a été enregistré ' +
+      'sur cet appareil et sera ' +
+      'synchronisé automatiquement ' +
+      'lorsque la connexion reviendra.'
+    );
+
+
+    return;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        APPS_SCRIPT_URL,
+        {
+
+          method: 'POST',
+
+          headers: {
+
+            'Content-Type':
+              'text/plain;charset=utf-8'
+
+          },
+
+          body:
+            JSON.stringify({
+
+              action:
+                'enregistrerPaiement',
+
+              data:
+                data
+
+            })
+
+        }
+      );
+
+
+    const resultat =
+      await response.json();
+
+
+    if (
+      !resultat.success
+    ) {
+
+      throw new Error(
+        resultat.message
+      );
+
+    }
+
+
+    alert(
+      'Paiement enregistré avec succès.'
+    );
+
+
+    /*
+     * Ici tu peux remettre
+     * le formulaire à zéro.
+     */
+
+  } catch (erreur) {
+
+    /*
+     * Si le serveur est inaccessible,
+     * on sauvegarde localement.
+     */
+
+    await sauvegarderPaiementLocal(
+      data
+    );
+
+
+    alert(
+      'Le serveur est inaccessible.\n\n' +
+      'Le paiement a été sauvegardé ' +
+      'localement et sera synchronisé ' +
+      'plus tard.'
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * SYNCHRONISATION
+ ************************************************************/
+
+async function synchroniserPaiements() {
+
+  if (
+    !navigator.onLine
+  ) {
+
+    return;
+
+  }
+
+
+  const db =
+    await ouvrirDB();
+
+
+  const paiements =
+    await new Promise(
+      function(resolve, reject) {
+
+        const transaction =
+          db.transaction(
+            STORE_PAIEMENTS,
+            'readonly'
+          );
+
+
+        const store =
+          transaction.objectStore(
+            STORE_PAIEMENTS
+          );
+
+
+        const request =
+          store.getAll();
+
+
+        request.onsuccess =
+          function() {
+
+            resolve(
+              request.result
+            );
+
+          };
+
+
+        request.onerror =
+          function() {
+
+            reject(
+              request.error
+            );
+
+          };
+
+      }
+    );
+
+
+  for (
+    const element of paiements
+  ) {
+
+    try {
+
+      const response =
+        await fetch(
+          APPS_SCRIPT_URL,
+          {
+
+            method: 'POST',
+
+            headers: {
+
+              'Content-Type':
+                'text/plain;charset=utf-8'
+
+            },
+
+            body:
+              JSON.stringify({
+
+                action:
+                  'enregistrerPaiement',
+
+                data:
+                  element.data
+
+              })
 
           }
         );
 
 
-        document
-          .getElementById(
-            'ecolageToggle'
-          )
-          .checked = false;
+      const resultat =
+        await response.json();
 
 
-        gererEcolage();
+      if (
+        resultat.success
+      ) {
 
-        calculerTotal();
-
-      }
-    )
-
-    .withFailureHandler(
-      function(erreur) {
-
-        bouton.disabled = false;
-
-        bouton.textContent =
-          '✓ Enregistrer le paiement';
-
-
-        afficherMessage(
-          erreur.message ||
-          'Une erreur est survenue.',
-          'error'
+        await supprimerPaiementLocal(
+          element.id
         );
 
       }
-    )
 
-    .enregistrerPaiement(data);
+    } catch (erreur) {
+
+      /*
+       * On arrête.
+       * Le paiement restera local.
+       */
+
+      break;
+
+    }
+
+  }
 
 }
 
 
-/*******************************************************
- * MESSAGES
- *******************************************************/
+/************************************************************
+ * SUPPRESSION LOCAL
+ ************************************************************/
 
-function afficherMessage(
-  texte,
-  type
+async function supprimerPaiementLocal(
+  id
 ) {
 
-  const message =
-    document.getElementById(
-      'message'
-    );
+  const db =
+    await ouvrirDB();
 
 
-  message.textContent =
-    texte;
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readwrite'
+        );
 
 
-  message.className =
-    'message ' + type;
+      transaction
+        .objectStore(
+          STORE_PAIEMENTS
+        )
+        .delete(id);
 
 
-  message.style.display =
-    'block';
+      transaction.oncomplete =
+        function() {
+
+          resolve();
+
+        };
+
+
+      transaction.onerror =
+        function() {
+
+          reject(
+            transaction.error
+          );
+
+        };
+
+    }
+  );
 
 }
 
 
-function cacherMessage() {
+/************************************************************
+ * RETOUR DE LA CONNEXION
+ ************************************************************/
 
-  const message =
-    document.getElementById(
-      'message'
-    );
+window.addEventListener(
+  'online',
+  function() {
+
+    synchroniserPaiements();
+
+  }
+);
 
 
-  message.style.display =
-    'none';
+/************************************************************
+ * AU CHARGEMENT
+ ************************************************************/
 
-}
+window.addEventListener(
+  'load',
+  function() {
+
+    if (
+      navigator.onLine
+    ) {
+
+      synchroniserPaiements();
+
+    }
+
+  }
+);
 
 
-calculerTotal();
+/************************************************************
+ * EXEMPLE D'UTILISATION
+ *
+ * Ton bouton enregistrer doit appeler :
+ *
+ * envoyerPaiement({
+ *
+ *   matricule: "...",
+ *   nom: "...",
+ *   prenom: "...",
+ *   classe: "...",
+ *   etablissement: "...",
+ *
+ *   fraisGeneraux: 0,
+ *   droit: 0,
+ *   cravate: 0,
+ *   teeShirt: 0,
+ *   extra: 0,
+ *
+ *   ecolage: true,
+ *   montantEcolage: 15000,
+ *   nombreMois: 2
+ *
+ * });
+ ************************************************************/
 
 </script>
-
-</body>
-
-</html>
-
