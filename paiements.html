@@ -5,29 +5,18 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>
-  Consultation des paiements
-</title>
-
+<title>Consultation des paiements</title>
 
 <style>
 
 * {
-
-  box-sizing:
-    border-box;
-
+  box-sizing: border-box;
   margin: 0;
-
   padding: 0;
-
 }
-
 
 body {
 
@@ -36,33 +25,23 @@ body {
     Arial,
     sans-serif;
 
-  background:
-    #f1f5f9;
+  background: #f1f5f9;
 
-  color:
-    #1e293b;
+  color: #1e293b;
 
-  min-height:
-    100vh;
+  min-height: 100vh;
 
-  padding:
-    25px 20px;
+  padding: 25px 20px;
 
 }
-
 
 .container {
 
-  max-width:
-    1200px;
+  max-width: 1200px;
 
-  margin:
-    auto;
+  margin: auto;
 
 }
-
-
-/* HEADER */
 
 .header {
 
@@ -73,147 +52,89 @@ body {
       #8f1d3e
     );
 
-  color:
-    white;
+  color: white;
 
-  padding:
-    22px 25px;
+  padding: 22px 25px;
 
-  border-radius:
-    16px;
+  border-radius: 16px;
 
-  margin-bottom:
-    20px;
+  margin-bottom: 20px;
 
   box-shadow:
     0 10px 30px
     rgba(107,16,38,0.25);
 
-  display:
-    flex;
+  display: flex;
 
   justify-content:
     space-between;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    20px;
+  gap: 20px;
 
 }
-
 
 .header h1 {
 
-  font-size:
-    25px;
+  font-size: 25px;
 
-  margin-bottom:
-    5px;
+  margin-bottom: 5px;
 
 }
-
 
 .header p {
 
-  opacity:
-    0.85;
+  opacity: 0.85;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
 }
 
-
 .btn-back {
 
-  border:
-    none;
+  border: none;
 
   background:
     rgba(255,255,255,0.16);
 
-  color:
-    white;
+  color: white;
 
-  padding:
-    11px 17px;
+  padding: 11px 17px;
 
-  border-radius:
-    10px;
+  border-radius: 10px;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  cursor:
-    pointer;
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: 0.2s;
 
 }
 
-
-/* STATUT */
-
-.status {
+.btn-back:hover {
 
   background:
-    white;
+    rgba(255,255,255,0.25);
 
-  border:
-    1px solid #e5e7eb;
-
-  padding:
-    13px 18px;
-
-  border-radius:
-    12px;
-
-  margin-bottom:
-    18px;
-
-  font-size:
-    13px;
-
-  font-weight:
-    600;
+  transform:
+    translateY(-1px);
 
 }
-
-
-.status.online {
-
-  color:
-    #15803d;
-
-}
-
-
-.status.offline {
-
-  color:
-    #dc2626;
-
-}
-
-
-/* CARD */
 
 .card {
 
-  background:
-    white;
+  background: white;
 
-  border-radius:
-    15px;
+  border-radius: 15px;
 
-  padding:
-    22px;
+  padding: 22px;
 
-  margin-bottom:
-    18px;
+  margin-bottom: 18px;
 
   box-shadow:
     0 4px 15px
@@ -224,389 +145,355 @@ body {
 
 }
 
-
 .card-title {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    9px;
+  gap: 9px;
 
-  font-size:
-    17px;
+  font-size: 17px;
 
-  font-weight:
-    700;
+  font-weight: 700;
 
-  margin-bottom:
-    18px;
+  margin-bottom: 18px;
 
 }
-
 
 .icon {
 
-  width:
-    34px;
+  width: 34px;
 
-  height:
-    34px;
+  height: 34px;
 
-  border-radius:
-    9px;
+  border-radius: 9px;
 
-  background:
-    #f9e8ed;
+  background: #f9e8ed;
 
-  color:
-    #7f1734;
+  color: #7f1734;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
 }
 
-
-/* FILTRES */
-
 .filter-grid {
 
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr 1fr auto;
 
-  gap:
-    15px;
+  gap: 15px;
 
-  align-items:
-    end;
+  align-items: end;
 
 }
-
 
 .form-group {
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
 }
-
 
 label {
 
-  font-size:
-    12px;
+  font-size: 12px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  margin-bottom:
-    6px;
+  margin-bottom: 6px;
 
-  color:
-    #475569;
+  color: #475569;
 
 }
-
 
 input,
 select {
 
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    43px;
+  height: 43px;
 
-  padding:
-    0 12px;
+  padding: 0 12px;
 
   border:
     1px solid #dbe2ea;
 
-  border-radius:
-    9px;
+  border-radius: 9px;
 
-  background:
-    #f8fafc;
+  background: #f8fafc;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
-  outline:
-    none;
+  outline: none;
 
 }
-
 
 input:focus,
 select:focus {
 
-  background:
-    white;
+  background: white;
 
-  border-color:
-    #7f1734;
+  border-color: #7f1734;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(127,23,52,0.10);
 
 }
-
 
 .btn-search {
 
-  height:
-    43px;
+  height: 43px;
 
-  padding:
-    0 22px;
+  padding: 0 22px;
 
-  border:
-    none;
+  border: none;
 
-  border-radius:
-    9px;
+  border-radius: 9px;
 
-  background:
-    #7f1734;
+  background: #7f1734;
 
-  color:
-    white;
+  color: white;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  cursor:
-    pointer;
+  cursor: pointer;
+
+  transition: 0.2s;
 
 }
 
+.btn-search:hover {
 
-/* RESULTATS */
+  background: #641129;
+
+  transform:
+    translateY(-1px);
+
+}
 
 .results-header {
 
-  display:
-    flex;
+  display: flex;
 
   justify-content:
     space-between;
 
-  align-items:
-    center;
+  align-items: center;
 
-  margin-bottom:
-    15px;
+  margin-bottom: 15px;
 
 }
-
 
 .results-count {
 
-  color:
-    #64748b;
+  color: #64748b;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
 }
-
 
 .results-count strong {
 
-  color:
-    #7f1734;
+  color: #7f1734;
 
 }
-
-
-/* TABLE */
 
 .table-container {
 
-  width:
-    100%;
+  width: 100%;
 
-  overflow-x:
-    auto;
+  overflow-x: auto;
 
 }
 
-
 table {
 
-  width:
-    100%;
+  width: 100%;
 
   border-collapse:
     collapse;
 
-  min-width:
-    850px;
+  min-width: 850px;
 
 }
-
 
 thead {
 
-  background:
-    #f8fafc;
+  background: #f8fafc;
 
 }
 
-
 th {
 
-  padding:
-    13px 11px;
+  padding: 13px 11px;
 
-  text-align:
-    left;
+  text-align: left;
 
-  font-size:
-    12px;
+  font-size: 12px;
 
-  font-weight:
-    700;
+  font-weight: 700;
 
-  color:
-    #64748b;
+  color: #64748b;
 
   border-bottom:
     2px solid #e2e8f0;
 
-  white-space:
-    nowrap;
+  white-space: nowrap;
 
 }
 
-
 td {
 
-  padding:
-    14px 11px;
+  padding: 14px 11px;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
   border-bottom:
     1px solid #edf2f7;
 
 }
 
+tbody tr {
+
+  transition: 0.15s;
+
+}
+
+tbody tr:hover {
+
+  background: #fff7f9;
+
+}
 
 .amount {
 
-  text-align:
-    right;
+  text-align: right;
 
-  font-weight:
-    700;
+  font-weight: 700;
 
-  color:
-    #7f1734;
+  color: #7f1734;
 
-  white-space:
-    nowrap;
+  white-space: nowrap;
 
 }
-
 
 .motif {
 
-  display:
-    inline-block;
+  display: inline-block;
 
-  padding:
-    5px 10px;
+  padding: 5px 10px;
 
-  background:
-    #f9e8ed;
+  background: #f9e8ed;
 
-  color:
-    #7f1734;
+  color: #7f1734;
 
-  border-radius:
-    20px;
+  border-radius: 20px;
 
-  font-size:
-    11px;
+  font-size: 11px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
 }
 
+.total-card {
 
-/* VIDE */
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  background: #0f172a;
+
+  color: white;
+
+  padding: 18px 22px;
+
+  border-radius: 13px;
+
+  margin-top: 18px;
+
+}
+
+.total-label {
+
+  font-size: 12px;
+
+  color: #cbd5e1;
+
+  margin-bottom: 3px;
+
+}
+
+.total-value {
+
+  font-size: 26px;
+
+  font-weight: 700;
+
+}
+
+.currency {
+
+  font-size: 13px;
+
+  color: #94a3b8;
+
+}
 
 .empty {
 
-  text-align:
-    center;
+  text-align: center;
 
-  padding:
-    45px 20px;
+  padding: 45px 20px;
 
-  color:
-    #94a3b8;
+  color: #94a3b8;
 
 }
-
 
 .empty-icon {
 
-  font-size:
-    38px;
+  font-size: 38px;
 
-  margin-bottom:
-    8px;
+  margin-bottom: 8px;
 
 }
 
+.empty p {
 
-/* LOADING */
+  font-size: 13px;
+
+}
 
 .loading {
 
-  text-align:
-    center;
+  text-align: center;
 
-  padding:
-    35px;
+  padding: 35px;
 
-  color:
-    #64748b;
+  color: #64748b;
 
-  display:
-    none;
+  display: none;
 
 }
 
-
 .spinner {
 
-  width:
-    30px;
+  width: 30px;
 
-  height:
-    30px;
+  height: 30px;
 
   border:
     3px solid #e2e8f0;
@@ -614,8 +501,7 @@ td {
   border-top-color:
     #7f1734;
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   margin:
     0 auto 12px;
@@ -625,96 +511,46 @@ td {
 
 }
 
-
 @keyframes spin {
 
   to {
+    transform: rotate(360deg);
+  }
 
-    transform:
-      rotate(360deg);
+}
+
+.status {
+
+  margin-top: 10px;
+
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+}
+
+@media (max-width: 850px) {
+
+  .filter-grid {
+
+    grid-template-columns:
+      1fr 1fr;
 
   }
 
 }
 
-
-/* TOTAL */
-
-.total-card {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  background:
-    #0f172a;
-
-  color:
-    white;
-
-  padding:
-    18px 22px;
-
-  border-radius:
-    13px;
-
-  margin-top:
-    18px;
-
-}
-
-
-.total-label {
-
-  font-size:
-    12px;
-
-  color:
-    #cbd5e1;
-
-}
-
-
-.total-value {
-
-  font-size:
-    26px;
-
-  font-weight:
-    700;
-
-}
-
-
-.currency {
-
-  font-size:
-    13px;
-
-  color:
-    #94a3b8;
-
-}
-
-
-/* MOBILE */
-
-@media (
-  max-width: 750px
-) {
+@media (max-width: 750px) {
 
   body {
-
-    padding:
-      12px;
-
+    padding: 12px;
   }
-
 
   .header {
 
@@ -726,14 +562,9 @@ td {
 
   }
 
-
   .btn-back {
-
-    width:
-      100%;
-
+    width: 100%;
   }
-
 
   .filter-grid {
 
@@ -742,14 +573,11 @@ td {
 
   }
 
-
   .btn-search {
 
-    width:
-      100%;
+    width: 100%;
 
   }
-
 
   .total-card {
 
@@ -759,8 +587,7 @@ td {
     align-items:
       flex-start;
 
-    gap:
-      8px;
+    gap: 8px;
 
   }
 
@@ -770,14 +597,10 @@ td {
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
-<!-- HEADER -->
 
 <div class="header">
 
@@ -788,16 +611,15 @@ td {
     </h1>
 
     <p>
-      Consultez les paiements selon une période et un établissement
+      Consultez les paiements enregistrés
+      selon une période et un établissement
     </p>
 
   </div>
 
-
   <button
     class="btn-back"
-    onclick="retourIndex()"
-  >
+    onclick="retourIndex()">
 
     ← Nouveau paiement
 
@@ -805,20 +627,6 @@ td {
 
 </div>
 
-
-<!-- STATUT -->
-
-<div
-  id="statusConnexion"
-  class="status"
->
-
-  🟢 Connexion vérifiée
-
-</div>
-
-
-<!-- FILTRE -->
 
 <div class="card">
 
@@ -844,8 +652,7 @@ td {
 
       <input
         type="date"
-        id="dateDebut"
-      >
+        id="dateDebut">
 
     </div>
 
@@ -858,8 +665,7 @@ td {
 
       <input
         type="date"
-        id="dateFin"
-      >
+        id="dateFin">
 
     </div>
 
@@ -870,19 +676,33 @@ td {
         Établissement
       </label>
 
-      <input
-        type="text"
-        id="etablissement"
-        placeholder="Tous les établissements"
-      >
+      <select
+        id="etablissement">
+
+        <option value="">
+          Tous les établissements
+        </option>
+
+        <option value="LS1">
+          LS1
+        </option>
+
+        <option value="LS2">
+          LS2
+        </option>
+
+        <option value="LS3">
+          LS3
+        </option>
+
+      </select>
 
     </div>
 
 
     <button
       class="btn-search"
-      onclick="rechercher()"
-    >
+      onclick="rechercher()">
 
       🔎 Rechercher
 
@@ -894,8 +714,6 @@ td {
 </div>
 
 
-<!-- RESULTATS -->
-
 <div class="card">
 
 
@@ -903,8 +721,7 @@ td {
 
     <div
       class="card-title"
-      style="margin-bottom:0;"
-    >
+      style="margin-bottom:0;">
 
       <div class="icon">
         💳
@@ -918,8 +735,7 @@ td {
     <div class="results-count">
 
       <strong
-        id="nombreResultats"
-      >
+        id="nombreResultats">
         0
       </strong>
 
@@ -930,12 +746,9 @@ td {
   </div>
 
 
-  <!-- LOADING -->
-
   <div
     class="loading"
-    id="loading"
-  >
+    id="loading">
 
     <div class="spinner"></div>
 
@@ -944,13 +757,10 @@ td {
   </div>
 
 
-  <!-- TABLE -->
-
   <div
     class="table-container"
     id="tableContainer"
-    style="display:none;"
-  >
+    style="display:none;">
 
     <table>
 
@@ -973,19 +783,18 @@ td {
           <th>Motif</th>
 
           <th
-            style="text-align:right;"
-          >
+            style="text-align:right;">
+
             Montant
+
           </th>
 
         </tr>
 
       </thead>
 
-
       <tbody
-        id="paymentsTable"
-      >
+        id="paymentsTable">
       </tbody>
 
     </table>
@@ -993,12 +802,9 @@ td {
   </div>
 
 
-  <!-- VIDE -->
-
   <div
     class="empty"
-    id="emptyMessage"
-  >
+    id="emptyMessage">
 
     <div class="empty-icon">
       📭
@@ -1011,8 +817,6 @@ td {
   </div>
 
 
-  <!-- TOTAL -->
-
   <div class="total-card">
 
     <div>
@@ -1023,8 +827,11 @@ td {
 
       <div class="total-value">
 
-        <span id="totalPaiements">
+        <span
+          id="totalPaiements">
+
           0
+
         </span>
 
         <span class="currency">
@@ -1035,7 +842,6 @@ td {
 
     </div>
 
-
     <div>
       💰
     </div>
@@ -1043,8 +849,16 @@ td {
   </div>
 
 
-</div>
+  <div
+    class="status"
+    id="status">
 
+    🟢 Connexion disponible
+
+  </div>
+
+
+</div>
 
 </div>
 
@@ -1056,7 +870,7 @@ td {
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbwQUcENV5ShGsj7em_nMh1K81gMffTpzY0DMoGI1vQKMBGxP7r3o9t0uHv1-q4xvvv6/exec';
+  'https://script.google.com/macros/s/AKfycby8s3FKTOd8frY8mI6_zH2YUOXjm3of-JhG8Zk1UiIE_6XFMsq6R50e2XBvRPb7px_d/exec';
 
 
 /************************************************************
@@ -1066,8 +880,7 @@ const APPS_SCRIPT_URL =
 const DB_NAME =
   'GestionPaiementDB';
 
-const DB_VERSION =
-  1;
+const DB_VERSION = 2;
 
 const STORE_PAIEMENTS =
   'paiements_en_attente';
@@ -1141,7 +954,73 @@ function ouvrirDB() {
 
 
 /************************************************************
- * PAIEMENTS LOCAUX
+ * RECHERCHE SERVEUR
+ ************************************************************/
+
+async function rechercherServeur(
+  dateDebut,
+  dateFin,
+  etablissement
+) {
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method: 'POST',
+
+        headers: {
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'rechercherPaiements',
+
+            dateDebut:
+              dateDebut,
+
+            dateFin:
+              dateFin,
+
+            etablissement:
+              etablissement
+
+          })
+
+      }
+    );
+
+
+  const resultat =
+    await response.json();
+
+
+  if (
+    !resultat.success
+  ) {
+
+    throw new Error(
+      resultat.message ||
+      'Erreur lors de la consultation.'
+    );
+
+  }
+
+
+  return resultat.paiements || [];
+
+}
+
+
+/************************************************************
+ * RECHERCHE LOCALE
  ************************************************************/
 
 async function rechercherLocal(
@@ -1165,12 +1044,14 @@ async function rechercherLocal(
           );
 
 
+        const store =
+          transaction.objectStore(
+            STORE_PAIEMENTS
+          );
+
+
         const request =
-          transaction
-            .objectStore(
-              STORE_PAIEMENTS
-            )
-            .getAll();
+          store.getAll();
 
 
         request.onsuccess =
@@ -1210,14 +1091,6 @@ async function rechercherLocal(
     );
 
 
-  const rechercheEtablissement =
-    String(
-      etablissement || ''
-    )
-      .trim()
-      .toLowerCase();
-
-
   const resultat = [];
 
 
@@ -1234,19 +1107,10 @@ async function rechercherLocal(
         );
 
 
-      /**************************************************
-       * FILTRE ETABLISSEMENT
-       **************************************************/
-
       if (
-        rechercheEtablissement &&
-        String(
-          data.etablissement || ''
-        )
-          .trim()
-          .toLowerCase()
-        !==
-        rechercheEtablissement
+        etablissement &&
+        data.etablissement !==
+        etablissement
       ) {
 
         return;
@@ -1254,53 +1118,54 @@ async function rechercherLocal(
       }
 
 
-      /**************************************************
-       * FILTRE DATE
-       **************************************************/
-
       if (
-        date < debut ||
-        date > fin
+        date >= debut &&
+        date <= fin
       ) {
 
-        return;
-
-      }
-
-
-      resultat.push({
-
-        date:
-          formatDateLocale(
-            date
-          ),
-
-        matricule:
-          data.matricule,
-
-        nom:
-          data.nom,
-
-        prenom:
-          data.prenom,
-
-        classe:
-          data.classe,
-
-        montant:
+        const montant =
           calculerMontantLocal(
             data
-          ),
+          );
 
-        etablissement:
-          data.etablissement,
 
-        motif:
+        const motif =
           construireMotifLocal(
             data
-          )
+          );
 
-      });
+
+        resultat.push({
+
+          date:
+            formatDateLocale(
+              date
+            ),
+
+          matricule:
+            data.matricule,
+
+          nom:
+            data.nom,
+
+          prenom:
+            data.prenom,
+
+          classe:
+            data.classe,
+
+          montant:
+            montant,
+
+          etablissement:
+            data.etablissement,
+
+          motif:
+            motif
+
+        });
+
+      }
 
     }
   );
@@ -1310,72 +1175,6 @@ async function rechercherLocal(
 
 
   return resultat;
-
-}
-
-
-/************************************************************
- * RECHERCHE SERVEUR
- ************************************************************/
-
-async function rechercherServeur(
-  dateDebut,
-  dateFin,
-  etablissement
-) {
-
-  const response =
-    await fetch(
-      APPS_SCRIPT_URL,
-      {
-
-        method:
-          'POST',
-
-        headers: {
-
-          'Content-Type':
-            'text/plain;charset=utf-8'
-
-        },
-
-        body:
-          JSON.stringify({
-
-            action:
-              'rechercherPaiements',
-
-            dateDebut:
-              dateDebut,
-
-            dateFin:
-              dateFin,
-
-            etablissement:
-              etablissement
-
-          })
-
-      }
-    );
-
-
-  const resultat =
-    await response.json();
-
-
-  if (
-    !resultat.success
-  ) {
-
-    throw new Error(
-      resultat.message
-    );
-
-  }
-
-
-  return resultat.paiements;
 
 }
 
@@ -1568,21 +1367,13 @@ function formatDateLocale(
   const jour =
     String(
       date.getDate()
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   const mois =
     String(
       date.getMonth() + 1
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   const annee =
@@ -1592,25 +1383,16 @@ function formatDateLocale(
   const heures =
     String(
       date.getHours()
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   const minutes =
     String(
       date.getMinutes()
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   return (
-
     jour +
     '/' +
     mois +
@@ -1620,7 +1402,6 @@ function formatDateLocale(
     heures +
     ':' +
     minutes
-
   );
 
 }
@@ -1653,8 +1434,7 @@ async function rechercher() {
       .getElementById(
         'etablissement'
       )
-      .value
-      .trim();
+      .value;
 
 
   if (
@@ -1690,14 +1470,12 @@ async function rechercher() {
 
   try {
 
-    let paiementsServeur = [];
-
-    let paiementsLocaux = [];
+    let paiements;
 
 
-    /**************************************************
-     * INTERNET
-     **************************************************/
+    /******************************************************
+     * AVEC INTERNET
+     ******************************************************/
 
     if (
       navigator.onLine
@@ -1705,7 +1483,7 @@ async function rechercher() {
 
       try {
 
-        paiementsServeur =
+        paiements =
           await rechercherServeur(
             dateDebut,
             dateFin,
@@ -1713,63 +1491,63 @@ async function rechercher() {
           );
 
 
-        /*
-         * Les paiements locaux sont également ajoutés
-         * car ils ne sont pas encore dans Google Sheets.
-         */
-
-        paiementsLocaux =
-          await rechercherLocal(
-            dateDebut,
-            dateFin,
-            etablissement
-          );
+        document
+          .getElementById(
+            'status'
+          )
+          .textContent =
+          '🟢 Données consultées depuis Google Sheets';
 
 
       } catch (erreur) {
 
         /*
-         * Serveur inaccessible.
-         * On utilise les données locales.
+         * Si le serveur ne répond pas,
+         * consultation locale.
          */
 
-        paiementsLocaux =
+        paiements =
           await rechercherLocal(
             dateDebut,
             dateFin,
             etablissement
           );
+
+
+        document
+          .getElementById(
+            'status'
+          )
+          .textContent =
+          '🟠 Serveur inaccessible — données locales';
 
       }
 
     }
 
 
-    /**************************************************
+    /******************************************************
      * HORS CONNEXION
-     **************************************************/
+     ******************************************************/
 
     else {
 
-      paiementsLocaux =
+      paiements =
         await rechercherLocal(
           dateDebut,
           dateFin,
           etablissement
         );
 
+
+      document
+        .getElementById(
+          'status'
+        )
+        .textContent =
+        '🔴 Hors connexion — données locales';
+
     }
-
-
-    /*
-     * Les paiements locaux sont ceux qui attendent
-     * encore leur synchronisation.
-     */
-
-    const paiements =
-      paiementsLocaux.concat(
-        paiementsServeur
-      );
 
 
     afficherResultats(
@@ -1861,7 +1639,7 @@ function echapperHTML(
 
 
 /************************************************************
- * AFFICHAGE
+ * RESULTATS
  ************************************************************/
 
 function afficherResultats(
@@ -1877,18 +1655,15 @@ function afficherResultats(
 
 
   const tbody =
-    document
-      .getElementById(
-        'paymentsTable'
-      );
+    document.getElementById(
+      'paymentsTable'
+    );
 
 
-  tbody.innerHTML =
-    '';
+  tbody.innerHTML = '';
 
 
-  let total =
-    0;
+  let total = 0;
 
 
   if (
@@ -2071,6 +1846,14 @@ function afficherErreur(
     'none';
 
 
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'block';
+
+
   alert(
     'Une erreur est survenue : ' +
     (
@@ -2111,77 +1894,25 @@ function dateAujourdhui() {
   const mois =
     String(
       maintenant.getMonth() + 1
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   const jour =
     String(
       maintenant.getDate()
-    )
-      .padStart(
-        2,
-        '0'
-      );
+    ).padStart(2, '0');
 
 
   return (
-
     annee +
     '-' +
     mois +
     '-' +
     jour
-
   );
 
 }
 
-
-/************************************************************
- * STATUT CONNEXION
- ************************************************************/
-
-function mettreAJourStatut() {
-
-  const element =
-    document
-      .getElementById(
-        'statusConnexion'
-      );
-
-
-  if (
-    navigator.onLine
-  ) {
-
-    element.className =
-      'status online';
-
-
-    element.textContent =
-      '🟢 Connecté à Internet';
-
-  } else {
-
-    element.className =
-      'status offline';
-
-
-    element.textContent =
-      '🔴 Hors connexion — consultation locale';
-
-  }
-
-}
-
-
-/************************************************************
- * INITIALISATION
- ************************************************************/
 
 document
   .getElementById(
@@ -2197,21 +1928,6 @@ document
   )
   .value =
   dateAujourdhui();
-
-
-window.addEventListener(
-  'online',
-  mettreAJourStatut
-);
-
-
-window.addEventListener(
-  'offline',
-  mettreAJourStatut
-);
-
-
-mettreAJourStatut();
 
 </script>
 
