@@ -5,8 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Gestion des paiements</title>
 
@@ -31,17 +33,19 @@ body {
 
   min-height: 100vh;
 
-  padding: 18px;
+  padding: 25px 20px;
 
 }
 
 .container {
 
-  max-width: 1000px;
+  max-width: 900px;
 
   margin: auto;
 
 }
+
+/* HEADER */
 
 .header {
 
@@ -54,23 +58,15 @@ body {
 
   color: white;
 
-  padding: 22px 25px;
+  padding: 25px;
 
   border-radius: 16px;
 
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 
   box-shadow:
     0 10px 30px
     rgba(107,16,38,0.25);
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  gap: 15px;
 
 }
 
@@ -84,32 +80,103 @@ body {
 
 .header p {
 
-  font-size: 13px;
+  opacity: 0.85;
 
-  opacity: .85;
+  font-size: 13px;
 
 }
 
-.btn-consultation {
 
-  border: none;
+/* STATUT */
 
-  background:
-    rgba(255,255,255,.16);
+.status-card {
 
-  color: white;
+  background: white;
 
-  padding: 11px 16px;
+  border-radius: 13px;
 
-  border-radius: 9px;
+  padding: 15px 18px;
+
+  margin-bottom: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 4px 15px
+    rgba(15,23,42,0.05);
+
+}
+
+.status {
+
+  font-size: 13px;
 
   font-weight: 600;
 
-  cursor: pointer;
+}
 
-  white-space: nowrap;
+.status.online {
+
+  color: #15803d;
 
 }
+
+.status.offline {
+
+  color: #dc2626;
+
+}
+
+.status.pending {
+
+  color: #d97706;
+
+}
+
+.btn-sync {
+
+  border: none;
+
+  background: #7f1734;
+
+  color: white;
+
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  font-size: 12px;
+
+}
+
+.btn-sync:hover {
+
+  background: #641129;
+
+}
+
+.btn-sync:disabled {
+
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+}
+
+
+/* CARD */
 
 .card {
 
@@ -117,62 +184,39 @@ body {
 
   border-radius: 15px;
 
-  padding: 20px;
+  padding: 25px;
 
-  margin-bottom: 16px;
-
-  border: 1px solid #e5e7eb;
+  margin-bottom: 18px;
 
   box-shadow:
     0 4px 15px
-    rgba(15,23,42,.06);
+    rgba(15,23,42,0.06);
+
+  border: 1px solid #e5e7eb;
 
 }
 
 .card-title {
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  font-size: 17px;
+  font-size: 18px;
 
   font-weight: 700;
 
-  margin-bottom: 17px;
+  margin-bottom: 20px;
 
 }
 
-.icon {
 
-  width: 34px;
-
-  height: 34px;
-
-  border-radius: 9px;
-
-  background: #f9e8ed;
-
-  color: #7f1734;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-}
+/* FORM */
 
 .grid {
 
   display: grid;
 
   grid-template-columns:
-    repeat(3, 1fr);
+    1fr 1fr;
 
-  gap: 13px;
+  gap: 15px;
 
 }
 
@@ -181,6 +225,12 @@ body {
   display: flex;
 
   flex-direction: column;
+
+}
+
+.form-group.full {
+
+  grid-column: 1 / -1;
 
 }
 
@@ -199,9 +249,9 @@ label {
 input,
 select {
 
-  height: 42px;
+  height: 43px;
 
-  width: 100%;
+  padding: 0 12px;
 
   border:
     1px solid #dbe2ea;
@@ -209,8 +259,6 @@ select {
   border-radius: 9px;
 
   background: #f8fafc;
-
-  padding: 0 11px;
 
   outline: none;
 
@@ -227,178 +275,117 @@ select:focus {
 
   box-shadow:
     0 0 0 3px
-    rgba(127,23,52,.10);
+    rgba(127,23,52,0.10);
 
 }
+
+
+/* MONTANTS */
 
 .amount-grid {
 
   display: grid;
 
   grid-template-columns:
-    repeat(5, 1fr);
-
-  gap: 11px;
-
-}
-
-.ecolage-box {
-
-  margin-top: 16px;
-
-  padding: 15px;
-
-  border-radius: 11px;
-
-  background: #f8fafc;
-
-  border: 1px solid #e2e8f0;
-
-}
-
-.ecolage-header {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  margin-bottom: 12px;
-
-}
-
-.switch {
-
-  position: relative;
-
-  width: 48px;
-
-  height: 25px;
-
-}
-
-.switch input {
-
-  display: none;
-
-}
-
-.slider {
-
-  position: absolute;
-
-  inset: 0;
-
-  background: #cbd5e1;
-
-  border-radius: 30px;
-
-  cursor: pointer;
-
-  transition: .2s;
-
-}
-
-.slider:before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 19px;
-
-  height: 19px;
-
-  left: 3px;
-
-  top: 3px;
-
-  background: white;
-
-  border-radius: 50%;
-
-  transition: .2s;
-
-}
-
-.switch input:checked + .slider {
-
-  background: #7f1734;
-
-}
-
-.switch input:checked + .slider:before {
-
-  transform: translateX(23px);
-
-}
-
-.ecolage-fields {
-
-  display: none;
-
-  grid-template-columns: 1fr 1fr;
+    repeat(2, 1fr);
 
   gap: 12px;
 
-}
-
-.ecolage-fields.visible {
-
-  display: grid;
+  margin-top: 15px;
 
 }
 
-.btn-save {
+.checkbox {
 
-  width: 100%;
+  display: flex;
 
-  height: 45px;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  font-size: 13px;
+
+}
+
+.checkbox input {
+
+  width: auto;
+
+  height: auto;
+
+}
+
+
+/* BOUTONS */
+
+.buttons {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 22px;
+
+}
+
+.btn {
 
   border: none;
 
-  border-radius: 10px;
+  border-radius: 9px;
+
+  padding: 12px 18px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+.btn-primary {
 
   background: #7f1734;
 
   color: white;
 
-  font-size: 14px;
+}
 
-  font-weight: 700;
+.btn-secondary {
 
-  cursor: pointer;
+  background: #e2e8f0;
 
-  margin-top: 17px;
+  color: #334155;
 
 }
 
-.btn-save:hover {
+.btn-primary:hover {
 
   background: #641129;
 
 }
 
-.status {
 
-  display: none;
+/* MESSAGE */
+
+.message {
 
   padding: 12px;
 
-  margin-top: 12px;
+  border-radius: 8px;
 
-  border-radius: 9px;
+  margin-top: 15px;
 
   font-size: 13px;
 
-  text-align: center;
+  display: none;
 
 }
 
-.status.success {
-
-  display: block;
+.message.success {
 
   background: #dcfce7;
 
@@ -406,9 +393,7 @@ select:focus {
 
 }
 
-.status.error {
-
-  display: block;
+.message.error {
 
   background: #fee2e2;
 
@@ -416,39 +401,56 @@ select:focus {
 
 }
 
-.loading {
 
-  display: none;
+/* MOBILE */
 
-  text-align: center;
-
-  padding: 10px;
-
-  color: #64748b;
-
-  font-size: 13px;
-
-}
-
-@media(max-width:750px) {
+@media (
+  max-width: 700px
+) {
 
   body {
-    padding: 10px;
-  }
 
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    padding: 12px;
 
-  .btn-consultation {
-    width: 100%;
   }
 
   .grid,
-  .amount-grid,
-  .ecolage-fields {
+  .amount-grid {
+
     grid-template-columns: 1fr;
+
+  }
+
+  .form-group.full {
+
+    grid-column: auto;
+
+  }
+
+  .status-card {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+  .btn-sync {
+
+    width: 100%;
+
+  }
+
+  .buttons {
+
+    flex-direction: column;
+
+  }
+
+  .btn {
+
+    width: 100%;
+
   }
 
 }
@@ -464,9 +466,7 @@ select:focus {
 <div class="container">
 
 
-<div class="header">
-
-  <div>
+  <div class="header">
 
     <h1>
       Gestion des paiements
@@ -478,298 +478,294 @@ select:focus {
 
   </div>
 
-  <button
-    class="btn-consultation"
-    onclick="allerPaiements()">
 
-    💳 Consultation
+  <!-- STATUT -->
 
-  </button>
+  <div class="status-card">
 
-</div>
+    <div
+      id="statusConnexion"
+      class="status online"
+    >
+      🟢 Connexion vérifiée
+    </div>
 
+    <button
+      id="btnSynchroniser"
+      class="btn-sync"
+      onclick="synchroniserPaiements(true)"
+    >
+      🔄 Synchroniser maintenant
+    </button>
 
-<div class="card">
-
-
-<div class="card-title">
-
-  <div class="icon">
-    👤
   </div>
 
-  Informations de l'étudiant
 
-</div>
+  <!-- FORMULAIRE -->
 
+  <div class="card">
 
-<div class="grid">
+    <div class="card-title">
 
+      💳 Nouveau paiement
 
-<div class="form-group">
-
-<label>Matricule</label>
-
-<input
-  type="text"
-  id="matricule"
-  placeholder="Ex : 00002">
-
-</div>
+    </div>
 
 
-<div class="form-group">
-
-<label>Nom</label>
-
-<input
-  type="text"
-  id="nom">
-
-</div>
+    <div class="grid">
 
 
-<div class="form-group">
+      <div class="form-group">
 
-<label>Prénom</label>
+        <label>
+          Matricule
+        </label>
 
-<input
-  type="text"
-  id="prenom">
+        <input
+          type="text"
+          id="matricule"
+        >
 
-</div>
-
-
-<div class="form-group">
-
-<label>Classe</label>
-
-<select id="classe">
-
-<option value="">
-  Sélectionner
-</option>
-
-<option>PS</option>
-<option>MS</option>
-<option>11ème</option>
-<option>10ème</option>
-<option>9ème</option>
-<option>8ème</option>
-<option>7ème</option>
-<option>6ème</option>
-<option>5ème</option>
-<option>4ème</option>
-<option>3ème</option>
-<option>2nde</option>
-<option>1ère</option>
-<option>Terminale</option>
-
-</select>
-
-</div>
+      </div>
 
 
-<div class="form-group">
+      <div class="form-group">
 
-<label>Établissement</label>
+        <label>
+          Nom
+        </label>
 
-<select id="etablissement">
+        <input
+          type="text"
+          id="nom"
+        >
 
-<option value="">
-  Sélectionner
-</option>
-
-<option>LS1</option>
-<option>LS2</option>
-<option>LS3</option>
-
-</select>
-
-</div>
+      </div>
 
 
-</div>
+      <div class="form-group">
 
-</div>
+        <label>
+          Prénom
+        </label>
+
+        <input
+          type="text"
+          id="prenom"
+        >
+
+      </div>
 
 
-<div class="card">
+      <div class="form-group">
+
+        <label>
+          Classe
+        </label>
+
+        <input
+          type="text"
+          id="classe"
+        >
+
+      </div>
 
 
-<div class="card-title">
+      <div class="form-group full">
 
-  <div class="icon">
-    💰
+        <label>
+          Établissement
+        </label>
+
+        <input
+          type="text"
+          id="etablissement"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <div class="card-title"
+         style="margin-top:25px;">
+
+      💰 Montants
+
+    </div>
+
+
+    <div class="amount-grid">
+
+
+      <div class="form-group">
+
+        <label>
+          Frais généraux
+        </label>
+
+        <input
+          type="number"
+          id="fraisGeneraux"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Droit
+        </label>
+
+        <input
+          type="number"
+          id="droit"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Cravate
+        </label>
+
+        <input
+          type="number"
+          id="cravate"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Tee-shirt
+        </label>
+
+        <input
+          type="number"
+          id="teeShirt"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Extra
+        </label>
+
+        <input
+          type="number"
+          id="extra"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <label class="checkbox">
+
+      <input
+        type="checkbox"
+        id="ecolage"
+        onchange="gererEcolage()"
+      >
+
+      Écolage
+
+    </label>
+
+
+    <div
+      id="blocEcolage"
+      style="display:none; margin-top:15px;"
+    >
+
+      <div class="amount-grid">
+
+        <div class="form-group">
+
+          <label>
+            Montant mensuel
+          </label>
+
+          <input
+            type="number"
+            id="montantEcolage"
+            min="0"
+            value="0"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Nombre de mois
+          </label>
+
+          <input
+            type="number"
+            id="nombreMois"
+            min="1"
+            max="10"
+            value="1"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <div class="buttons">
+
+      <button
+        class="btn btn-primary"
+        onclick="enregistrer()"
+      >
+        💾 Enregistrer le paiement
+      </button>
+
+
+      <button
+        class="btn btn-secondary"
+        onclick="ouvrirPaiements()"
+      >
+        📋 Consultation des paiements
+      </button>
+
+    </div>
+
+
   </div>
-
-  Paiement
-
-</div>
-
-
-<div class="amount-grid">
-
-
-<div class="form-group">
-
-<label>Frais généraux</label>
-
-<input
-  type="number"
-  id="fraisGeneraux"
-  min="0"
-  placeholder="0">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Droit</label>
-
-<input
-  type="number"
-  id="droit"
-  min="0"
-  placeholder="0">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Cravate</label>
-
-<input
-  type="number"
-  id="cravate"
-  min="0"
-  placeholder="0">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Tee-shirt</label>
-
-<input
-  type="number"
-  id="teeShirt"
-  min="0"
-  placeholder="0">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Extra</label>
-
-<input
-  type="number"
-  id="extra"
-  min="0"
-  placeholder="0">
-
-</div>
-
-
-</div>
-
-
-<div class="ecolage-box">
-
-
-<div class="ecolage-header">
-
-<strong>
-  Écolage
-</strong>
-
-
-<label class="switch">
-
-<input
-  type="checkbox"
-  id="ecolage">
-
-<span class="slider"></span>
-
-</label>
-
-</div>
-
-
-<div
-  class="ecolage-fields"
-  id="ecolageFields">
-
-
-<div class="form-group">
-
-<label>
-  Montant mensuel
-</label>
-
-<input
-  type="number"
-  id="montantEcolage"
-  min="0"
-  placeholder="Ex : 15000">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-  Nombre de mois
-</label>
-
-<input
-  type="number"
-  id="nombreMois"
-  min="1"
-  max="10"
-  placeholder="Ex : 2">
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<button
-  class="btn-save"
-  id="btnSave"
-  onclick="enregistrer()">
-
-  💾 Enregistrer le paiement
-
-</button>
-
-
-<div
-  class="loading"
-  id="loading">
-
-  Enregistrement...
-
-</div>
-
-
-<div
-  class="status"
-  id="status">
-</div>
-
-
-</div>
-
 
 </div>
 
@@ -777,11 +773,11 @@ select:focus {
 <script>
 
 /************************************************************
- * URL APPS SCRIPT
+ * URL GOOGLE APPS SCRIPT
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'TON_URL_APPS_SCRIPT_ICI';
+  'https://script.google.com/macros/s/AKfycbwQUcENV5ShGsj7em_nMh1K81gMffTpzY0DMoGI1vQKMBGxP7r3o9t0uHv1-q4xvvv6/exec';
 
 
 /************************************************************
@@ -791,11 +787,16 @@ const APPS_SCRIPT_URL =
 const DB_NAME =
   'GestionPaiementDB';
 
-const DB_VERSION = 1;
+const DB_VERSION =
+  1;
 
 const STORE_PAIEMENTS =
   'paiements_en_attente';
 
+
+/************************************************************
+ * OUVERTURE DB
+ ************************************************************/
 
 function ouvrirDB() {
 
@@ -861,7 +862,7 @@ function ouvrirDB() {
 
 
 /************************************************************
- * STOCKAGE LOCAL
+ * SAUVEGARDE LOCALE
  ************************************************************/
 
 async function sauvegarderPaiementLocal(
@@ -893,9 +894,117 @@ async function sauvegarderPaiementLocal(
           dateCreation:
             new Date().toISOString(),
 
-          synchronise: false
+          synchronise:
+            false
 
         });
+
+
+      transaction.oncomplete =
+        function() {
+
+          resolve();
+
+          mettreAJourStatut();
+
+        };
+
+
+      transaction.onerror =
+        function() {
+
+          reject(
+            transaction.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * RECUPERATION PAIEMENTS LOCAUX
+ ************************************************************/
+
+async function recupererPaiementsLocaux() {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readonly'
+        );
+
+
+      const request =
+        transaction
+          .objectStore(
+            STORE_PAIEMENTS
+          )
+          .getAll();
+
+
+      request.onsuccess =
+        function() {
+
+          resolve(
+            request.result
+          );
+
+        };
+
+
+      request.onerror =
+        function() {
+
+          reject(
+            request.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * SUPPRESSION LOCAL
+ ************************************************************/
+
+async function supprimerPaiementLocal(
+  id
+) {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readwrite'
+        );
+
+
+      transaction
+        .objectStore(
+          STORE_PAIEMENTS
+        )
+        .delete(id);
 
 
       transaction.oncomplete =
@@ -925,7 +1034,7 @@ async function sauvegarderPaiementLocal(
  * ENVOI SERVEUR
  ************************************************************/
 
-async function envoyerServeur(
+async function envoyerAuServeur(
   data
 ) {
 
@@ -987,83 +1096,112 @@ async function enregistrer() {
   const data = {
 
     matricule:
-      document.getElementById(
-        'matricule'
-      ).value.trim(),
+      document
+        .getElementById(
+          'matricule'
+        )
+        .value
+        .trim(),
 
     nom:
-      document.getElementById(
-        'nom'
-      ).value.trim(),
+      document
+        .getElementById(
+          'nom'
+        )
+        .value
+        .trim(),
 
     prenom:
-      document.getElementById(
-        'prenom'
-      ).value.trim(),
+      document
+        .getElementById(
+          'prenom'
+        )
+        .value
+        .trim(),
 
     classe:
-      document.getElementById(
-        'classe'
-      ).value,
+      document
+        .getElementById(
+          'classe'
+        )
+        .value
+        .trim(),
 
     etablissement:
-      document.getElementById(
-        'etablissement'
-      ).value,
+      document
+        .getElementById(
+          'etablissement'
+        )
+        .value
+        .trim(),
 
     fraisGeneraux:
-      document.getElementById(
-        'fraisGeneraux'
-      ).value,
+      document
+        .getElementById(
+          'fraisGeneraux'
+        )
+        .value,
 
     droit:
-      document.getElementById(
-        'droit'
-      ).value,
+      document
+        .getElementById(
+          'droit'
+        )
+        .value,
 
     cravate:
-      document.getElementById(
-        'cravate'
-      ).value,
+      document
+        .getElementById(
+          'cravate'
+        )
+        .value,
 
     teeShirt:
-      document.getElementById(
-        'teeShirt'
-      ).value,
+      document
+        .getElementById(
+          'teeShirt'
+        )
+        .value,
 
     extra:
-      document.getElementById(
-        'extra'
-      ).value,
+      document
+        .getElementById(
+          'extra'
+        )
+        .value,
 
     ecolage:
-      document.getElementById(
-        'ecolage'
-      ).checked,
+      document
+        .getElementById(
+          'ecolage'
+        )
+        .checked,
 
     montantEcolage:
-      document.getElementById(
-        'montantEcolage'
-      ).value,
+      document
+        .getElementById(
+          'montantEcolage'
+        )
+        .value,
 
     nombreMois:
-      document.getElementById(
-        'nombreMois'
-      ).value
+      document
+        .getElementById(
+          'nombreMois'
+        )
+        .value
 
   };
 
 
-  if (
-    !data.matricule ||
-    !data.nom ||
-    !data.prenom ||
-    !data.classe ||
-    !data.etablissement
-  ) {
+  /******************************************************
+   * VALIDATION LOCALE
+   ******************************************************/
 
-    afficherStatus(
-      'Veuillez remplir toutes les informations de l’étudiant.',
+  if (!data.matricule) {
+
+    afficherMessage(
+      'La matricule est obligatoire.',
       'error'
     );
 
@@ -1072,10 +1210,59 @@ async function enregistrer() {
   }
 
 
-  afficherLoading(true);
+  if (!data.nom) {
+
+    afficherMessage(
+      'Le nom est obligatoire.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  if (!data.prenom) {
+
+    afficherMessage(
+      'Le prénom est obligatoire.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  if (!data.classe) {
+
+    afficherMessage(
+      'La classe est obligatoire.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  if (!data.etablissement) {
+
+    afficherMessage(
+      'L’établissement est obligatoire.',
+      'error'
+    );
+
+    return;
+
+  }
 
 
   try {
+
+    /****************************************************
+     * HORS CONNEXION
+     ****************************************************/
 
     if (
       !navigator.onLine
@@ -1086,13 +1273,13 @@ async function enregistrer() {
       );
 
 
-      afficherStatus(
-        'Pas de connexion. Le paiement est enregistré localement et sera synchronisé automatiquement.',
+      afficherMessage(
+        '🔴 Hors connexion : paiement sauvegardé sur cet appareil. Il sera synchronisé automatiquement.',
         'success'
       );
 
 
-      nettoyerFormulaire();
+      viderFormulaire();
 
 
       return;
@@ -1100,51 +1287,58 @@ async function enregistrer() {
     }
 
 
+    /****************************************************
+     * INTERNET
+     ****************************************************/
+
     try {
 
-      await envoyerServeur(
+      await envoyerAuServeur(
         data
       );
 
 
-      afficherStatus(
-        'Paiement enregistré avec succès.',
+      afficherMessage(
+        '🟢 Paiement enregistré avec succès.',
         'success'
       );
 
 
-      nettoyerFormulaire();
+      viderFormulaire();
+
+
+      mettreAJourStatut();
 
 
     } catch (erreur) {
+
+      /**************************************************
+       * SERVEUR INACCESSIBLE
+       **************************************************/
 
       await sauvegarderPaiementLocal(
         data
       );
 
 
-      afficherStatus(
-        'Serveur inaccessible. Le paiement a été enregistré localement et sera synchronisé plus tard.',
+      afficherMessage(
+        '🟠 Serveur inaccessible : paiement sauvegardé localement. Il sera synchronisé plus tard.',
         'success'
       );
 
 
-      nettoyerFormulaire();
+      viderFormulaire();
 
     }
 
 
   } catch (erreur) {
 
-    afficherStatus(
+    afficherMessage(
       erreur.message ||
       String(erreur),
       'error'
     );
-
-  } finally {
-
-    afficherLoading(false);
 
   }
 
@@ -1155,92 +1349,137 @@ async function enregistrer() {
  * SYNCHRONISATION
  ************************************************************/
 
-async function synchroniserPaiements() {
+async function synchroniserPaiements(
+  afficherMessageUtilisateur = false
+) {
 
   if (
     !navigator.onLine
   ) {
+
+    mettreAJourStatut();
+
+    if (
+      afficherMessageUtilisateur
+    ) {
+
+      afficherMessage(
+        '🔴 Pas de connexion Internet.',
+        'error'
+      );
+
+    }
+
     return;
+
   }
 
 
-  try {
-
-    const db =
-      await ouvrirDB();
+  const paiements =
+    await recupererPaiementsLocaux();
 
 
-    const paiements =
-      await new Promise(
-        function(resolve, reject) {
+  if (
+    paiements.length === 0
+  ) {
 
-          const transaction =
-            db.transaction(
-              STORE_PAIEMENTS,
-              'readonly'
-            );
+    mettreAJourStatut();
 
+    if (
+      afficherMessageUtilisateur
+    ) {
 
-          const request =
-            transaction
-              .objectStore(
-                STORE_PAIEMENTS
-              )
-              .getAll();
+      afficherMessage(
+        '🟢 Aucun paiement en attente. Tout est synchronisé.',
+        'success'
+      );
 
+    }
 
-          request.onsuccess =
-            function() {
+    return;
 
-              resolve(
-                request.result
-              );
-
-            };
+  }
 
 
-          request.onerror =
-            function() {
-
-              reject(
-                request.error
-              );
-
-            };
-
-        }
+  const bouton =
+    document
+      .getElementById(
+        'btnSynchroniser'
       );
 
 
-    for (
-      const element of paiements
-    ) {
+  bouton.disabled = true;
 
-      try {
-
-        await envoyerServeur(
-          element.data
-        );
+  bouton.textContent =
+    '⏳ Synchronisation...';
 
 
-        await supprimerPaiementLocal(
-          element.id
-        );
+  let nombreSynchronise = 0;
 
 
-      } catch (erreur) {
+  for (
+    const element of paiements
+  ) {
 
-        break;
+    try {
 
-      }
+      await envoyerAuServeur(
+        element.data
+      );
+
+
+      await supprimerPaiementLocal(
+        element.id
+      );
+
+
+      nombreSynchronise++;
+
+
+    } catch (erreur) {
+
+      /*
+       * On arrête.
+       * Le paiement reste local.
+       */
+
+      break;
 
     }
 
-  } catch (erreur) {
+  }
 
-    console.error(
-      erreur
-    );
+
+  bouton.disabled = false;
+
+
+  mettreAJourStatut();
+
+
+  if (
+    afficherMessageUtilisateur
+  ) {
+
+    if (
+      nombreSynchronise ===
+      paiements.length
+    ) {
+
+      afficherMessage(
+        '🟢 Tous les paiements ont été synchronisés.',
+        'success'
+      );
+
+    } else {
+
+      afficherMessage(
+        '🟠 ' +
+        nombreSynchronise +
+        ' paiement(s) synchronisé(s). Certains restent en attente.',
+        'success'
+      );
+
+    }
 
   }
 
@@ -1248,229 +1487,287 @@ async function synchroniserPaiements() {
 
 
 /************************************************************
- * SUPPRESSION LOCAL
+ * NOMBRE PAIEMENTS EN ATTENTE
  ************************************************************/
 
-async function supprimerPaiementLocal(
-  id
-) {
+async function compterPaiementsLocaux() {
 
-  const db =
-    await ouvrirDB();
+  const paiements =
+    await recupererPaiementsLocaux();
 
 
-  return new Promise(
-    function(resolve, reject) {
-
-      const transaction =
-        db.transaction(
-          STORE_PAIEMENTS,
-          'readwrite'
-        );
-
-
-      transaction
-        .objectStore(
-          STORE_PAIEMENTS
-        )
-        .delete(id);
-
-
-      transaction.oncomplete =
-        function() {
-
-          resolve();
-
-        };
-
-
-      transaction.onerror =
-        function() {
-
-          reject(
-            transaction.error
-          );
-
-        };
-
-    }
-  );
+  return paiements.length;
 
 }
 
 
 /************************************************************
- * ECOLAGE UI
+ * STATUT
  ************************************************************/
 
-document
-  .getElementById(
-    'ecolage'
-  )
-  .addEventListener(
-    'change',
-    function() {
+async function mettreAJourStatut() {
 
-      const fields =
-        document.getElementById(
-          'ecolageFields'
-        );
+  const element =
+    document
+      .getElementById(
+        'statusConnexion'
+      );
 
 
-      if (this.checked) {
+  const bouton =
+    document
+      .getElementById(
+        'btnSynchroniser'
+      );
 
-        fields.classList.add(
-          'visible'
-        );
 
-      } else {
+  if (
+    !navigator.onLine
+  ) {
 
-        fields.classList.remove(
-          'visible'
-        );
+    element.className =
+      'status offline';
 
-      }
 
-    }
-  );
+    element.textContent =
+      '🔴 Hors connexion';
+
+
+    bouton.disabled =
+      true;
+
+
+    bouton.textContent =
+      '🔄 Synchroniser maintenant';
+
+
+    return;
+
+  }
+
+
+  const nombre =
+    await compterPaiementsLocaux();
+
+
+  if (
+    nombre > 0
+  ) {
+
+    element.className =
+      'status pending';
+
+
+    element.textContent =
+      '🟠 ' +
+      nombre +
+      ' paiement(s) en attente';
+
+
+    bouton.disabled =
+      false;
+
+
+  } else {
+
+    element.className =
+      'status online';
+
+
+    element.textContent =
+      '🟢 Synchronisé';
+
+
+    bouton.disabled =
+      false;
+
+  }
+
+
+  bouton.textContent =
+    '🔄 Synchroniser maintenant';
+
+}
 
 
 /************************************************************
- * STATUS
+ * CONNEXION INTERNET
  ************************************************************/
 
-function afficherStatus(
-  message,
-  type
-) {
+window.addEventListener(
+  'online',
+  async function() {
 
-  const status =
-    document.getElementById(
-      'status'
+    mettreAJourStatut();
+
+    await synchroniserPaiements(
+      false
     );
 
+  }
+);
 
-  status.textContent =
-    message;
 
+window.addEventListener(
+  'offline',
+  function() {
 
-  status.className =
-    'status ' + type;
+    mettreAJourStatut();
 
-}
+  }
+);
 
 
 /************************************************************
- * LOADING
+ * ECOLAGE
  ************************************************************/
 
-function afficherLoading(
-  visible
-) {
+function gererEcolage() {
 
-  document.getElementById(
-    'loading'
-  ).style.display =
-    visible
+  const coche =
+    document
+      .getElementById(
+        'ecolage'
+      )
+      .checked;
+
+
+  document
+    .getElementById(
+      'blocEcolage'
+    )
+    .style.display =
+    coche
       ? 'block'
       : 'none';
 
+}
 
-  document.getElementById(
-    'btnSave'
-  ).disabled =
-    visible;
+
+/************************************************************
+ * MESSAGE
+ ************************************************************/
+
+function afficherMessage(
+  texte,
+  type
+) {
+
+  const element =
+    document
+      .getElementById(
+        'message'
+      );
+
+
+  element.textContent =
+    texte;
+
+
+  element.className =
+    'message ' +
+    type;
+
+
+  element.style.display =
+    'block';
 
 }
 
 
 /************************************************************
- * RESET
+ * VIDER FORMULAIRE
  ************************************************************/
 
-function nettoyerFormulaire() {
+function viderFormulaire() {
 
   document
     .getElementById(
       'matricule'
-    ).value = '';
+    )
+    .value = '';
+
 
   document
     .getElementById(
       'nom'
-    ).value = '';
+    )
+    .value = '';
+
 
   document
     .getElementById(
       'prenom'
-    ).value = '';
+    )
+    .value = '';
 
-  document
-    .getElementById(
-      'classe'
-    ).value = '';
-
-  document
-    .getElementById(
-      'etablissement'
-    ).value = '';
 
   document
     .getElementById(
       'fraisGeneraux'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'droit'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'cravate'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'teeShirt'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'extra'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'ecolage'
-    ).checked = false;
+    )
+    .checked = false;
+
 
   document
     .getElementById(
       'montantEcolage'
-    ).value = '';
+    )
+    .value = '0';
+
 
   document
     .getElementById(
       'nombreMois'
-    ).value = '';
-
-  document
-    .getElementById(
-      'ecolageFields'
     )
-    .classList.remove(
-      'visible'
-    );
+    .value = '1';
+
+
+  gererEcolage();
 
 }
 
 
 /************************************************************
- * NAVIGATION
+ * OUVRIR PAIEMENTS
  ************************************************************/
 
-function allerPaiements() {
+function ouvrirPaiements() {
 
   window.location.href =
     'paiements.html';
@@ -1479,28 +1776,23 @@ function allerPaiements() {
 
 
 /************************************************************
- * RETOUR CONNEXION
+ * CHARGEMENT
  ************************************************************/
 
 window.addEventListener(
-  'online',
-  function() {
-
-    synchroniserPaiements();
-
-  }
-);
-
-
-window.addEventListener(
   'load',
-  function() {
+  async function() {
+
+    mettreAJourStatut();
+
 
     if (
       navigator.onLine
     ) {
 
-      synchroniserPaiements();
+      await synchroniserPaiements(
+        false
+      );
 
     }
 
