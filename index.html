@@ -5,10 +5,18 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#7f1734"
+>
 
 <title>Gestion des paiements</title>
+
 
 <style>
 
@@ -45,7 +53,7 @@ body {
 
   box-shadow:
     0 10px 30px
-    rgba(107, 16, 38, 0.22);
+    rgba(107,16,38,0.22);
 
   display: flex;
   justify-content: space-between;
@@ -59,13 +67,21 @@ body {
 }
 
 .header p {
-  opacity: 0.85;
+  opacity: .85;
   font-size: 13px;
 }
 
-.btn-navigation {
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn-navigation,
+.btn-sync {
   border: none;
-  background: rgba(255,255,255,0.16);
   color: white;
   padding: 11px 16px;
   border-radius: 10px;
@@ -73,12 +89,46 @@ body {
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  transition: 0.2s;
 }
 
-.btn-navigation:hover {
-  background: rgba(255,255,255,0.25);
-  transform: translateY(-1px);
+.btn-navigation {
+  background: rgba(255,255,255,.16);
+}
+
+.btn-sync {
+  background: rgba(255,255,255,.24);
+}
+
+.btn-navigation:hover,
+.btn-sync:hover {
+  background: rgba(255,255,255,.32);
+}
+
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 6px;
+  justify-content: flex-end;
+}
+
+.status-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.15);
+}
+
+.status-dot.pending {
+  background: #f59e0b;
+}
+
+.status-dot.syncing {
+  background: #38bdf8;
 }
 
 .card {
@@ -89,7 +139,7 @@ body {
 
   box-shadow:
     0 4px 15px
-    rgba(15,23,42,0.06);
+    rgba(15,23,42,.06);
 
   border: 1px solid #e5e7eb;
 }
@@ -139,28 +189,20 @@ select {
   width: 100%;
   height: 42px;
   padding: 0 12px;
-
-  border:
-    1px solid #dbe2ea;
-
+  border: 1px solid #dbe2ea;
   border-radius: 9px;
-
   background: #f8fafc;
-
   font-size: 13px;
-
   outline: none;
 }
 
 input:focus,
 select:focus {
   background: white;
-
   border-color: #7f1734;
-
   box-shadow:
     0 0 0 3px
-    rgba(127,23,52,0.10);
+    rgba(127,23,52,.10);
 }
 
 .frais-grid {
@@ -182,10 +224,7 @@ select:focus {
   position: absolute;
   right: 10px;
   top: 50%;
-
-  transform:
-    translateY(-50%);
-
+  transform: translateY(-50%);
   color: #94a3b8;
   font-size: 11px;
 }
@@ -217,34 +256,24 @@ select:focus {
   position: absolute;
   cursor: pointer;
   inset: 0;
-
   background: #cbd5e1;
-
   border-radius: 30px;
-
-  transition: 0.25s;
+  transition: .25s;
 }
 
 .slider:before {
   content: "";
-
   position: absolute;
-
   width: 19px;
   height: 19px;
-
   left: 3px;
   top: 3px;
-
   background: white;
-
   border-radius: 50%;
-
-  transition: 0.25s;
-
+  transition: .25s;
   box-shadow:
     0 2px 5px
-    rgba(0,0,0,0.15);
+    rgba(0,0,0,.15);
 }
 
 .switch input:checked + .slider {
@@ -252,8 +281,7 @@ select:focus {
 }
 
 .switch input:checked + .slider:before {
-  transform:
-    translateX(23px);
+  transform: translateX(23px);
 }
 
 .toggle-text {
@@ -268,12 +296,8 @@ select:focus {
 
 .ecolage-fields {
   display: none;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns: 1fr 1fr;
   gap: 13px;
-
   padding-top: 10px;
 }
 
@@ -283,18 +307,12 @@ select:focus {
 
 .total-box {
   display: flex;
-  justify-content:
-    space-between;
+  justify-content: space-between;
   align-items: center;
-
   background: #0f172a;
-
   color: white;
-
   padding: 16px 20px;
-
   border-radius: 13px;
-
   margin-top: 15px;
 }
 
@@ -316,48 +334,30 @@ select:focus {
 .btn-submit {
   width: 100%;
   height: 46px;
-
   margin-top: 15px;
-
   border: none;
-
   border-radius: 10px;
-
   background: #7f1734;
-
   color: white;
-
   font-size: 14px;
-
   font-weight: 700;
-
   cursor: pointer;
-
-  transition: 0.2s;
 }
 
 .btn-submit:hover {
   background: #641129;
-
-  transform:
-    translateY(-1px);
 }
 
 .btn-submit:disabled {
-  opacity: 0.6;
+  opacity: .6;
   cursor: wait;
-  transform: none;
 }
 
 .message {
   display: none;
-
   margin-top: 12px;
-
   padding: 12px;
-
   border-radius: 9px;
-
   font-size: 13px;
 }
 
@@ -371,15 +371,6 @@ select:focus {
   display: block;
   background: #fef2f2;
   color: #b91c1c;
-}
-
-.sync-status {
-  margin-top: 10px;
-  padding: 9px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  background: #f8fafc;
-  color: #64748b;
 }
 
 @media (max-width: 850px) {
@@ -407,8 +398,14 @@ select:focus {
     align-items: flex-start;
   }
 
-  .btn-navigation {
+  .header-actions {
     width: 100%;
+    justify-content: stretch;
+  }
+
+  .btn-navigation,
+  .btn-sync {
+    flex: 1;
   }
 
   .form-grid,
@@ -423,9 +420,12 @@ select:focus {
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
 
 <div class="header">
 
@@ -439,18 +439,48 @@ select:focus {
       Enregistrement d'un nouveau paiement
     </p>
 
+    <div class="sync-status">
+
+      <span
+        id="statusDot"
+        class="status-dot">
+      </span>
+
+      <span id="statusText">
+        Synchronisé
+      </span>
+
+    </div>
+
   </div>
 
-  <button
-    class="btn-navigation"
-    onclick="ouvrirPaiements()">
 
-    💳 Consultation des paiements
+  <div class="header-actions">
 
-  </button>
+    <button
+      class="btn-sync"
+      id="btnSync"
+      onclick="synchroniserPaiements()">
+
+      🔄 Synchroniser
+
+    </button>
+
+
+    <button
+      class="btn-navigation"
+      onclick="ouvrirPaiements()">
+
+      💳 Consultation des paiements
+
+    </button>
+
+  </div>
 
 </div>
 
+
+<!-- INFORMATIONS -->
 
 <div class="card">
 
@@ -464,7 +494,9 @@ select:focus {
 
   </div>
 
+
   <div class="form-grid">
+
 
     <div class="form-group">
 
@@ -479,6 +511,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -492,6 +525,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -504,6 +538,7 @@ select:focus {
         placeholder="Prénom">
 
     </div>
+
 
     <div class="form-group">
 
@@ -537,6 +572,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -557,10 +593,13 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
+
+<!-- FRAIS -->
 
 <div class="card">
 
@@ -574,7 +613,9 @@ select:focus {
 
   </div>
 
+
   <div class="frais-grid">
+
 
     <div class="form-group">
 
@@ -596,6 +637,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -615,6 +657,7 @@ select:focus {
       </div>
 
     </div>
+
 
     <div class="form-group">
 
@@ -636,6 +679,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -655,6 +699,7 @@ select:focus {
       </div>
 
     </div>
+
 
     <div class="form-group">
 
@@ -676,10 +721,13 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
+
+<!-- ECOLAGE -->
 
 <div class="card">
 
@@ -696,6 +744,7 @@ select:focus {
 
     </div>
 
+
     <div class="toggle-container">
 
       <span
@@ -705,6 +754,7 @@ select:focus {
         Non
 
       </span>
+
 
       <label class="switch">
 
@@ -721,9 +771,11 @@ select:focus {
 
   </div>
 
+
   <div
     class="ecolage-fields"
     id="ecolageFields">
+
 
     <div class="form-group">
 
@@ -745,6 +797,7 @@ select:focus {
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -760,10 +813,13 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
+
+<!-- TOTAL -->
 
 <div class="total-box">
 
@@ -810,30 +866,18 @@ select:focus {
 </div>
 
 
-<div
-  class="sync-status"
-  id="syncStatus">
-
-  🟢 Connexion disponible
-
-</div>
-
 </div>
 
 
 <script>
 
 /************************************************************
- * URL APPS SCRIPT
+ * CONFIGURATION
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycby8s3FKTOd8frY8mI6_zH2YUOXjm3of-JhG8Zk1UiIE_6XFMsq6R50e2XBvRPb7px_d/exec';
+  'https://script.google.com/macros/s/AKfycbzocTzSSVaTc7ThJQTrMdE4wjYg5yXrq58A5_KboS6kPXHD0mGEzh7GT7Jy7DOqOEiI/exec';
 
-
-/************************************************************
- * INDEXEDDB
- ************************************************************/
 
 const DB_NAME =
   'GestionPaiementDB';
@@ -844,11 +888,41 @@ const STORE_PAIEMENTS =
   'paiements_en_attente';
 
 
-let synchronisationEnCours = false;
+/************************************************************
+ * SERVICE WORKER
+ ************************************************************/
+
+if (
+  'serviceWorker' in navigator
+) {
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      navigator.serviceWorker
+        .register(
+          './service-worker.js'
+        )
+        .catch(
+          function(erreur) {
+
+            console.error(
+              'Service Worker :',
+              erreur
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
 
 
 /************************************************************
- * OUVERTURE DB
+ * INDEXEDDB
  ************************************************************/
 
 function ouvrirDB() {
@@ -879,8 +953,7 @@ function ouvrirDB() {
             db.createObjectStore(
               STORE_PAIEMENTS,
               {
-                keyPath: 'id',
-                autoIncrement: true
+                keyPath: 'id'
               }
             );
 
@@ -915,30 +988,27 @@ function ouvrirDB() {
 
 
 /************************************************************
- * NAVIGATION
- ************************************************************/
-
-function ouvrirPaiements() {
-
-  window.location.href =
-    'paiements.html';
-
-}
-
-
-/************************************************************
  * ID UNIQUE
  ************************************************************/
 
-function genererIdPaiement() {
+function creerIdLocal() {
+
+  if (
+    crypto &&
+    crypto.randomUUID
+  ) {
+
+    return crypto.randomUUID();
+
+  }
+
 
   return (
-    'PAY-' +
     Date.now() +
-    '-' +
+    '_' +
     Math.random()
       .toString(36)
-      .substring(2, 10)
+      .substring(2)
   );
 
 }
@@ -956,6 +1026,20 @@ async function sauvegarderPaiementLocal(
     await ouvrirDB();
 
 
+  const element = {
+
+    id:
+      creerIdLocal(),
+
+    data:
+      data,
+
+    dateCreation:
+      new Date().toISOString()
+
+  };
+
+
   return new Promise(
     function(resolve, reject) {
 
@@ -966,22 +1050,122 @@ async function sauvegarderPaiementLocal(
         );
 
 
-      const store =
-        transaction.objectStore(
+      transaction
+        .objectStore(
           STORE_PAIEMENTS
+        )
+        .add(
+          element
         );
 
 
-      store.add({
+      transaction.oncomplete =
+        function() {
 
-        data: data,
+          resolve(
+            element
+          );
 
-        dateCreation:
-          new Date().toISOString(),
+        };
 
-        synchronise: false
 
-      });
+      transaction.onerror =
+        function() {
+
+          reject(
+            transaction.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * RECUPERATION LOCAL
+ ************************************************************/
+
+async function obtenirPaiementsLocaux() {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readonly'
+        );
+
+
+      const request =
+        transaction
+          .objectStore(
+            STORE_PAIEMENTS
+          )
+          .getAll();
+
+
+      request.onsuccess =
+        function() {
+
+          resolve(
+            request.result
+          );
+
+        };
+
+
+      request.onerror =
+        function() {
+
+          reject(
+            request.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * SUPPRESSION LOCAL
+ ************************************************************/
+
+async function supprimerPaiementLocal(
+  id
+) {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readwrite'
+        );
+
+
+      transaction
+        .objectStore(
+          STORE_PAIEMENTS
+        )
+        .delete(
+          id
+        );
 
 
       transaction.oncomplete =
@@ -1008,65 +1192,11 @@ async function sauvegarderPaiementLocal(
 
 
 /************************************************************
- * ENVOI AU SERVEUR
- ************************************************************/
-
-async function envoyerAuServeur(
-  data
-) {
-
-  const response =
-    await fetch(
-      APPS_SCRIPT_URL,
-      {
-
-        method: 'POST',
-
-        headers: {
-
-          'Content-Type':
-            'text/plain;charset=utf-8'
-
-        },
-
-        body:
-          JSON.stringify({
-
-            action:
-              'enregistrerPaiement',
-
-            data:
-              data
-
-          })
-
-      }
-    );
-
-
-  const resultat =
-    await response.json();
-
-
-  if (
-    !resultat.success
-  ) {
-
-    throw new Error(
-      resultat.message ||
-      'Erreur serveur.'
-    );
-
-  }
-
-
-  return resultat;
-
-}
-
-
-/************************************************************
  * ENREGISTREMENT
+ *
+ * TOUJOURS LOCAL.
+ *
+ * Aucun appel Internet ici.
  ************************************************************/
 
 async function enregistrer() {
@@ -1079,8 +1209,7 @@ async function enregistrer() {
       .getElementById(
         'matricule'
       )
-      .value
-      .trim();
+      .value.trim();
 
 
   const nom =
@@ -1088,8 +1217,7 @@ async function enregistrer() {
       .getElementById(
         'nom'
       )
-      .value
-      .trim();
+      .value.trim();
 
 
   const prenom =
@@ -1097,8 +1225,7 @@ async function enregistrer() {
       .getElementById(
         'prenom'
       )
-      .value
-      .trim();
+      .value.trim();
 
 
   const classe =
@@ -1143,16 +1270,91 @@ async function enregistrer() {
   }
 
 
+  const fraisGeneraux =
+    valeur(
+      'fraisGeneraux'
+    );
+
+
+  const droit =
+    valeur(
+      'droit'
+    );
+
+
+  const cravate =
+    valeur(
+      'cravate'
+    );
+
+
+  const teeShirt =
+    valeur(
+      'teeShirt'
+    );
+
+
+  const extra =
+    valeur(
+      'extra'
+    );
+
+
+  const montantEcolage =
+    valeur(
+      'montantEcolage'
+    );
+
+
+  const nombreMois =
+    valeur(
+      'nombreMois'
+    );
+
+
+  if (
+    ecolage &&
+    montantEcolage <= 0
+  ) {
+
+    afficherMessage(
+      'Veuillez renseigner le montant mensuel de l’écolage.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    ecolage &&
+    (
+      nombreMois <= 0 ||
+      nombreMois > 10
+    )
+  ) {
+
+    afficherMessage(
+      'Le nombre de mois doit être compris entre 1 et 10.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
   const total =
-    valeur('fraisGeneraux') +
-    valeur('droit') +
-    valeur('cravate') +
-    valeur('teeShirt') +
-    valeur('extra') +
+    fraisGeneraux +
+    droit +
+    cravate +
+    teeShirt +
+    extra +
     (
       ecolage
-        ? valeur('montantEcolage') *
-          valeur('nombreMois')
+        ? montantEcolage *
+          nombreMois
         : 0
     );
 
@@ -1171,44 +1373,7 @@ async function enregistrer() {
   }
 
 
-  if (
-    ecolage
-  ) {
-
-    if (
-      valeur('montantEcolage') <= 0
-    ) {
-
-      afficherMessage(
-        'Veuillez renseigner le montant mensuel de l’écolage.',
-        'error'
-      );
-
-      return;
-
-    }
-
-
-    if (
-      valeur('nombreMois') <= 0
-    ) {
-
-      afficherMessage(
-        'Veuillez renseigner le nombre de mois.',
-        'error'
-      );
-
-      return;
-
-    }
-
-  }
-
-
   const data = {
-
-    idPaiement:
-      genererIdPaiement(),
 
     matricule:
       matricule,
@@ -1226,144 +1391,84 @@ async function enregistrer() {
       etablissement,
 
     fraisGeneraux:
-      valeur('fraisGeneraux'),
+      fraisGeneraux,
 
     droit:
-      valeur('droit'),
+      droit,
 
     cravate:
-      valeur('cravate'),
+      cravate,
 
     teeShirt:
-      valeur('teeShirt'),
+      teeShirt,
 
     extra:
-      valeur('extra'),
+      extra,
 
     ecolage:
       ecolage,
 
     montantEcolage:
-      valeur('montantEcolage'),
+      montantEcolage,
 
     nombreMois:
-      valeur('nombreMois')
+      nombreMois
 
   };
 
 
   const bouton =
-    document.getElementById(
-      'btnSubmit'
-    );
+    document
+      .getElementById(
+        'btnSubmit'
+      );
 
 
-  bouton.disabled = true;
+  bouton.disabled =
+    true;
 
   bouton.textContent =
-    '⏳ Enregistrement...';
+    '⏳ Enregistrement local...';
 
 
   try {
 
-    /******************************************************
-     * HORS CONNEXION
-     ******************************************************/
-
-    if (
-      !navigator.onLine
-    ) {
-
-      await sauvegarderPaiementLocal(
-        data
-      );
+    await sauvegarderPaiementLocal(
+      data
+    );
 
 
-      afficherMessage(
-        'Paiement enregistré localement. Il sera synchronisé dès que la connexion reviendra.',
-        'success'
-      );
+    afficherMessage(
+      'Paiement enregistré localement. Il sera envoyé à Google Sheets lorsque vous appuierez sur Synchroniser.',
+      'success'
+    );
 
 
-      nettoyerFormulaire();
+    nettoyerFormulaire();
 
 
-      return;
-
-    }
-
-
-    /******************************************************
-     * INTERNET
-     ******************************************************/
-
-    try {
-
-      const resultat =
-        await envoyerAuServeur(
-          data
-        );
-
-
-      afficherMessage(
-
-        resultat.dejaExistant
-          ? 'Ce paiement était déjà enregistré.'
-          :
-            'Paiement enregistré avec succès — ' +
-            Number(
-              resultat.montant
-            ).toLocaleString('fr-FR') +
-            ' Ar — ' +
-            resultat.motif,
-
-        'success'
-
-      );
-
-
-      nettoyerFormulaire();
-
-
-    } catch (erreur) {
-
-      /****************************************************
-       * SERVEUR INACCESSIBLE
-       ****************************************************/
-
-      await sauvegarderPaiementLocal(
-        data
-      );
-
-
-      afficherMessage(
-        'Serveur inaccessible. Le paiement a été enregistré localement et sera synchronisé automatiquement.',
-        'success'
-      );
-
-
-      nettoyerFormulaire();
-
-    }
+    await actualiserEtatSynchronisation();
 
 
   } catch (erreur) {
 
     afficherMessage(
-      erreur.message ||
-      'Une erreur est survenue.',
+      'Impossible d’enregistrer localement : ' +
+      (
+        erreur.message ||
+        erreur
+      ),
       'error'
     );
 
-
-  } finally {
-
-    bouton.disabled = false;
-
-    bouton.textContent =
-      '✓ Enregistrer le paiement';
-
   }
+
+
+  bouton.disabled =
+    false;
+
+  bouton.textContent =
+    '✓ Enregistrer le paiement';
 
 }
 
@@ -1374,424 +1479,275 @@ async function enregistrer() {
 
 async function synchroniserPaiements() {
 
+  const paiements =
+    await obtenirPaiementsLocaux();
+
+
+  if (
+    paiements.length === 0
+  ) {
+
+    afficherMessage(
+      'Aucune donnée locale à synchroniser. Vous êtes déjà synchronisé.',
+      'success'
+    );
+
+    await actualiserEtatSynchronisation();
+
+    return;
+
+  }
+
+
   if (
     !navigator.onLine
   ) {
 
-    mettreAJourStatut();
+    afficherMessage(
+      'Aucune connexion Internet. Les données restent sur cet appareil.',
+      'error'
+    );
 
     return;
 
   }
 
 
-  /*
-   * Protection fondamentale :
-   * une seule synchronisation simultanée.
-   */
-
-  if (
-    synchronisationEnCours
-  ) {
-
-    return;
-
-  }
-
-
-  synchronisationEnCours = true;
-
-
-  try {
-
-    const db =
-      await ouvrirDB();
-
-
-    const paiements =
-      await new Promise(
-        function(resolve, reject) {
-
-          const transaction =
-            db.transaction(
-              STORE_PAIEMENTS,
-              'readonly'
-            );
-
-
-          const store =
-            transaction.objectStore(
-              STORE_PAIEMENTS
-            );
-
-
-          const request =
-            store.getAll();
-
-
-          request.onsuccess =
-            function() {
-
-              resolve(
-                request.result
-              );
-
-            };
-
-
-          request.onerror =
-            function() {
-
-              reject(
-                request.error
-              );
-
-            };
-
-        }
+  const bouton =
+    document
+      .getElementById(
+        'btnSync'
       );
 
 
-    if (
-      paiements.length === 0
-    ) {
+  bouton.disabled =
+    true;
 
-      mettreAJourStatut();
-
-      return;
-
-    }
+  bouton.textContent =
+    '⏳ Synchronisation...';
 
 
-    for (
-      const element of paiements
-    ) {
-
-      try {
-
-        const resultat =
-          await envoyerAuServeur(
-            element.data
-          );
-
-
-        if (
-          resultat.success
-        ) {
-
-          await supprimerPaiementLocal(
-            element.id
-          );
-
-        }
-
-      } catch (erreur) {
-
-        /*
-         * On garde le paiement local.
-         */
-
-        break;
-
-      }
-
-    }
-
-
-  } catch (erreur) {
-
-    console.error(
-      'Synchronisation :',
-      erreur
-    );
-
-
-  } finally {
-
-    synchronisationEnCours =
-      false;
-
-
-    mettreAJourStatut();
-
-  }
-
-}
-
-
-/************************************************************
- * SUPPRESSION LOCALE
- ************************************************************/
-
-async function supprimerPaiementLocal(
-  id
-) {
-
-  const db =
-    await ouvrirDB();
-
-
-  return new Promise(
-    function(resolve, reject) {
-
-      const transaction =
-        db.transaction(
-          STORE_PAIEMENTS,
-          'readwrite'
-        );
-
-
-      transaction
-        .objectStore(
-          STORE_PAIEMENTS
-        )
-        .delete(id);
-
-
-      transaction.oncomplete =
-        function() {
-
-          resolve();
-
-        };
-
-
-      transaction.onerror =
-        function() {
-
-          reject(
-            transaction.error
-          );
-
-        };
-
-    }
+  afficherEtat(
+    'syncing',
+    'Synchronisation en cours...'
   );
 
-}
 
+  let synchronises = 0;
 
-/************************************************************
- * NOMBRE DE PAIEMENTS EN ATTENTE
- ************************************************************/
-
-async function compterPaiementsEnAttente() {
 
   try {
 
-    const db =
-      await ouvrirDB();
+    for (
+      const element
+      of paiements
+    ) {
+
+      const resultat =
+        await envoyerVersServeur(
+          element
+        );
 
 
-    return new Promise(
-      function(resolve) {
+      if (
+        resultat.success
+      ) {
 
-        const transaction =
-          db.transaction(
-            STORE_PAIEMENTS,
-            'readonly'
-          );
+        await supprimerPaiementLocal(
+          element.id
+        );
 
+        synchronises++;
 
-        const store =
-          transaction.objectStore(
-            STORE_PAIEMENTS
-          );
+      } else {
 
+        throw new Error(
+          resultat.message ||
+          'Le serveur a refusé le paiement.'
+        );
 
-        const request =
-          store.count();
+      }
 
-
-        request.onsuccess =
-          function() {
-
-            resolve(
-              request.result
-            );
-
-          };
+    }
 
 
-        request.onerror =
-          function() {
+    afficherMessage(
+      synchronises +
+      ' paiement(s) synchronisé(s) avec succès.',
+      'success'
+    );
 
-            resolve(0);
 
-          };
+  } catch (erreur) {
+
+    afficherMessage(
+      synchronises +
+      ' paiement(s) synchronisé(s).\n\n' +
+      'La synchronisation s’est arrêtée : ' +
+      (
+        erreur.message ||
+        erreur
+      ),
+      'error'
+    );
+
+  }
+
+
+  bouton.disabled =
+    false;
+
+  bouton.textContent =
+    '🔄 Synchroniser';
+
+
+  await actualiserEtatSynchronisation();
+
+}
+
+
+/************************************************************
+ * ENVOI SERVEUR
+ ************************************************************/
+
+async function envoyerVersServeur(
+  element
+) {
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method: 'POST',
+
+        redirect: 'follow',
+
+        headers: {
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'synchroniserPaiement',
+
+            localId:
+              element.id,
+
+            data:
+              element.data
+
+          })
 
       }
     );
 
-  } catch (erreur) {
 
-    return 0;
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      'Erreur HTTP ' +
+      response.status
+    );
 
   }
+
+
+  const resultat =
+    await response.json();
+
+
+  return resultat;
 
 }
 
 
 /************************************************************
- * STATUT
+ * ETAT SYNCHRONISATION
  ************************************************************/
 
-async function mettreAJourStatut() {
+async function actualiserEtatSynchronisation() {
 
-  const element =
-    document.getElementById(
-      'syncStatus'
-    );
-
-
-  if (!element) {
-
-    return;
-
-  }
-
-
-  const nombre =
-    await compterPaiementsEnAttente();
+  const paiements =
+    await obtenirPaiementsLocaux();
 
 
   if (
-    !navigator.onLine
+    paiements.length === 0
   ) {
 
-    element.textContent =
-      nombre > 0
-        ? '🔴 Hors connexion — ' +
-          nombre +
-          ' paiement(s) en attente'
-        : '🔴 Hors connexion';
-
-    return;
-
-  }
-
-
-  if (
-    nombre > 0
-  ) {
-
-    element.textContent =
-      '🟠 ' +
-      nombre +
-      ' paiement(s) en attente de synchronisation';
-
-    return;
-
-  }
-
-
-  element.textContent =
-    '🟢 Synchronisé';
-
-}
-
-
-/************************************************************
- * RETOUR DE CONNEXION
- ************************************************************/
-
-window.addEventListener(
-  'online',
-  function() {
-
-    mettreAJourStatut();
-
-    synchroniserPaiements();
-
-  }
-);
-
-
-window.addEventListener(
-  'offline',
-  function() {
-
-    mettreAJourStatut();
-
-  }
-);
-
-
-/************************************************************
- * ECOLAGE
- ************************************************************/
-
-function gererEcolage() {
-
-  const toggle =
-    document.getElementById(
-      'ecolageToggle'
-    );
-
-
-  const fields =
-    document.getElementById(
-      'ecolageFields'
-    );
-
-
-  const text =
-    document.getElementById(
-      'toggleText'
-    );
-
-
-  if (
-    toggle.checked
-  ) {
-
-    fields.classList.add(
-      'visible'
-    );
-
-
-    text.textContent =
-      'Oui';
-
-
-    text.classList.add(
-      'active'
+    afficherEtat(
+      'synced',
+      'Synchronisé'
     );
 
   } else {
 
-    fields.classList.remove(
-      'visible'
+    afficherEtat(
+      'pending',
+      paiements.length +
+      ' paiement(s) en attente'
     );
 
+  }
 
-    text.textContent =
-      'Non';
+}
 
 
-    text.classList.remove(
-      'active'
+function afficherEtat(
+  type,
+  texte
+) {
+
+  const dot =
+    document
+      .getElementById(
+        'statusDot'
+      );
+
+
+  const status =
+    document
+      .getElementById(
+        'statusText'
+      );
+
+
+  dot.className =
+    'status-dot';
+
+
+  if (
+    type === 'pending'
+  ) {
+
+    dot.classList.add(
+      'pending'
     );
 
   }
 
 
-  calculerTotal();
+  if (
+    type === 'syncing'
+  ) {
 
-}
+    dot.classList.add(
+      'syncing'
+    );
+
+  }
 
 
-/************************************************************
- * VALEUR
- ************************************************************/
-
-function valeur(id) {
-
-  return Number(
-    document
-      .getElementById(id)
-      .value
-  ) || 0;
+  status.textContent =
+    texte;
 
 }
 
@@ -1800,39 +1756,45 @@ function valeur(id) {
  * TOTAL
  ************************************************************/
 
+function valeur(
+  id
+) {
+
+  return Number(
+    document
+      .getElementById(
+        id
+      )
+      .value
+  ) || 0;
+
+}
+
+
 function calculerTotal() {
 
   let total = 0;
 
 
-  total +=
-    valeur(
-      'fraisGeneraux'
-    );
+  total += valeur(
+    'fraisGeneraux'
+  );
 
+  total += valeur(
+    'droit'
+  );
 
-  total +=
-    valeur(
-      'droit'
-    );
+  total += valeur(
+    'cravate'
+  );
 
+  total += valeur(
+    'teeShirt'
+  );
 
-  total +=
-    valeur(
-      'cravate'
-    );
-
-
-  total +=
-    valeur(
-      'teeShirt'
-    );
-
-
-  total +=
-    valeur(
-      'extra'
-    );
+  total += valeur(
+    'extra'
+  );
 
 
   const ecolage =
@@ -1850,7 +1812,8 @@ function calculerTotal() {
     total +=
       valeur(
         'montantEcolage'
-      ) *
+      )
+      *
       valeur(
         'nombreMois'
       );
@@ -1871,6 +1834,69 @@ function calculerTotal() {
 
 
 /************************************************************
+ * ECOLAGE
+ ************************************************************/
+
+function gererEcolage() {
+
+  const toggle =
+    document
+      .getElementById(
+        'ecolageToggle'
+      );
+
+
+  const fields =
+    document
+      .getElementById(
+        'ecolageFields'
+      );
+
+
+  const text =
+    document
+      .getElementById(
+        'toggleText'
+      );
+
+
+  if (
+    toggle.checked
+  ) {
+
+    fields.classList.add(
+      'visible'
+    );
+
+    text.textContent =
+      'Oui';
+
+    text.classList.add(
+      'active'
+    );
+
+  } else {
+
+    fields.classList.remove(
+      'visible'
+    );
+
+    text.textContent =
+      'Non';
+
+    text.classList.remove(
+      'active'
+    );
+
+  }
+
+
+  calculerTotal();
+
+}
+
+
+/************************************************************
  * NETTOYAGE
  ************************************************************/
 
@@ -1880,8 +1906,6 @@ function nettoyerFormulaire() {
     'matricule',
     'nom',
     'prenom',
-    'classe',
-    'etablissement',
     'fraisGeneraux',
     'droit',
     'cravate',
@@ -1889,15 +1913,32 @@ function nettoyerFormulaire() {
     'extra',
     'montantEcolage',
     'nombreMois'
-  ].forEach(
+  ]
+  .forEach(
     function(id) {
 
       document
-        .getElementById(id)
+        .getElementById(
+          id
+        )
         .value = '';
 
     }
   );
+
+
+  document
+    .getElementById(
+      'classe'
+    )
+    .value = '';
+
+
+  document
+    .getElementById(
+      'etablissement'
+    )
+    .value = '';
 
 
   document
@@ -1915,6 +1956,18 @@ function nettoyerFormulaire() {
 
 
 /************************************************************
+ * NAVIGATION
+ ************************************************************/
+
+function ouvrirPaiements() {
+
+  window.location.href =
+    'paiements.html';
+
+}
+
+
+/************************************************************
  * MESSAGES
  ************************************************************/
 
@@ -1924,9 +1977,10 @@ function afficherMessage(
 ) {
 
   const message =
-    document.getElementById(
-      'message'
-    );
+    document
+      .getElementById(
+        'message'
+      );
 
 
   message.textContent =
@@ -1947,9 +2001,10 @@ function afficherMessage(
 function cacherMessage() {
 
   const message =
-    document.getElementById(
-      'message'
-    );
+    document
+      .getElementById(
+        'message'
+      );
 
 
   message.style.display =
@@ -1959,7 +2014,7 @@ function cacherMessage() {
 
 
 /************************************************************
- * INITIALISATION
+ * RECALCUL
  ************************************************************/
 
 document
@@ -1978,22 +2033,17 @@ document
   );
 
 
-calculerTotal();
-
-mettreAJourStatut();
-
+/************************************************************
+ * DEMARRAGE
+ ************************************************************/
 
 window.addEventListener(
   'load',
   function() {
 
-    if (
-      navigator.onLine
-    ) {
+    calculerTotal();
 
-      synchroniserPaiements();
-
-    }
+    actualiserEtatSynchronisation();
 
   }
 );
