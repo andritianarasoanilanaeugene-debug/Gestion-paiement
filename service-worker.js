@@ -1,18 +1,21 @@
 const CACHE_NAME =
-  'gestion-paiements-v1';
+  'gestion-paiement-v2';
 
 
-const FICHIERS =
-  [
-    './',
-    './index.html',
-    './paiements.html'
-  ];
+const FILES_TO_CACHE = [
 
+  './',
 
-/************************************************************
- * INSTALLATION
- ************************************************************/
+  './index.html',
+
+  './paiements.html',
+
+  './classe.html',
+
+  './service-worker.js'
+
+];
+
 
 self.addEventListener(
   'install',
@@ -28,7 +31,7 @@ self.addEventListener(
           function(cache) {
 
             return cache.addAll(
-              FICHIERS
+              FILES_TO_CACHE
             );
 
           }
@@ -43,10 +46,6 @@ self.addEventListener(
 );
 
 
-/************************************************************
- * ACTIVATION
- ************************************************************/
-
 self.addEventListener(
   'activate',
   function(event) {
@@ -56,26 +55,24 @@ self.addEventListener(
       caches
         .keys()
         .then(
-          function(cachesExistants) {
+          function(names) {
 
             return Promise.all(
 
-              cachesExistants
+              names
                 .filter(
-                  function(cache) {
+                  function(name) {
 
-                    return (
-                      cache !==
-                      CACHE_NAME
-                    );
+                    return name !==
+                      CACHE_NAME;
 
                   }
                 )
                 .map(
-                  function(cache) {
+                  function(name) {
 
                     return caches.delete(
-                      cache
+                      name
                     );
 
                   }
@@ -95,17 +92,16 @@ self.addEventListener(
 );
 
 
-/************************************************************
- * REQUETES
- ************************************************************/
-
 self.addEventListener(
   'fetch',
   function(event) {
 
     /*
-     * On ne met PAS les requêtes
-     * Google Apps Script dans le cache.
+     * On ne met PAS les appels Apps Script
+     * dans le cache.
+     *
+     * L'API Google Sheets doit toujours
+     * être appelée directement.
      */
 
     if (
@@ -119,11 +115,6 @@ self.addEventListener(
     }
 
 
-    /*
-     * Pour le frontend :
-     * cache d'abord.
-     */
-
     event.respondWith(
 
       caches
@@ -131,60 +122,17 @@ self.addEventListener(
           event.request
         )
         .then(
-          function(reponseCache) {
+          function(cached) {
 
-            if (
-              reponseCache
-            ) {
+            if (cached) {
 
-              return reponseCache;
+              return cached;
 
             }
 
 
             return fetch(
               event.request
-            )
-            .then(
-              function(reponseInternet) {
-
-                /*
-                 * On met en cache
-                 * uniquement les réponses
-                 * valides.
-                 */
-
-                if (
-                  reponseInternet &&
-                  reponseInternet.status === 200 &&
-                  reponseInternet.type === 'basic'
-                ) {
-
-                  const copie =
-                    reponseInternet.clone();
-
-
-                  caches
-                    .open(
-                      CACHE_NAME
-                    )
-                    .then(
-                      function(cache) {
-
-                        cache.put(
-                          event.request,
-                          copie
-                        );
-
-                      }
-                    );
-
-                }
-
-
-                return reponseInternet;
-
-              }
             );
 
           }
