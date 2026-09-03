@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Paiements par classe</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  min-height: 100vh;
+
+  padding: 22px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      #f8d9e3,
+      #f3eef1 30%,
+      #edf1f6
+    );
+
+  color: #29222d;
+
+}
+
+.container {
+
+  max-width: 1400px;
+
+  margin: auto;
+
+}
+
+.header {
+
+  background:
+    linear-gradient(
+      135deg,
+      #5c0c25,
+      #86153b,
+      #b83260
+    );
+
+  color: white;
+
+  padding: 23px 27px;
+
+  border-radius: 19px;
+
+  margin-bottom: 17px;
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  box-shadow:
+    0 14px 30px
+    rgba(92,12,37,.23);
+
+}
+
+.header h1 {
+
+  font-size: 25px;
+
+  margin-bottom: 5px;
+
+}
+
+.header p {
+
+  font-size: 13px;
+
+  opacity: .85;
+
+}
+
+.btn {
+
+  border: none;
+
+  border-radius: 10px;
+
+  padding:
+    11px 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+.btn-back {
+
+  background:
+    rgba(255,255,255,.16);
+
+  color: white;
+
+}
+
+.btn-search {
+
+  background:
+    linear-gradient(
+      135deg,
+      #86153b,
+      #bd3764
+    );
+
+  color: white;
+
+}
+
+.card {
+
+  background:
+    rgba(255,255,255,.95);
+
+  border:
+    1px solid #e6dbe0;
+
+  border-radius: 16px;
+
+  padding: 19px;
+
+  margin-bottom: 15px;
+
+  box-shadow:
+    0 6px 22px
+    rgba(31,18,30,.06);
+
+}
+
+.filters {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr auto;
+
+  gap: 13px;
+
+  align-items: end;
+
+}
+
+label {
+
+  display: block;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #5e5260;
+
+  margin-bottom: 6px;
+
+}
+
+select {
+
+  width: 100%;
+
+  height: 43px;
+
+  border:
+    1px solid #ddd3d9;
+
+  border-radius: 10px;
+
+  padding:
+    0 11px;
+
+  background: #fcfafb;
+
+  outline: none;
+
+}
+
+select:focus {
+
+  border-color: #a32650;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(163,38,80,.10);
+
+}
+
+.info {
+
+  margin-bottom: 13px;
+
+  font-size: 12px;
+
+  color: #75666f;
+
+}
+
+.badge {
+
+  display: inline-block;
+
+  background: #f6dbe4;
+
+  color: #7e1237;
+
+  padding:
+    6px 10px;
+
+  border-radius: 20px;
+
+  font-weight: 800;
+
+  margin-right: 5px;
+
+}
+
+.table-wrapper {
+
+  overflow-x: auto;
+
+  border-radius: 12px;
+
+  border:
+    1px solid #e4dbe0;
+
+}
+
+table {
+
+  width: 100%;
+
+  border-collapse:
+    collapse;
+
+  min-width: 1500px;
+
+}
+
+thead {
+
+  background:
+    linear-gradient(
+      90deg,
+      #67102b,
+      #8f1d43
+    );
+
+  color: white;
+
+}
+
+th {
+
+  padding:
+    12px 10px;
+
+  font-size: 11px;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+}
+
+td {
+
+  padding:
+    11px 10px;
+
+  font-size: 12px;
+
+  border-bottom:
+    1px solid #eee6ea;
+
+  white-space: nowrap;
+
+}
+
+tbody tr:nth-child(even) {
+
+  background: #fff8fa;
+
+}
+
+tbody tr:hover {
+
+  background: #f8e7ed;
+
+}
+
+.mois {
+
+  text-align: right;
+
+  font-weight: 600;
+
+}
+
+.etablissement {
+
+  font-weight: 800;
+
+  color: #86153b;
+
+}
+
+.loading,
+.empty {
+
+  text-align: center;
+
+  padding: 35px;
+
+  color: #776872;
+
+}
+
+@media(max-width:750px) {
+
+  body {
+
+    padding: 12px;
+
+  }
+
+  .header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+  .filters {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<div class="header">
+
+  <div>
+
+    <h1>📚 Paiements par classe</h1>
+
+    <p>
+      Consultation directe des feuilles de classes
+    </p>
+
+  </div>
+
+
+  <button
+    class="btn btn-back"
+    onclick="retourPaiements()">
+
+    ← Retour
+
+  </button>
+
+</div>
+
+
+<div class="card">
+
+  <div class="filters">
+
+
+    <div>
+
+      <label>Classe</label>
+
+      <select id="classe">
+
+        <option value="">
+          Sélectionner une classe
+        </option>
+
+        <option>PS</option>
+        <option>MS</option>
+        <option>11ème</option>
+        <option>10ème</option>
+        <option>9ème</option>
+        <option>8ème</option>
+        <option>7ème</option>
+        <option>6ème</option>
+        <option>5ème</option>
+        <option>4ème</option>
+        <option>3ème</option>
+        <option>2nde</option>
+        <option>1ère</option>
+        <option>Terminale</option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>Établissement</label>
+
+      <select id="etablissement">
+
+        <option value="">
+          Tous les établissements
+        </option>
+
+        <option>LS1</option>
+        <option>LS2</option>
+        <option>LS3</option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="btn btn-search"
+      onclick="rechercherClasse()">
+
+      🔎 Rechercher
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  id="loading"
+  class="card loading"
+  style="display:none">
+
+  ⏳ Lecture de Google Sheets...
+
+</div>
+
+
+<div
+  id="resultCard"
+  class="card"
+  style="display:none">
+
+
+  <div class="info">
+
+    <span
+      id="badgeClasse"
+      class="badge">
+    </span>
+
+
+    <span
+      id="badgeEtablissement"
+      class="badge">
+    </span>
+
+
+    <span
+      id="nombreEtudiants"
+      class="badge">
+    </span>
+
+  </div>
+
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr id="tableHeader">
+        </tr>
+
+      </thead>
+
+
+      <tbody id="tableBody">
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<div
+  id="emptyMessage"
+  class="card empty"
+  style="display:none">
+
+  Aucun étudiant trouvé pour cette sélection.
+
+</div>
+
+
+<script>
+
+/************************************************************
+ * CONFIGURATION
+ ************************************************************/
+
+const APPS_SCRIPT_URL =
+  'TON_URL_APPS_SCRIPT_ICI';
+
+
+/************************************************************
+ * RECHERCHE
+ ************************************************************/
+
+async function rechercherClasse() {
+
+  const classe =
+    document
+      .getElementById(
+        'classe'
+      )
+      .value;
+
+
+  const etablissement =
+    document
+      .getElementById(
+        'etablissement'
+      )
+      .value;
+
+
+  if (
+    !classe
+  ) {
+
+    alert(
+      'Veuillez sélectionner une classe.'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !navigator.onLine
+  ) {
+
+    alert(
+      'Une connexion Internet est nécessaire pour consulter une classe.'
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'resultCard'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
+
+
+  try {
+
+    const response =
+      await fetch(
+        APPS_SCRIPT_URL,
+        {
+
+          method: 'POST',
+
+          headers: {
+
+            'Content-Type':
+              'text/plain;charset=utf-8'
+
+          },
+
+          body:
+            JSON.stringify({
+
+              action:
+                'rechercherClasse',
+
+              classe:
+                classe,
+
+              etablissement:
+                etablissement
+
+            })
+
+        }
+      );
+
+
+    const resultat =
+      await response.json();
+
+
+    if (
+      !resultat.success
+    ) {
+
+      throw new Error(
+        resultat.message
+      );
+
+    }
+
+
+    afficherResultats(
+      resultat
+    );
+
+
+  } catch (erreur) {
+
+    alert(
+      'Une erreur est survenue : ' +
+      (
+        erreur.message ||
+        erreur
+      )
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+}
+
+
+/************************************************************
+ * AFFICHAGE
+ ************************************************************/
+
+function afficherResultats(
+  resultat
+) {
+
+  const etudiants =
+    resultat.etudiants || [];
+
+
+  if (
+    etudiants.length === 0
+  ) {
+
+    document
+      .getElementById(
+        'emptyMessage'
+      )
+      .style.display =
+      'block';
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'resultCard'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'badgeClasse'
+    )
+    .textContent =
+    'Classe : ' +
+    resultat.classe;
+
+
+  document
+    .getElementById(
+      'badgeEtablissement'
+    )
+    .textContent =
+    resultat.etablissement
+      ? resultat.etablissement
+      : 'Tous les établissements';
+
+
+  document
+    .getElementById(
+      'nombreEtudiants'
+    )
+    .textContent =
+    etudiants.length +
+    (
+      etudiants.length > 1
+        ? ' étudiants'
+        : ' étudiant'
+    );
+
+
+  const colonnes =
+    resultat.colonnes;
+
+
+  const header =
+    document.getElementById(
+      'tableHeader'
+    );
+
+
+  header.innerHTML = '';
+
+
+  colonnes.forEach(
+    function(colonne) {
+
+      const th =
+        document.createElement(
+          'th'
+        );
+
+
+      th.textContent =
+        colonne;
+
+
+      header.appendChild(
+        th
+      );
+
+    }
+  );
+
+
+  const body =
+    document.getElementById(
+      'tableBody'
+    );
+
+
+  body.innerHTML = '';
+
+
+  etudiants.forEach(
+    function(etudiant) {
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      colonnes.forEach(
+        function(colonne) {
+
+          const td =
+            document.createElement(
+              'td'
+            );
+
+
+          const valeur =
+            etudiant[colonne] || '';
+
+
+          td.textContent =
+            valeur;
+
+
+          if (
+            colonne ===
+            'Etablissement'
+          ) {
+
+            td.className =
+              'etablissement';
+
+          }
+
+
+          if (
+            [
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Décembre',
+              'Janvier',
+              'Février',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin'
+            ].includes(
+              colonne
+            )
+          ) {
+
+            td.className =
+              'mois';
+
+          }
+
+
+          tr.appendChild(
+            td
+          );
+
+        }
+      );
+
+
+      body.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * NAVIGATION
+ ************************************************************/
+
+function retourPaiements() {
+
+  window.location.href =
+    'paiements.html';
+
+}
+
+</script>
+
+</body>
+
+</html>
