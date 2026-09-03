@@ -10,13 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<meta
-  name="theme-color"
-  content="#7f1734"
->
-
 <title>Consultation des paiements</title>
-
 
 <style>
 
@@ -27,267 +21,448 @@
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #f1f5f9;
-  color: #1e293b;
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
   min-height: 100vh;
-  padding: 20px;
+
+  padding: 22px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      #f7d8e2,
+      #f3eef1 32%,
+      #edf1f6
+    );
+
+  color: #29222d;
+
 }
 
 .container {
+
   max-width: 1250px;
+
   margin: auto;
+
 }
 
 .header {
-  background: linear-gradient(
-    135deg,
-    #6b1026,
-    #8f1d3e
-  );
+
+  background:
+    linear-gradient(
+      135deg,
+      #5c0c25,
+      #86153b,
+      #b83260
+    );
 
   color: white;
-  padding: 20px 25px;
-  border-radius: 16px;
-  margin-bottom: 18px;
 
-  box-shadow:
-    0 10px 30px
-    rgba(107,16,38,.22);
+  padding: 23px 27px;
+
+  border-radius: 19px;
+
+  margin-bottom: 17px;
 
   display: flex;
-  justify-content: space-between;
+
+  justify-content:
+    space-between;
+
   align-items: center;
-  gap: 20px;
+
+  gap: 15px;
+
+  box-shadow:
+    0 14px 30px
+    rgba(92,12,37,.23);
+
 }
 
 .header h1 {
+
   font-size: 25px;
+
   margin-bottom: 5px;
+
 }
 
 .header p {
-  opacity: .85;
+
   font-size: 13px;
+
+  opacity: .85;
+
 }
 
-.btn-navigation {
+.btn {
+
   border: none;
-  background: rgba(255,255,255,.16);
-  color: white;
-  padding: 11px 16px;
+
   border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
+
+  padding:
+    11px 16px;
+
+  font-weight: 700;
+
   cursor: pointer;
+
+}
+
+.btn-back {
+
+  background:
+    rgba(255,255,255,.16);
+
+  color: white;
+
+}
+
+.btn-search {
+
+  background:
+    linear-gradient(
+      135deg,
+      #86153b,
+      #bd3764
+    );
+
+  color: white;
+
 }
 
 .card {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
+
+  background:
+    rgba(255,255,255,.94);
+
+  border:
+    1px solid #e6dbe0;
+
+  border-radius: 16px;
+
+  padding: 19px;
+
   margin-bottom: 15px;
 
   box-shadow:
-    0 4px 15px
-    rgba(15,23,42,.06);
+    0 6px 22px
+    rgba(31,18,30,.06);
 
-  border: 1px solid #e5e7eb;
-}
-
-.card-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.source-selector {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.source-option {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.source-option input {
-  width: auto;
-  height: auto;
 }
 
 .filters {
+
   display: grid;
+
   grid-template-columns:
     1fr 1fr 1fr auto;
 
   gap: 13px;
-  align-items: end;
-}
 
-.form-group {
-  display: flex;
-  flex-direction: column;
+  align-items: end;
+
 }
 
 label {
+
+  display: block;
+
   font-size: 12px;
-  font-weight: 600;
-  color: #475569;
+
+  font-weight: 700;
+
+  color: #5e5260;
+
   margin-bottom: 6px;
+
 }
 
 input,
 select {
+
   width: 100%;
-  height: 42px;
-  padding: 0 12px;
-  border: 1px solid #dbe2ea;
-  border-radius: 9px;
-  background: #f8fafc;
-  font-size: 13px;
+
+  height: 43px;
+
+  border:
+    1px solid #ddd3d9;
+
+  border-radius: 10px;
+
+  padding:
+    0 11px;
+
+  background: #fcfafb;
+
   outline: none;
+
 }
 
 input:focus,
 select:focus {
-  background: white;
-  border-color: #7f1734;
+
+  border-color: #a32650;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(163,38,80,.10);
+
 }
 
-.btn-search {
-  height: 42px;
-  padding: 0 20px;
-  border: none;
-  border-radius: 9px;
-  background: #7f1734;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-}
+.mode {
 
-.btn-search:disabled {
-  opacity: .6;
-  cursor: wait;
-}
-
-.loading {
-  display: none;
-  padding: 20px;
-  text-align: center;
-  color: #64748b;
-}
-
-.empty {
-  display: none;
-  padding: 30px;
-  text-align: center;
-  color: #64748b;
-}
-
-.stats {
   display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 16px;
+
 }
 
-.stat {
-  flex: 1;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 15px;
+.mode label {
+
+  margin: 0;
+
 }
 
-.stat-label {
-  color: #64748b;
-  font-size: 12px;
+.mode-option {
+
+  position: relative;
+
 }
 
-.stat-value {
-  font-size: 21px;
-  font-weight: 700;
-  margin-top: 5px;
-}
+.mode-option input {
 
-.table-container {
   display: none;
+
+}
+
+.mode-option span {
+
+  display: block;
+
+  padding:
+    10px 15px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #e1d4db;
+
+  background: #fbf8fa;
+
+  color: #6b5c65;
+
+  cursor: pointer;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+.mode-option input:checked
++ span {
+
+  background:
+    #f7d8e1;
+
+  border-color:
+    #b62d5c;
+
+  color:
+    #7d1237;
+
+}
+
+.info {
+
+  font-size: 12px;
+
+  color: #746771;
+
+  margin-bottom: 12px;
+
+}
+
+.table-wrapper {
+
   overflow-x: auto;
+
+  border-radius: 12px;
+
+  border:
+    1px solid #e4dbe0;
+
 }
 
 table {
+
   width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
+
+  border-collapse:
+    collapse;
+
+  min-width: 950px;
+
+}
+
+thead {
+
+  background:
+    linear-gradient(
+      90deg,
+      #67102b,
+      #8f1d43
+    );
+
+  color: white;
+
 }
 
 th {
+
+  padding:
+    13px 11px;
+
+  font-size: 11px;
+
   text-align: left;
-  background: #f8fafc;
-  color: #475569;
-  padding: 12px;
-  border-bottom: 1px solid #e2e8f0;
+
   white-space: nowrap;
+
 }
 
 td {
-  padding: 11px 12px;
-  border-bottom: 1px solid #eef2f7;
+
+  padding:
+    12px 11px;
+
+  font-size: 12px;
+
+  border-bottom:
+    1px solid #eee6ea;
+
   white-space: nowrap;
+
+}
+
+tbody tr:nth-child(even) {
+
+  background: #fff8fa;
+
+}
+
+tbody tr:hover {
+
+  background: #f8e7ed;
+
 }
 
 .amount {
-  text-align: right;
-  font-weight: 700;
+
+  font-weight: 800;
+
+  color: #86153b;
+
 }
 
 .motif {
-  display: inline-block;
-  padding: 5px 8px;
-  border-radius: 7px;
-  background: #f9e8ed;
-  color: #7f1734;
-}
 
-@media(max-width:800px) {
-
-  .filters {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .btn-search {
-    width: 100%;
-  }
+  color: #6d5963;
 
 }
 
-@media(max-width:600px) {
+.stats {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 15px;
+
+  flex-wrap: wrap;
+
+}
+
+.stat {
+
+  flex: 1;
+
+  min-width: 180px;
+
+  padding: 15px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #f8e8ed
+    );
+
+  border:
+    1px solid #ead7de;
+
+}
+
+.stat-title {
+
+  color: #806d76;
+
+  font-size: 11px;
+
+}
+
+.stat-value {
+
+  font-size: 20px;
+
+  font-weight: 800;
+
+  color: #781333;
+
+}
+
+.loading,
+.empty {
+
+  text-align: center;
+
+  padding: 35px;
+
+  color: #776872;
+
+}
+
+@media(max-width:750px) {
 
   body {
     padding: 12px;
   }
 
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .btn-navigation {
-    width: 100%;
+    flex-direction: column;
+
+    align-items: flex-start;
+
   }
 
   .filters {
-    grid-template-columns: 1fr;
-  }
 
-  .stats {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+
   }
 
 }
@@ -299,7 +474,6 @@ td {
 
 <body>
 
-
 <div class="container">
 
 
@@ -307,22 +481,20 @@ td {
 
   <div>
 
-    <h1>
-      Consultation des paiements
-    </h1>
+    <h1>Consultation des paiements</h1>
 
     <p>
-      Consultation locale ou Google Sheets
+      Paiements enregistrés
     </p>
 
   </div>
 
 
   <button
-    class="btn-navigation"
+    class="btn btn-back"
     onclick="retourIndex()">
 
-    ← Retour à l'enregistrement
+    ← Retour
 
   </button>
 
@@ -331,38 +503,38 @@ td {
 
 <div class="card">
 
-  <div class="card-title">
-    Source des données
-  </div>
 
+  <div class="mode">
 
-  <div class="source-selector">
-
-    <label class="source-option">
+    <label class="mode-option">
 
       <input
         type="radio"
         name="source"
-        id="sourceLocal"
         value="local"
         checked
+        onchange="changerSource()"
       >
 
-      📱 Données locales
+      <span>
+        📱 Données locales
+      </span>
 
     </label>
 
 
-    <label class="source-option">
+    <label class="mode-option">
 
       <input
         type="radio"
         name="source"
-        id="sourceGoogle"
-        value="google"
+        value="serveur"
+        onchange="changerSource()"
       >
 
-      ☁️ Google Sheets
+      <span>
+        ☁️ Google Sheets
+      </span>
 
     </label>
 
@@ -372,11 +544,9 @@ td {
   <div class="filters">
 
 
-    <div class="form-group">
+    <div>
 
-      <label>
-        Date de début
-      </label>
+      <label>Date début</label>
 
       <input
         type="date"
@@ -386,11 +556,9 @@ td {
     </div>
 
 
-    <div class="form-group">
+    <div>
 
-      <label>
-        Date de fin
-      </label>
+      <label>Date fin</label>
 
       <input
         type="date"
@@ -400,11 +568,9 @@ td {
     </div>
 
 
-    <div class="form-group">
+    <div>
 
-      <label>
-        Établissement
-      </label>
+      <label>Établissement</label>
 
       <select id="etablissement">
 
@@ -412,17 +578,9 @@ td {
           Tous les établissements
         </option>
 
-        <option value="LS1">
-          LS1
-        </option>
-
-        <option value="LS2">
-          LS2
-        </option>
-
-        <option value="LS3">
-          LS3
-        </option>
+        <option>LS1</option>
+        <option>LS2</option>
+        <option>LS3</option>
 
       </select>
 
@@ -430,43 +588,43 @@ td {
 
 
     <button
-      class="btn-search"
-      id="btnSearch"
+      class="btn btn-search"
       onclick="rechercher()">
 
       🔎 Rechercher
 
     </button>
 
-
   </div>
 
 </div>
 
 
 <div
-  class="loading"
-  id="loading">
+  id="loading"
+  class="card loading"
+  style="display:none">
 
   ⏳ Recherche en cours...
 
 </div>
 
 
-<div class="stats">
+<div
+  id="stats"
+  class="stats"
+  style="display:none">
 
   <div class="stat">
 
-    <div class="stat-label">
+    <div class="stat-title">
       Nombre de paiements
     </div>
 
     <div
-      class="stat-value"
-      id="nombreResultats">
-
+      id="nombreResultats"
+      class="stat-value">
       0
-
     </div>
 
   </div>
@@ -474,15 +632,17 @@ td {
 
   <div class="stat">
 
-    <div class="stat-label">
-      Total
+    <div class="stat-title">
+      Montant total
     </div>
 
-    <div
-      class="stat-value"
-      id="totalPaiements">
+    <div class="stat-value">
 
-      0 Ar
+      <span id="totalPaiements">
+        0
+      </span>
+
+      Ar
 
     </div>
 
@@ -492,42 +652,49 @@ td {
 
 
 <div
-  class="card table-container"
-  id="tableContainer">
-
-  <table>
-
-    <thead>
-
-      <tr>
-
-        <th>Date</th>
-        <th>Matricule</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Classe</th>
-        <th>Établissement</th>
-        <th>Motif</th>
-        <th>Montant</th>
-
-      </tr>
-
-    </thead>
+  id="tableContainer"
+  class="card"
+  style="display:none">
 
 
-    <tbody id="paymentsTable">
-    </tbody>
+  <div class="table-wrapper">
 
-  </table>
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Date</th>
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Classe</th>
+          <th>Établissement</th>
+          <th>Motif</th>
+          <th>Montant</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="paymentsTable">
+      </tbody>
+
+    </table>
+
+  </div>
 
 </div>
 
 
 <div
+  id="emptyMessage"
   class="card empty"
-  id="emptyMessage">
+  style="display:none">
 
-  Aucun paiement trouvé pour ces critères.
+  Aucun paiement trouvé.
 
 </div>
 
@@ -539,49 +706,16 @@ td {
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzocTzSSVaTc7ThJQTrMdE4wjYg5yXrq58A5_KboS6kPXHD0mGEzh7GT7Jy7DOqOEiI/exec';
+  'https://script.google.com/macros/s/AKfycbzh347Syf1dDfNrCKhvXwE7Lv5IszkBk739PGn7o7LGef_5UlxVU0aAD15GzsCKXRiM/exec';
 
 
 const DB_NAME =
   'GestionPaiementDB';
 
-const DB_VERSION = 2;
+const DB_VERSION = 1;
 
 const STORE_PAIEMENTS =
   'paiements_en_attente';
-
-
-/************************************************************
- * SERVICE WORKER
- ************************************************************/
-
-if (
-  'serviceWorker' in navigator
-) {
-
-  window.addEventListener(
-    'load',
-    function() {
-
-      navigator.serviceWorker
-        .register(
-          './service-worker.js'
-        )
-        .catch(
-          function(erreur) {
-
-            console.error(
-              'Service Worker :',
-              erreur
-            );
-
-          }
-        );
-
-    }
-  );
-
-}
 
 
 /************************************************************
@@ -616,7 +750,8 @@ function ouvrirDB() {
             db.createObjectStore(
               STORE_PAIEMENTS,
               {
-                keyPath: 'id'
+                keyPath: 'id',
+                autoIncrement: true
               }
             );
 
@@ -651,6 +786,40 @@ function ouvrirDB() {
 
 
 /************************************************************
+ * SOURCE
+ ************************************************************/
+
+function sourceSelectionnee() {
+
+  return document
+    .querySelector(
+      'input[name="source"]:checked'
+    )
+    .value;
+
+}
+
+
+function changerSource() {
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'none';
+
+  document
+    .getElementById(
+      'stats'
+    )
+    .style.display =
+    'none';
+
+}
+
+
+/************************************************************
  * RECHERCHE LOCALE
  ************************************************************/
 
@@ -668,15 +837,12 @@ async function rechercherLocal(
     await new Promise(
       function(resolve, reject) {
 
-        const transaction =
-          db.transaction(
-            STORE_PAIEMENTS,
-            'readonly'
-          );
-
-
         const request =
-          transaction
+          db
+            .transaction(
+              STORE_PAIEMENTS,
+              'readonly'
+            )
             .objectStore(
               STORE_PAIEMENTS
             )
@@ -792,19 +958,7 @@ async function rechercherLocal(
   );
 
 
-  resultat.sort(
-    function(a, b) {
-
-      return
-        convertirDateAffichage(
-          b.date
-        ) -
-        convertirDateAffichage(
-          a.date
-        );
-
-    }
-  );
+  resultat.reverse();
 
 
   return resultat;
@@ -813,25 +967,14 @@ async function rechercherLocal(
 
 
 /************************************************************
- * RECHERCHE GOOGLE SHEETS
+ * RECHERCHE SERVEUR
  ************************************************************/
 
-async function rechercherGoogle(
+async function rechercherServeur(
   dateDebut,
   dateFin,
   etablissement
 ) {
-
-  if (
-    !navigator.onLine
-  ) {
-
-    throw new Error(
-      'Une connexion Internet est nécessaire pour consulter Google Sheets.'
-    );
-
-  }
-
 
   const response =
     await fetch(
@@ -839,8 +982,6 @@ async function rechercherGoogle(
       {
 
         method: 'POST',
-
-        redirect: 'follow',
 
         headers: {
 
@@ -868,18 +1009,6 @@ async function rechercherGoogle(
 
       }
     );
-
-
-  if (
-    !response.ok
-  ) {
-
-    throw new Error(
-      'Erreur HTTP ' +
-      response.status
-    );
-
-  }
 
 
   const resultat =
@@ -932,14 +1061,6 @@ async function rechercher() {
       .value;
 
 
-  const source =
-    document
-      .querySelector(
-        'input[name="source"]:checked'
-      )
-      .value;
-
-
   if (
     !dateDebut ||
     !dateFin
@@ -971,30 +1092,16 @@ async function rechercher() {
   afficherLoading();
 
 
-  const bouton =
-    document
-      .getElementById(
-        'btnSearch'
-      );
-
-
-  bouton.disabled =
-    true;
-
-
   try {
 
     let paiements;
 
 
     if (
-      source ===
+      sourceSelectionnee()
+      ===
       'local'
     ) {
-
-      /*
-       * AUCUN INTERNET
-       */
 
       paiements =
         await rechercherLocal(
@@ -1005,12 +1112,19 @@ async function rechercher() {
 
     } else {
 
-      /*
-       * GOOGLE SHEETS
-       */
+      if (
+        !navigator.onLine
+      ) {
+
+        throw new Error(
+          'Une connexion Internet est nécessaire pour consulter Google Sheets.'
+        );
+
+      }
+
 
       paiements =
-        await rechercherGoogle(
+        await rechercherServeur(
           dateDebut,
           dateFin,
           etablissement
@@ -1032,44 +1146,12 @@ async function rechercher() {
 
   }
 
-
-  bouton.disabled =
-    false;
-
 }
 
 
 /************************************************************
- * AFFICHAGE
+ * RESULTATS
  ************************************************************/
-
-function afficherLoading() {
-
-  document
-    .getElementById(
-      'loading'
-    )
-    .style.display =
-    'block';
-
-
-  document
-    .getElementById(
-      'tableContainer'
-    )
-    .style.display =
-    'none';
-
-
-  document
-    .getElementById(
-      'emptyMessage'
-    )
-    .style.display =
-    'none';
-
-}
-
 
 function afficherResultats(
   paiements
@@ -1084,17 +1166,12 @@ function afficherResultats(
 
 
   const tbody =
-    document
-      .getElementById(
-        'paymentsTable'
-      );
+    document.getElementById(
+      'paymentsTable'
+    );
 
 
-  tbody.innerHTML =
-    '';
-
-
-  let total = 0;
+  tbody.innerHTML = '';
 
 
   if (
@@ -1112,31 +1189,31 @@ function afficherResultats(
 
     document
       .getElementById(
+        'stats'
+      )
+      .style.display =
+      'none';
+
+
+    document
+      .getElementById(
         'emptyMessage'
       )
       .style.display =
       'block';
 
 
-    document
-      .getElementById(
-        'nombreResultats'
-      )
-      .textContent =
-      '0';
-
-
-    document
-      .getElementById(
-        'totalPaiements'
-      )
-      .textContent =
-      '0 Ar';
-
-
     return;
 
   }
+
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
 
 
   document
@@ -1149,10 +1226,13 @@ function afficherResultats(
 
   document
     .getElementById(
-      'emptyMessage'
+      'stats'
     )
     .style.display =
-    'none';
+    'flex';
+
+
+  let total = 0;
 
 
   paiements.forEach(
@@ -1164,6 +1244,9 @@ function afficherResultats(
         ) || 0;
 
 
+      total += montant;
+
+
       const tr =
         document.createElement(
           'tr'
@@ -1172,45 +1255,33 @@ function afficherResultats(
 
       tr.innerHTML = `
 
+        <td>${echapperHTML(
+          paiement.date
+        )}</td>
+
         <td>
-          ${echapperHTML(
-            paiement.date
-          )}
+          <strong>${echapperHTML(
+            paiement.matricule
+          )}</strong>
         </td>
 
         <td>
-          <strong>
-            ${echapperHTML(
-              paiement.matricule
-            )}
-          </strong>
+          <strong>${echapperHTML(
+            paiement.nom
+          )}</strong>
         </td>
 
-        <td>
-          <strong>
-            ${echapperHTML(
-              paiement.nom
-            )}
-          </strong>
-        </td>
+        <td>${echapperHTML(
+          paiement.prenom
+        )}</td>
 
-        <td>
-          ${echapperHTML(
-            paiement.prenom
-          )}
-        </td>
+        <td>${echapperHTML(
+          paiement.classe
+        )}</td>
 
-        <td>
-          ${echapperHTML(
-            paiement.classe
-          )}
-        </td>
-
-        <td>
-          ${echapperHTML(
-            paiement.etablissement
-          )}
-        </td>
+        <td>${echapperHTML(
+          paiement.etablissement
+        )}</td>
 
         <td>
           <span class="motif">
@@ -1233,10 +1304,6 @@ function afficherResultats(
         tr
       );
 
-
-      total +=
-        montant;
-
     }
   );
 
@@ -1256,8 +1323,7 @@ function afficherResultats(
     .textContent =
     total.toLocaleString(
       'fr-FR'
-    ) +
-    ' Ar';
+    );
 
 }
 
@@ -1295,24 +1361,20 @@ function calculerMontantLocal(
       data.fraisGeneraux
     );
 
-
   total +=
     valeurOuZero(
       data.droit
     );
-
 
   total +=
     valeurOuZero(
       data.cravate
     );
 
-
   total +=
     valeurOuZero(
       data.teeShirt
     );
-
 
   total +=
     valeurOuZero(
@@ -1342,7 +1404,7 @@ function calculerMontantLocal(
 
 
 /************************************************************
- * MOTIF LOCAL
+ * MOTIF
  ************************************************************/
 
 function construireMotifLocal(
@@ -1441,96 +1503,35 @@ function construireMotifLocal(
 
 
 /************************************************************
- * DATE
+ * FORMAT DATE
  ************************************************************/
 
 function formatDateLocale(
   date
 ) {
 
-  const jour =
+  return (
     String(
       date.getDate()
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  const mois =
+    ).padStart(2,'0')
+    +
+    '/' +
     String(
       date.getMonth() + 1
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  const annee =
-    date.getFullYear();
-
-
-  const heures =
+    ).padStart(2,'0')
+    +
+    '/' +
+    date.getFullYear()
+    +
+    ' ' +
     String(
       date.getHours()
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  const minutes =
+    ).padStart(2,'0')
+    +
+    ':' +
     String(
       date.getMinutes()
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  return (
-    jour +
-    '/' +
-    mois +
-    '/' +
-    annee +
-    ' ' +
-    heures +
-    ':' +
-    minutes
-  );
-
-}
-
-
-function convertirDateAffichage(
-  texte
-) {
-
-  const morceaux =
-    texte.split(
-      ' '
-    );
-
-
-  const date =
-    morceaux[0].split(
-      '/'
-    );
-
-
-  const heure =
-    morceaux[1]
-      ? morceaux[1].split(':')
-      : ['00','00'];
-
-
-  return new Date(
-    Number(date[2]),
-    Number(date[1]) - 1,
-    Number(date[0]),
-    Number(heure[0]),
-    Number(heure[1])
+    ).padStart(2,'0')
   );
 
 }
@@ -1577,8 +1578,41 @@ function echapperHTML(
 
 
 /************************************************************
- * ERREUR
+ * LOADING
  ************************************************************/
+
+function afficherLoading() {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'block';
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'none';
+
+  document
+    .getElementById(
+      'stats'
+    )
+    .style.display =
+    'none';
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
+
+}
+
 
 function afficherErreur(
   erreur
@@ -1587,14 +1621,6 @@ function afficherErreur(
   document
     .getElementById(
       'loading'
-    )
-    .style.display =
-    'none';
-
-
-  document
-    .getElementById(
-      'tableContainer'
     )
     .style.display =
     'none';
@@ -1612,8 +1638,47 @@ function afficherErreur(
 
 
 /************************************************************
- * RETOUR
+ * DATES
  ************************************************************/
+
+function dateAujourdhui() {
+
+  const date =
+    new Date();
+
+
+  return (
+    date.getFullYear()
+    +
+    '-' +
+    String(
+      date.getMonth() + 1
+    ).padStart(2,'0')
+    +
+    '-' +
+    String(
+      date.getDate()
+    ).padStart(2,'0')
+  );
+
+}
+
+
+document
+  .getElementById(
+    'dateDebut'
+  )
+  .value =
+  dateAujourdhui();
+
+
+document
+  .getElementById(
+    'dateFin'
+  )
+  .value =
+  dateAujourdhui();
+
 
 function retourIndex() {
 
@@ -1621,80 +1686,6 @@ function retourIndex() {
     'index.html';
 
 }
-
-
-/************************************************************
- * DATE DU JOUR
- ************************************************************/
-
-function dateAujourdhui() {
-
-  const maintenant =
-    new Date();
-
-
-  const annee =
-    maintenant.getFullYear();
-
-
-  const mois =
-    String(
-      maintenant.getMonth() + 1
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  const jour =
-    String(
-      maintenant.getDate()
-    ).padStart(
-      2,
-      '0'
-    );
-
-
-  return (
-    annee +
-    '-' +
-    mois +
-    '-' +
-    jour
-  );
-
-}
-
-
-/************************************************************
- * DEMARRAGE
- ************************************************************/
-
-window.addEventListener(
-  'load',
-  function() {
-
-    const aujourdHui =
-      dateAujourdhui();
-
-
-    document
-      .getElementById(
-        'dateDebut'
-      )
-      .value =
-      aujourdHui;
-
-
-    document
-      .getElementById(
-        'dateFin'
-      )
-      .value =
-      aujourdHui;
-
-  }
-);
 
 </script>
 
