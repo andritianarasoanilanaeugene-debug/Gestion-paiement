@@ -394,7 +394,13 @@ select:focus {
       🔄 Synchroniser
 
     </button>
+    <button
+  class="btn-navigation"
+  onclick="ouvrirClasses()">
 
+  📚 Paiements par classe
+
+  </button>
     <button
       class="btn-navigation"
       onclick="ouvrirPaiements()">
@@ -696,7 +702,12 @@ const DB_VERSION = 3;
 const STORE_PAIEMENTS =
   'paiements_en_attente';
 
+function ouvrirClasses() {
 
+  window.location.href =
+    'classe.html';
+
+}
 /************************************************************
  * INDEXED DB
  ************************************************************/
