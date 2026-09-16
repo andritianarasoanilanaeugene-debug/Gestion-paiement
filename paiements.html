@@ -4,465 +4,228 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Consultation des paiements</title>
 
 <style>
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body {
-
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-  min-height: 100vh;
-
-  padding: 22px;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      #f7d8e2,
-      #f3eef1 32%,
-      #edf1f6
-    );
-
-  color: #29222d;
-
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(135deg,#fdf2f5,#f8fafc,#fff7ed);
+  color:#1e293b;
+  min-height:100vh;
+  padding:20px;
 }
 
 .container {
-
-  max-width: 1250px;
-
-  margin: auto;
-
+  max-width:1250px;
+  margin:auto;
 }
 
 .header {
-
-  background:
-    linear-gradient(
-      135deg,
-      #5c0c25,
-      #86153b,
-      #b83260
-    );
-
-  color: white;
-
-  padding: 23px 27px;
-
-  border-radius: 19px;
-
-  margin-bottom: 17px;
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items: center;
-
-  gap: 15px;
-
-  box-shadow:
-    0 14px 30px
-    rgba(92,12,37,.23);
-
+  background:linear-gradient(135deg,#5b0b20,#8f1d3e,#b8325a);
+  color:white;
+  padding:20px 25px;
+  border-radius:17px;
+  margin-bottom:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 12px 30px rgba(107,16,38,.22);
 }
 
 .header h1 {
-
-  font-size: 25px;
-
-  margin-bottom: 5px;
-
+  font-size:24px;
 }
 
 .header p {
-
-  font-size: 13px;
-
-  opacity: .85;
-
+  font-size:13px;
+  opacity:.85;
+  margin-top:4px;
 }
 
 .btn {
-
-  border: none;
-
-  border-radius: 10px;
-
-  padding:
-    11px 16px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
+  border:none;
+  border-radius:10px;
+  padding:11px 15px;
+  cursor:pointer;
+  font-weight:600;
 }
 
 .btn-back {
-
-  background:
-    rgba(255,255,255,.16);
-
-  color: white;
-
-}
-
-.btn-search {
-
-  background:
-    linear-gradient(
-      135deg,
-      #86153b,
-      #bd3764
-    );
-
-  color: white;
-
+  background:rgba(255,255,255,.16);
+  color:white;
 }
 
 .card {
-
-  background:
-    rgba(255,255,255,.94);
-
-  border:
-    1px solid #e6dbe0;
-
-  border-radius: 16px;
-
-  padding: 19px;
-
-  margin-bottom: 15px;
-
-  box-shadow:
-    0 6px 22px
-    rgba(31,18,30,.06);
-
+  background:rgba(255,255,255,.94);
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #f1dce3;
+  box-shadow:0 5px 18px rgba(15,23,42,.07);
+  margin-bottom:16px;
 }
 
 .filters {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr auto;
+  gap:13px;
+  align-items:end;
+}
 
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr 1fr auto;
-
-  gap: 13px;
-
-  align-items: end;
-
+.form-group {
+  display:flex;
+  flex-direction:column;
 }
 
 label {
-
-  display: block;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  color: #5e5260;
-
-  margin-bottom: 6px;
-
+  font-size:12px;
+  font-weight:600;
+  color:#475569;
+  margin-bottom:6px;
 }
 
 input,
 select {
-
-  width: 100%;
-
-  height: 43px;
-
-  border:
-    1px solid #ddd3d9;
-
-  border-radius: 10px;
-
-  padding:
-    0 11px;
-
-  background: #fcfafb;
-
-  outline: none;
-
+  height:42px;
+  border:1px solid #dbe2ea;
+  border-radius:9px;
+  background:#f8fafc;
+  padding:0 12px;
+  outline:none;
 }
 
 input:focus,
 select:focus {
-
-  border-color: #a32650;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(163,38,80,.10);
-
+  border-color:#8f1d3e;
+  background:white;
 }
 
-.mode {
-
-  display: flex;
-
-  gap: 10px;
-
-  flex-wrap: wrap;
-
-  margin-bottom: 16px;
-
+.btn-search {
+  height:42px;
+  background:#8f1d3e;
+  color:white;
 }
 
-.mode label {
-
-  margin: 0;
-
+.radio-box {
+  display:flex;
+  gap:20px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
 }
 
-.mode-option {
-
-  position: relative;
-
+.radio-option {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.mode-option input {
-
-  display: none;
-
-}
-
-.mode-option span {
-
-  display: block;
-
-  padding:
-    10px 15px;
-
-  border-radius: 10px;
-
-  border:
-    1px solid #e1d4db;
-
-  background: #fbf8fa;
-
-  color: #6b5c65;
-
-  cursor: pointer;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-}
-
-.mode-option input:checked
-+ span {
-
-  background:
-    #f7d8e1;
-
-  border-color:
-    #b62d5c;
-
-  color:
-    #7d1237;
-
-}
-
-.info {
-
-  font-size: 12px;
-
-  color: #746771;
-
-  margin-bottom: 12px;
-
+.radio-option input {
+  width:auto;
+  height:auto;
+  accent-color:#8f1d3e;
 }
 
 .table-wrapper {
-
-  overflow-x: auto;
-
-  border-radius: 12px;
-
-  border:
-    1px solid #e4dbe0;
-
+  overflow:auto;
+  border-radius:10px;
 }
 
 table {
-
-  width: 100%;
-
-  border-collapse:
-    collapse;
-
-  min-width: 950px;
-
-}
-
-thead {
-
-  background:
-    linear-gradient(
-      90deg,
-      #67102b,
-      #8f1d43
-    );
-
-  color: white;
-
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
 }
 
 th {
-
-  padding:
-    13px 11px;
-
-  font-size: 11px;
-
-  text-align: left;
-
-  white-space: nowrap;
-
+  background:#651029;
+  color:white;
+  padding:11px;
+  font-size:12px;
+  text-align:left;
+  white-space:nowrap;
 }
 
 td {
-
-  padding:
-    12px 11px;
-
-  font-size: 12px;
-
-  border-bottom:
-    1px solid #eee6ea;
-
-  white-space: nowrap;
-
+  padding:10px;
+  border-bottom:1px solid #edf0f3;
+  font-size:12px;
+  white-space:nowrap;
 }
 
-tbody tr:nth-child(even) {
-
-  background: #fff8fa;
-
-}
-
-tbody tr:hover {
-
-  background: #f8e7ed;
-
+tr:nth-child(even) td {
+  background:#fff8fa;
 }
 
 .amount {
-
-  font-weight: 800;
-
-  color: #86153b;
-
+  text-align:right;
+  font-weight:700;
 }
 
 .motif {
-
-  color: #6d5963;
-
+  background:#f9e8ed;
+  color:#7f1734;
+  padding:5px 8px;
+  border-radius:7px;
 }
 
-.stats {
-
-  display: flex;
-
-  gap: 12px;
-
-  margin-bottom: 15px;
-
-  flex-wrap: wrap;
-
+.summary {
+  display:flex;
+  gap:12px;
+  margin-bottom:15px;
+  flex-wrap:wrap;
 }
 
-.stat {
-
-  flex: 1;
-
-  min-width: 180px;
-
-  padding: 15px;
-
-  border-radius: 13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #f8e8ed
-    );
-
-  border:
-    1px solid #ead7de;
-
+.summary-box {
+  padding:12px 17px;
+  background:#fff;
+  border:1px solid #f1dce3;
+  border-radius:10px;
 }
 
-.stat-title {
-
-  color: #806d76;
-
-  font-size: 11px;
-
+.summary-label {
+  color:#64748b;
+  font-size:11px;
 }
 
-.stat-value {
-
-  font-size: 20px;
-
-  font-weight: 800;
-
-  color: #781333;
-
+.summary-value {
+  color:#7f1734;
+  font-weight:700;
+  font-size:17px;
 }
 
 .loading,
 .empty {
-
-  text-align: center;
-
-  padding: 35px;
-
-  color: #776872;
-
+  display:none;
+  padding:30px;
+  text-align:center;
+  color:#64748b;
 }
 
 @media(max-width:750px) {
 
-  body {
-    padding: 12px;
-  }
-
   .header {
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   .filters {
+    grid-template-columns:1fr;
+  }
 
-    grid-template-columns: 1fr;
-
+  .btn-search {
+    width:100%;
   }
 
 }
@@ -471,11 +234,9 @@ tbody tr:hover {
 
 </head>
 
-
 <body>
 
 <div class="container">
-
 
 <div class="header">
 
@@ -484,11 +245,10 @@ tbody tr:hover {
     <h1>Consultation des paiements</h1>
 
     <p>
-      Paiements enregistrés
+      Consultation locale ou depuis Google Sheets
     </p>
 
   </div>
-
 
   <button
     class="btn btn-back"
@@ -503,38 +263,31 @@ tbody tr:hover {
 
 <div class="card">
 
+  <div class="radio-box">
 
-  <div class="mode">
-
-    <label class="mode-option">
+    <label class="radio-option">
 
       <input
         type="radio"
         name="source"
         value="local"
         checked
-        onchange="changerSource()"
-      >
+        onchange="changerSource()">
 
-      <span>
-        📱 Données locales
-      </span>
+      📱 Données locales
 
     </label>
 
 
-    <label class="mode-option">
+    <label class="radio-option">
 
       <input
         type="radio"
         name="source"
-        value="serveur"
-        onchange="changerSource()"
-      >
+        value="google"
+        onchange="changerSource()">
 
-      <span>
-        ☁️ Google Sheets
-      </span>
+      ☁️ Google Sheets
 
     </label>
 
@@ -543,32 +296,29 @@ tbody tr:hover {
 
   <div class="filters">
 
-
-    <div>
+    <div class="form-group">
 
       <label>Date début</label>
 
       <input
         type="date"
-        id="dateDebut"
-      >
+        id="dateDebut">
 
     </div>
 
 
-    <div>
+    <div class="form-group">
 
       <label>Date fin</label>
 
       <input
         type="date"
-        id="dateFin"
-      >
+        id="dateFin">
 
     </div>
 
 
-    <div>
+    <div class="form-group">
 
       <label>Établissement</label>
 
@@ -591,7 +341,7 @@ tbody tr:hover {
       class="btn btn-search"
       onclick="rechercher()">
 
-      🔎 Rechercher
+      🔎 Chercher
 
     </button>
 
@@ -600,49 +350,36 @@ tbody tr:hover {
 </div>
 
 
-<div
-  id="loading"
-  class="card loading"
-  style="display:none">
+<div class="summary">
 
-  ⏳ Recherche en cours...
+  <div class="summary-box">
 
-</div>
-
-
-<div
-  id="stats"
-  class="stats"
-  style="display:none">
-
-  <div class="stat">
-
-    <div class="stat-title">
+    <div class="summary-label">
       Nombre de paiements
     </div>
 
     <div
-      id="nombreResultats"
-      class="stat-value">
+      class="summary-value"
+      id="nombreResultats">
+
       0
+
     </div>
 
   </div>
 
 
-  <div class="stat">
+  <div class="summary-box">
 
-    <div class="stat-title">
-      Montant total
+    <div class="summary-label">
+      Total
     </div>
 
-    <div class="stat-value">
+    <div
+      class="summary-value"
+      id="totalPaiements">
 
-      <span id="totalPaiements">
-        0
-      </span>
-
-      Ar
+      0 Ar
 
     </div>
 
@@ -652,10 +389,9 @@ tbody tr:hover {
 
 
 <div
-  id="tableContainer"
   class="card"
+  id="tableContainer"
   style="display:none">
-
 
   <div class="table-wrapper">
 
@@ -668,7 +404,6 @@ tbody tr:hover {
           <th>Date</th>
           <th>Matricule</th>
           <th>Nom</th>
-          <th>Prénom</th>
           <th>Classe</th>
           <th>Établissement</th>
           <th>Motif</th>
@@ -678,9 +413,7 @@ tbody tr:hover {
 
       </thead>
 
-
-      <tbody id="paymentsTable">
-      </tbody>
+      <tbody id="paymentsTable"></tbody>
 
     </table>
 
@@ -690,11 +423,22 @@ tbody tr:hover {
 
 
 <div
-  id="emptyMessage"
-  class="card empty"
-  style="display:none">
+  class="card loading"
+  id="loading">
 
-  Aucun paiement trouvé.
+  ⏳ Recherche en cours...
+
+</div>
+
+
+<div
+  class="card empty"
+  id="emptyMessage">
+
+  Aucun paiement trouvé pour ces critères.
+
+</div>
+
 
 </div>
 
@@ -702,12 +446,8 @@ tbody tr:hover {
 <script>
 
 /************************************************************
- * CONFIGURATION
+ * CONFIGURATION LOCALE
  ************************************************************/
-
-const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzh347Syf1dDfNrCKhvXwE7Lv5IszkBk739PGn7o7LGef_5UlxVU0aAD15GzsCKXRiM/exec';
-
 
 const DB_NAME =
   'GestionPaiementDB';
@@ -719,13 +459,13 @@ const STORE_PAIEMENTS =
 
 
 /************************************************************
- * INDEXEDDB
+ * INDEXED DB
  ************************************************************/
 
 function ouvrirDB() {
 
   return new Promise(
-    function(resolve, reject) {
+    function(resolve,reject) {
 
       const request =
         indexedDB.open(
@@ -750,8 +490,8 @@ function ouvrirDB() {
             db.createObjectStore(
               STORE_PAIEMENTS,
               {
-                keyPath: 'id',
-                autoIncrement: true
+                keyPath:'id',
+                autoIncrement:true
               }
             );
 
@@ -786,41 +526,7 @@ function ouvrirDB() {
 
 
 /************************************************************
- * SOURCE
- ************************************************************/
-
-function sourceSelectionnee() {
-
-  return document
-    .querySelector(
-      'input[name="source"]:checked'
-    )
-    .value;
-
-}
-
-
-function changerSource() {
-
-  document
-    .getElementById(
-      'tableContainer'
-    )
-    .style.display =
-    'none';
-
-  document
-    .getElementById(
-      'stats'
-    )
-    .style.display =
-    'none';
-
-}
-
-
-/************************************************************
- * RECHERCHE LOCALE
+ * LECTURE LOCALE
  ************************************************************/
 
 async function rechercherLocal(
@@ -835,7 +541,7 @@ async function rechercherLocal(
 
   const elements =
     await new Promise(
-      function(resolve, reject) {
+      function(resolve,reject) {
 
         const request =
           db
@@ -892,14 +598,24 @@ async function rechercherLocal(
   elements.forEach(
     function(element) {
 
-      const data =
-        element.data;
-
-
       const date =
         new Date(
           element.dateCreation
         );
+
+
+      const data =
+        element.data;
+
+
+      if (
+        date < debut ||
+        date > fin
+      ) {
+
+        return;
+
+      }
 
 
       if (
@@ -913,46 +629,38 @@ async function rechercherLocal(
       }
 
 
-      if (
-        date >= debut &&
-        date <= fin
-      ) {
+      const montant =
+        calculerMontant(data);
 
-        resultat.push({
 
-          date:
-            formatDateLocale(
-              date
-            ),
+      resultat.push({
 
-          matricule:
-            data.matricule,
+        date:
+          formatDateLocale(date),
 
-          nom:
+        matricule:
+          genererMatricule(
             data.nom,
-
-          prenom:
-            data.prenom,
-
-          classe:
             data.classe,
+            data.etablissement
+          ),
 
-          montant:
-            calculerMontantLocal(
-              data
-            ),
+        nom:
+          data.nom,
 
-          etablissement:
-            data.etablissement,
+        classe:
+          data.classe,
 
-          motif:
-            construireMotifLocal(
-              data
-            )
+        etablissement:
+          data.etablissement,
 
-        });
+        motif:
+          construireMotif(data),
 
-      }
+        montant:
+          montant
+
+      });
 
     }
   );
@@ -967,72 +675,180 @@ async function rechercherLocal(
 
 
 /************************************************************
- * RECHERCHE SERVEUR
+ * CALCUL LOCAL
  ************************************************************/
 
-async function rechercherServeur(
-  dateDebut,
-  dateFin,
-  etablissement
-) {
+function valeurOuZero(v) {
 
-  const response =
-    await fetch(
-      APPS_SCRIPT_URL,
-      {
+  const n =
+    Number(v);
 
-        method: 'POST',
+  return isNaN(n)
+    ? 0
+    : n;
 
-        headers: {
-
-          'Content-Type':
-            'text/plain;charset=utf-8'
-
-        },
-
-        body:
-          JSON.stringify({
-
-            action:
-              'rechercherPaiements',
-
-            dateDebut:
-              dateDebut,
-
-            dateFin:
-              dateFin,
-
-            etablissement:
-              etablissement
-
-          })
-
-      }
-    );
+}
 
 
-  const resultat =
-    await response.json();
+function calculerMontant(data) {
+
+  let total = 0;
+
+  total += valeurOuZero(data.droit);
+  total += valeurOuZero(data.fraisGeneraux);
+  total += valeurOuZero(data.fram);
+  total += valeurOuZero(data.teeShirt);
+  total += valeurOuZero(data.cravate);
+  total += valeurOuZero(data.short);
+  total += valeurOuZero(data.extra);
 
 
   if (
-    !resultat.success
+    data.ecolage === true
   ) {
 
-    throw new Error(
-      resultat.message
-    );
+    total +=
+      valeurOuZero(
+        data.montantEcolage
+      ) *
+      valeurOuZero(
+        data.nombreMois
+      );
 
   }
 
 
-  return resultat.paiements;
+  return total;
 
 }
 
 
 /************************************************************
- * RECHERCHE PRINCIPALE
+ * MATRICULE LOCAL
+ ************************************************************/
+
+function genererMatricule(
+  nom,
+  classe,
+  etablissement
+) {
+
+  function normaliser(v) {
+
+    return String(v || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-zA-Z0-9]+/g,'-')
+      .replace(/^-+|-+$/g,'')
+      .toUpperCase();
+
+  }
+
+
+  return (
+    normaliser(nom) +
+    '-' +
+    normaliser(classe) +
+    '-' +
+    normaliser(etablissement)
+  );
+
+}
+
+
+/************************************************************
+ * MOTIF
+ ************************************************************/
+
+function construireMotif(data) {
+
+  const motifs = [];
+
+
+  if (valeurOuZero(data.droit) > 0)
+    motifs.push('Droit');
+
+  if (valeurOuZero(data.fraisGeneraux) > 0)
+    motifs.push('Frais généraux');
+
+  if (valeurOuZero(data.fram) > 0)
+    motifs.push('FRAM');
+
+  if (valeurOuZero(data.teeShirt) > 0)
+    motifs.push('Tee-shirt');
+
+  if (valeurOuZero(data.cravate) > 0)
+    motifs.push('Cravate');
+
+  if (valeurOuZero(data.short) > 0)
+    motifs.push('Short');
+
+  if (valeurOuZero(data.extra) > 0)
+    motifs.push('Extra');
+
+
+  if (
+    data.ecolage === true &&
+    valeurOuZero(data.montantEcolage) > 0
+  ) {
+
+    motifs.push(
+      'Écolage ' +
+      data.nombreMois +
+      ' mois'
+    );
+
+  }
+
+
+  return motifs.join(' + ');
+
+}
+
+
+/************************************************************
+ * RECHERCHE GOOGLE SHEETS
+ ************************************************************/
+
+function rechercherServeur(
+  dateDebut,
+  dateFin,
+  etablissement
+) {
+
+  return new Promise(
+    function(resolve,reject) {
+
+      google.script.run
+
+        .withSuccessHandler(
+          function(resultat) {
+
+            resolve(
+              resultat
+            );
+
+          }
+        )
+
+        .withFailureHandler(
+          reject
+        )
+
+        .rechercherPaiements(
+          dateDebut,
+          dateFin,
+          etablissement
+        );
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * RECHERCHE
  ************************************************************/
 
 async function rechercher() {
@@ -1076,8 +892,7 @@ async function rechercher() {
 
 
   if (
-    dateDebut >
-    dateFin
+    dateDebut > dateFin
   ) {
 
     alert(
@@ -1094,13 +909,17 @@ async function rechercher() {
 
   try {
 
+    const source =
+      document.querySelector(
+        'input[name="source"]:checked'
+      ).value;
+
+
     let paiements;
 
 
     if (
-      sourceSelectionnee()
-      ===
-      'local'
+      source === 'local'
     ) {
 
       paiements =
@@ -1111,17 +930,6 @@ async function rechercher() {
         );
 
     } else {
-
-      if (
-        !navigator.onLine
-      ) {
-
-        throw new Error(
-          'Une connexion Internet est nécessaire pour consulter Google Sheets.'
-        );
-
-      }
-
 
       paiements =
         await rechercherServeur(
@@ -1138,7 +946,7 @@ async function rechercher() {
     );
 
 
-  } catch (erreur) {
+  } catch(erreur) {
 
     afficherErreur(
       erreur
@@ -1150,435 +958,7 @@ async function rechercher() {
 
 
 /************************************************************
- * RESULTATS
- ************************************************************/
-
-function afficherResultats(
-  paiements
-) {
-
-  document
-    .getElementById(
-      'loading'
-    )
-    .style.display =
-    'none';
-
-
-  const tbody =
-    document.getElementById(
-      'paymentsTable'
-    );
-
-
-  tbody.innerHTML = '';
-
-
-  if (
-    !paiements ||
-    paiements.length === 0
-  ) {
-
-    document
-      .getElementById(
-        'tableContainer'
-      )
-      .style.display =
-      'none';
-
-
-    document
-      .getElementById(
-        'stats'
-      )
-      .style.display =
-      'none';
-
-
-    document
-      .getElementById(
-        'emptyMessage'
-      )
-      .style.display =
-      'block';
-
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      'emptyMessage'
-    )
-    .style.display =
-    'none';
-
-
-  document
-    .getElementById(
-      'tableContainer'
-    )
-    .style.display =
-    'block';
-
-
-  document
-    .getElementById(
-      'stats'
-    )
-    .style.display =
-    'flex';
-
-
-  let total = 0;
-
-
-  paiements.forEach(
-    function(paiement) {
-
-      const montant =
-        Number(
-          paiement.montant
-        ) || 0;
-
-
-      total += montant;
-
-
-      const tr =
-        document.createElement(
-          'tr'
-        );
-
-
-      tr.innerHTML = `
-
-        <td>${echapperHTML(
-          paiement.date
-        )}</td>
-
-        <td>
-          <strong>${echapperHTML(
-            paiement.matricule
-          )}</strong>
-        </td>
-
-        <td>
-          <strong>${echapperHTML(
-            paiement.nom
-          )}</strong>
-        </td>
-
-        <td>${echapperHTML(
-          paiement.prenom
-        )}</td>
-
-        <td>${echapperHTML(
-          paiement.classe
-        )}</td>
-
-        <td>${echapperHTML(
-          paiement.etablissement
-        )}</td>
-
-        <td>
-          <span class="motif">
-            ${echapperHTML(
-              paiement.motif
-            )}
-          </span>
-        </td>
-
-        <td class="amount">
-          ${montant.toLocaleString(
-            'fr-FR'
-          )} Ar
-        </td>
-
-      `;
-
-
-      tbody.appendChild(
-        tr
-      );
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      'nombreResultats'
-    )
-    .textContent =
-    paiements.length;
-
-
-  document
-    .getElementById(
-      'totalPaiements'
-    )
-    .textContent =
-    total.toLocaleString(
-      'fr-FR'
-    );
-
-}
-
-
-/************************************************************
- * CALCUL LOCAL
- ************************************************************/
-
-function valeurOuZero(
-  valeur
-) {
-
-  const nombre =
-    Number(
-      valeur || 0
-    );
-
-
-  return isNaN(nombre)
-    ? 0
-    : nombre;
-
-}
-
-
-function calculerMontantLocal(
-  data
-) {
-
-  let total = 0;
-
-
-  total +=
-    valeurOuZero(
-      data.fraisGeneraux
-    );
-
-  total +=
-    valeurOuZero(
-      data.droit
-    );
-
-  total +=
-    valeurOuZero(
-      data.cravate
-    );
-
-  total +=
-    valeurOuZero(
-      data.teeShirt
-    );
-
-  total +=
-    valeurOuZero(
-      data.extra
-    );
-
-
-  if (
-    data.ecolage === true
-  ) {
-
-    total +=
-      valeurOuZero(
-        data.montantEcolage
-      )
-      *
-      valeurOuZero(
-        data.nombreMois
-      );
-
-  }
-
-
-  return total;
-
-}
-
-
-/************************************************************
- * MOTIF
- ************************************************************/
-
-function construireMotifLocal(
-  data
-) {
-
-  const motifs = [];
-
-
-  if (
-    valeurOuZero(
-      data.fraisGeneraux
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Frais généraux'
-    );
-
-  }
-
-
-  if (
-    valeurOuZero(
-      data.droit
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Droit'
-    );
-
-  }
-
-
-  if (
-    valeurOuZero(
-      data.cravate
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Cravate'
-    );
-
-  }
-
-
-  if (
-    valeurOuZero(
-      data.teeShirt
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Tee-shirt'
-    );
-
-  }
-
-
-  if (
-    valeurOuZero(
-      data.extra
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Extra'
-    );
-
-  }
-
-
-  if (
-    data.ecolage === true &&
-    valeurOuZero(
-      data.montantEcolage
-    ) > 0
-  ) {
-
-    motifs.push(
-      'Écolage ' +
-      data.nombreMois +
-      ' mois'
-    );
-
-  }
-
-
-  return motifs.join(
-    ' + '
-  );
-
-}
-
-
-/************************************************************
- * FORMAT DATE
- ************************************************************/
-
-function formatDateLocale(
-  date
-) {
-
-  return (
-    String(
-      date.getDate()
-    ).padStart(2,'0')
-    +
-    '/' +
-    String(
-      date.getMonth() + 1
-    ).padStart(2,'0')
-    +
-    '/' +
-    date.getFullYear()
-    +
-    ' ' +
-    String(
-      date.getHours()
-    ).padStart(2,'0')
-    +
-    ':' +
-    String(
-      date.getMinutes()
-    ).padStart(2,'0')
-  );
-
-}
-
-
-/************************************************************
- * PROTECTION HTML
- ************************************************************/
-
-function echapperHTML(
-  valeur
-) {
-
-  return String(
-    valeur ?? ''
-  )
-
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-
-    .replace(
-      /</g,
-      '&lt;'
-    )
-
-    .replace(
-      />/g,
-      '&gt;'
-    )
-
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-
-    .replace(
-      /'/g,
-      '&#039;'
-    );
-
-}
-
-
-/************************************************************
- * LOADING
+ * AFFICHAGE
  ************************************************************/
 
 function afficherLoading() {
@@ -1599,13 +979,6 @@ function afficherLoading() {
 
   document
     .getElementById(
-      'stats'
-    )
-    .style.display =
-    'none';
-
-  document
-    .getElementById(
       'emptyMessage'
     )
     .style.display =
@@ -1614,9 +987,175 @@ function afficherLoading() {
 }
 
 
-function afficherErreur(
-  erreur
-) {
+function echapperHTML(v) {
+
+  return String(v ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+function afficherResultats(paiements) {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+
+  const tbody =
+    document.getElementById(
+      'paymentsTable'
+    );
+
+
+  tbody.innerHTML = '';
+
+
+  let total = 0;
+
+
+  if (
+    !paiements ||
+    paiements.length === 0
+  ) {
+
+    document
+      .getElementById(
+        'tableContainer'
+      )
+      .style.display =
+      'none';
+
+
+    document
+      .getElementById(
+        'emptyMessage'
+      )
+      .style.display =
+      'block';
+
+
+    document
+      .getElementById(
+        'nombreResultats'
+      )
+      .textContent =
+      '0';
+
+
+    document
+      .getElementById(
+        'totalPaiements'
+      )
+      .textContent =
+      '0 Ar';
+
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'emptyMessage'
+    )
+    .style.display =
+    'none';
+
+
+  paiements.forEach(
+    function(paiement) {
+
+      const montant =
+        Number(
+          paiement.montant
+        ) || 0;
+
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      tr.innerHTML = `
+
+        <td>${echapperHTML(paiement.date)}</td>
+
+        <td>
+          <strong>
+            ${echapperHTML(paiement.matricule)}
+          </strong>
+        </td>
+
+        <td>
+          <strong>
+            ${echapperHTML(paiement.nom)}
+          </strong>
+        </td>
+
+        <td>${echapperHTML(paiement.classe)}</td>
+
+        <td>${echapperHTML(paiement.etablissement)}</td>
+
+        <td>
+          <span class="motif">
+            ${echapperHTML(paiement.motif)}
+          </span>
+        </td>
+
+        <td class="amount">
+          ${montant.toLocaleString('fr-FR')} Ar
+        </td>
+
+      `;
+
+
+      tbody.appendChild(tr);
+
+      total += montant;
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      'nombreResultats'
+    )
+    .textContent =
+    paiements.length;
+
+
+  document
+    .getElementById(
+      'totalPaiements'
+    )
+    .textContent =
+    total.toLocaleString(
+      'fr-FR'
+    ) + ' Ar';
+
+}
+
+
+function afficherErreur(erreur) {
 
   document
     .getElementById(
@@ -1637,8 +1176,27 @@ function afficherErreur(
 }
 
 
+function changerSource() {
+
+  /*
+   * Aucun appel automatique.
+   * La recherche se fait uniquement
+   * lorsque l'utilisateur clique sur Chercher.
+   */
+
+}
+
+
+function retourIndex() {
+
+  window.location.href =
+    'index.html';
+
+}
+
+
 /************************************************************
- * DATES
+ * DATE DU JOUR
  ************************************************************/
 
 function dateAujourdhui() {
@@ -1648,13 +1206,11 @@ function dateAujourdhui() {
 
 
   return (
-    date.getFullYear()
-    +
+    date.getFullYear() +
     '-' +
     String(
       date.getMonth() + 1
-    ).padStart(2,'0')
-    +
+    ).padStart(2,'0') +
     '-' +
     String(
       date.getDate()
@@ -1679,16 +1235,7 @@ document
   .value =
   dateAujourdhui();
 
-
-function retourIndex() {
-
-  window.location.href =
-    'index.html';
-
-}
-
 </script>
 
 </body>
-
 </html>
