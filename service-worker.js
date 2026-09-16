@@ -1,5 +1,5 @@
 const CACHE_NAME =
-  'gestion-paiement-v2';
+  'gestion-paiement-v3';
 
 
 const FILES_TO_CACHE = [
@@ -97,11 +97,8 @@ self.addEventListener(
   function(event) {
 
     /*
-     * On ne met PAS les appels Apps Script
-     * dans le cache.
-     *
-     * L'API Google Sheets doit toujours
-     * être appelée directement.
+     * Les requêtes Google Apps Script
+     * ne sont jamais mises en cache.
      */
 
     if (
