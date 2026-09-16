@@ -345,24 +345,28 @@ tr:nth-child(even) td {
 <script>
 
 /************************************************************
+ * URL GOOGLE APPS SCRIPT
+ ************************************************************/
+
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbyGgGPsX0HAZUTnPKXomTCEIZ3ba26w8YJeCpwbqJMJaCGg4ZlT2L908O-EXuQiUSRI/exec';
+
+
+/************************************************************
  * RECHERCHE
  ************************************************************/
 
-function rechercher() {
+async function rechercher() {
 
   const classe =
     document
-      .getElementById(
-        'classe'
-      )
+      .getElementById('classe')
       .value;
 
 
   const etablissement =
     document
-      .getElementById(
-        'etablissement'
-      )
+      .getElementById('etablissement')
       .value;
 
 
@@ -380,38 +384,74 @@ function rechercher() {
   afficherLoading();
 
 
-  google.script.run
+  try {
 
-    .withSuccessHandler(
-      function(resultat) {
+    const response =
+      await fetch(
+        APPS_SCRIPT_URL,
+        {
 
-        afficherResultats(
-          resultat
-        );
+          method: 'POST',
 
-      }
-    )
+          headers: {
 
-    .withFailureHandler(
-      function(erreur) {
+            'Content-Type':
+              'text/plain;charset=utf-8'
 
-        afficherErreur(
-          erreur
-        );
+          },
 
-      }
-    )
+          body:
+            JSON.stringify({
 
-    .rechercherClasse(
-      classe,
-      etablissement
+              action:
+                'rechercherClasse',
+
+              classe:
+                classe,
+
+              etablissement:
+                etablissement
+
+            })
+
+        }
+      );
+
+
+    const resultat =
+      await response.json();
+
+
+    if (!resultat.success) {
+
+      throw new Error(
+        resultat.message ||
+        'Erreur lors de la recherche.'
+      );
+
+    }
+
+
+    afficherResultats(
+      resultat.lignes ||
+      resultat.paiements ||
+      []
     );
+
+
+  } catch (erreur) {
+
+    afficherErreur(
+      erreur
+    );
+
+  }
 
 }
 
 
 /************************************************************
- * FORMAT
+ * FORMAT MONTANT
  ************************************************************/
 
 function formatMontant(
@@ -440,6 +480,10 @@ function formatMontant(
 
 }
 
+
+/************************************************************
+ * PROTECTION HTML
+ ************************************************************/
 
 function echapperHTML(v) {
 
@@ -534,58 +578,134 @@ function afficherResultats(
 
         <td>
           <strong>
-            ${echapperHTML(row.matricule)}
+            ${echapperHTML(
+              row.matricule
+            )}
           </strong>
         </td>
 
         <td>
           <strong>
-            ${echapperHTML(row.nom)}
+            ${echapperHTML(
+              row.nom
+            )}
           </strong>
         </td>
 
-        <td>${formatMontant(row.droit)}</td>
-
-        <td>${formatMontant(row.fraisGeneraux)}</td>
-
-        <td>${formatMontant(row.fram)}</td>
-
-        <td>${formatMontant(row.teeShirt)}</td>
-
-        <td>${formatMontant(row.cravate)}</td>
-
-        <td>${formatMontant(row.short)}</td>
-
-        <td>${formatMontant(row.extra)}</td>
-
-        <td>${formatMontant(row.septembre)}</td>
-
-        <td>${formatMontant(row.octobre)}</td>
-
-        <td>${formatMontant(row.novembre)}</td>
-
-        <td>${formatMontant(row.decembre)}</td>
-
-        <td>${formatMontant(row.janvier)}</td>
-
-        <td>${formatMontant(row.fevrier)}</td>
-
-        <td>${formatMontant(row.mars)}</td>
-
-        <td>${formatMontant(row.avril)}</td>
-
-        <td>${formatMontant(row.mai)}</td>
-
-        <td>${formatMontant(row.juin)}</td>
+        <td>
+          ${formatMontant(
+            row.droit
+          )}
+        </td>
 
         <td>
-          ${echapperHTML(row.etablissement)}
+          ${formatMontant(
+            row.fraisGeneraux
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.fram
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.teeShirt
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.cravate
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.short
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.extra
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.septembre
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.octobre
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.novembre
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.decembre
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.janvier
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.fevrier
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.mars
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.avril
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.mai
+          )}
+        </td>
+
+        <td>
+          ${formatMontant(
+            row.juin
+          )}
+        </td>
+
+        <td>
+          ${echapperHTML(
+            row.etablissement
+          )}
         </td>
 
       `;
 
 
-      tbody.appendChild(tr);
+      tbody.appendChild(
+        tr
+      );
 
     }
   );
@@ -636,6 +756,14 @@ function afficherErreur(
   document
     .getElementById(
       'loading'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'empty'
     )
     .style.display =
     'none';
