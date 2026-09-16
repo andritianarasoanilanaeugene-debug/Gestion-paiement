@@ -4,366 +4,171 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Paiements par classe</title>
 
 <style>
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body {
-
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-  min-height: 100vh;
-
-  padding: 22px;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      #f8d9e3,
-      #f3eef1 30%,
-      #edf1f6
-    );
-
-  color: #29222d;
-
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(135deg,#fdf2f5,#f8fafc,#fff7ed);
+  color:#1e293b;
+  min-height:100vh;
+  padding:20px;
 }
 
 .container {
-
-  max-width: 1400px;
-
-  margin: auto;
-
+  max-width:1500px;
+  margin:auto;
 }
 
 .header {
-
-  background:
-    linear-gradient(
-      135deg,
-      #5c0c25,
-      #86153b,
-      #b83260
-    );
-
-  color: white;
-
-  padding: 23px 27px;
-
-  border-radius: 19px;
-
-  margin-bottom: 17px;
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items: center;
-
-  gap: 15px;
-
-  box-shadow:
-    0 14px 30px
-    rgba(92,12,37,.23);
-
+  background:linear-gradient(135deg,#5b0b20,#8f1d3e,#b8325a);
+  color:white;
+  padding:20px 25px;
+  border-radius:17px;
+  margin-bottom:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 12px 30px rgba(107,16,38,.22);
 }
 
 .header h1 {
-
-  font-size: 25px;
-
-  margin-bottom: 5px;
-
+  font-size:24px;
 }
 
 .header p {
-
-  font-size: 13px;
-
-  opacity: .85;
-
+  font-size:13px;
+  opacity:.85;
+  margin-top:4px;
 }
 
 .btn {
-
-  border: none;
-
-  border-radius: 10px;
-
-  padding:
-    11px 16px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
+  border:none;
+  border-radius:10px;
+  padding:11px 15px;
+  cursor:pointer;
+  font-weight:600;
 }
 
 .btn-back {
-
-  background:
-    rgba(255,255,255,.16);
-
-  color: white;
-
-}
-
-.btn-search {
-
-  background:
-    linear-gradient(
-      135deg,
-      #86153b,
-      #bd3764
-    );
-
-  color: white;
-
+  background:rgba(255,255,255,.16);
+  color:white;
 }
 
 .card {
-
-  background:
-    rgba(255,255,255,.95);
-
-  border:
-    1px solid #e6dbe0;
-
-  border-radius: 16px;
-
-  padding: 19px;
-
-  margin-bottom: 15px;
-
-  box-shadow:
-    0 6px 22px
-    rgba(31,18,30,.06);
-
+  background:rgba(255,255,255,.94);
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #f1dce3;
+  box-shadow:0 5px 18px rgba(15,23,42,.07);
+  margin-bottom:16px;
 }
 
 .filters {
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:13px;
+  align-items:end;
+}
 
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr auto;
-
-  gap: 13px;
-
-  align-items: end;
-
+.form-group {
+  display:flex;
+  flex-direction:column;
 }
 
 label {
-
-  display: block;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  color: #5e5260;
-
-  margin-bottom: 6px;
-
+  font-size:12px;
+  font-weight:600;
+  color:#475569;
+  margin-bottom:6px;
 }
 
 select {
-
-  width: 100%;
-
-  height: 43px;
-
-  border:
-    1px solid #ddd3d9;
-
-  border-radius: 10px;
-
-  padding:
-    0 11px;
-
-  background: #fcfafb;
-
-  outline: none;
-
+  height:42px;
+  border:1px solid #dbe2ea;
+  border-radius:9px;
+  background:#f8fafc;
+  padding:0 12px;
+  outline:none;
 }
 
 select:focus {
-
-  border-color: #a32650;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(163,38,80,.10);
-
+  border-color:#8f1d3e;
+  background:white;
 }
 
-.info {
-
-  margin-bottom: 13px;
-
-  font-size: 12px;
-
-  color: #75666f;
-
-}
-
-.badge {
-
-  display: inline-block;
-
-  background: #f6dbe4;
-
-  color: #7e1237;
-
-  padding:
-    6px 10px;
-
-  border-radius: 20px;
-
-  font-weight: 800;
-
-  margin-right: 5px;
-
+.btn-search {
+  height:42px;
+  background:#8f1d3e;
+  color:white;
 }
 
 .table-wrapper {
-
-  overflow-x: auto;
-
-  border-radius: 12px;
-
-  border:
-    1px solid #e4dbe0;
-
+  overflow:auto;
+  border-radius:10px;
 }
 
 table {
-
-  width: 100%;
-
-  border-collapse:
-    collapse;
-
-  min-width: 1500px;
-
-}
-
-thead {
-
-  background:
-    linear-gradient(
-      90deg,
-      #67102b,
-      #8f1d43
-    );
-
-  color: white;
-
+  width:100%;
+  border-collapse:collapse;
+  min-width:1450px;
 }
 
 th {
-
-  padding:
-    12px 10px;
-
-  font-size: 11px;
-
-  text-align: left;
-
-  white-space: nowrap;
-
+  background:#651029;
+  color:white;
+  padding:11px 9px;
+  font-size:11px;
+  text-align:left;
+  white-space:nowrap;
 }
 
 td {
-
-  padding:
-    11px 10px;
-
-  font-size: 12px;
-
-  border-bottom:
-    1px solid #eee6ea;
-
-  white-space: nowrap;
-
+  padding:9px;
+  border-bottom:1px solid #edf0f3;
+  font-size:11px;
+  white-space:nowrap;
 }
 
-tbody tr:nth-child(even) {
-
-  background: #fff8fa;
-
+tr:nth-child(even) td {
+  background:#fff8fa;
 }
 
-tbody tr:hover {
-
-  background: #f8e7ed;
-
+.amount {
+  text-align:right;
 }
 
-.mois {
-
-  text-align: right;
-
-  font-weight: 600;
-
-}
-
-.etablissement {
-
-  font-weight: 800;
-
-  color: #86153b;
-
-}
-
-.loading,
-.empty {
-
-  text-align: center;
-
-  padding: 35px;
-
-  color: #776872;
-
+.empty,
+.loading {
+  display:none;
+  text-align:center;
+  padding:30px;
+  color:#64748b;
 }
 
 @media(max-width:750px) {
 
-  body {
-
-    padding: 12px;
-
-  }
-
   .header {
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   .filters {
+    grid-template-columns:1fr;
+  }
 
-    grid-template-columns: 1fr;
-
+  .btn-search {
+    width:100%;
   }
 
 }
@@ -372,20 +177,18 @@ tbody tr:hover {
 
 </head>
 
-
 <body>
 
 <div class="container">
-
 
 <div class="header">
 
   <div>
 
-    <h1>📚 Paiements par classe</h1>
+    <h1>Paiements par classe</h1>
 
     <p>
-      Consultation directe des feuilles de classes
+      Consultation directe des données Google Sheets
     </p>
 
   </div>
@@ -393,9 +196,9 @@ tbody tr:hover {
 
   <button
     class="btn btn-back"
-    onclick="retourPaiements()">
+    onclick="retourIndex()">
 
-    ← Retour
+    ← Retour à l'accueil
 
   </button>
 
@@ -406,8 +209,7 @@ tbody tr:hover {
 
   <div class="filters">
 
-
-    <div>
+    <div class="form-group">
 
       <label>Classe</label>
 
@@ -419,26 +221,26 @@ tbody tr:hover {
 
         <option>PS</option>
         <option>MS</option>
-        <option>12ème</option>
-        <option>11ème</option>
-        <option>10ème</option>
-        <option>9ème</option>
-        <option>8ème</option>
-        <option>7ème</option>
-        <option>6ème</option>
-        <option>5ème</option>
-        <option>4ème</option>
-        <option>3ème</option>
-        <option>2nde</option>
-        <option>1ère</option>
-        <option>Terminale</option>
+        <option>12</option>
+        <option>11</option>
+        <option>10</option>
+        <option>9</option>
+        <option>8</option>
+        <option>7</option>
+        <option>6</option>
+        <option>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+        <option>Tle</option>
 
       </select>
 
     </div>
 
 
-    <div>
+    <div class="form-group">
 
       <label>Établissement</label>
 
@@ -459,9 +261,9 @@ tbody tr:hover {
 
     <button
       class="btn btn-search"
-      onclick="rechercherClasse()">
+      onclick="rechercher()">
 
-      🔎 Rechercher
+      🔎 Chercher
 
     </button>
 
@@ -471,42 +273,27 @@ tbody tr:hover {
 
 
 <div
-  id="loading"
   class="card loading"
-  style="display:none">
+  id="loading">
 
-  ⏳ Lecture de Google Sheets...
+  ⏳ Chargement des données Google Sheets...
 
 </div>
 
 
 <div
-  id="resultCard"
+  class="card empty"
+  id="empty">
+
+  Aucun étudiant trouvé.
+
+</div>
+
+
+<div
   class="card"
+  id="tableContainer"
   style="display:none">
-
-
-  <div class="info">
-
-    <span
-      id="badgeClasse"
-      class="badge">
-    </span>
-
-
-    <span
-      id="badgeEtablissement"
-      class="badge">
-    </span>
-
-
-    <span
-      id="nombreEtudiants"
-      class="badge">
-    </span>
-
-  </div>
-
 
   <div class="table-wrapper">
 
@@ -514,14 +301,36 @@ tbody tr:hover {
 
       <thead>
 
-        <tr id="tableHeader">
+        <tr>
+
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Droit</th>
+          <th>Frais généraux</th>
+          <th>FRAM</th>
+          <th>Tee-shirt</th>
+          <th>Cravate</th>
+          <th>Short</th>
+          <th>Extra</th>
+
+          <th>Septembre</th>
+          <th>Octobre</th>
+          <th>Novembre</th>
+          <th>Décembre</th>
+          <th>Janvier</th>
+          <th>Février</th>
+          <th>Mars</th>
+          <th>Avril</th>
+          <th>Mai</th>
+          <th>Juin</th>
+
+          <th>Établissement</th>
+
         </tr>
 
       </thead>
 
-
-      <tbody id="tableBody">
-      </tbody>
+      <tbody id="classeTable"></tbody>
 
     </table>
 
@@ -530,31 +339,16 @@ tbody tr:hover {
 </div>
 
 
-<div
-  id="emptyMessage"
-  class="card empty"
-  style="display:none">
-
-  Aucun étudiant trouvé pour cette sélection.
-
 </div>
 
 
 <script>
 
 /************************************************************
- * CONFIGURATION
- ************************************************************/
-
-const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzh347Syf1dDfNrCKhvXwE7Lv5IszkBk739PGn7o7LGef_5UlxVU0aAD15GzsCKXRiM/exec';
-
-
-/************************************************************
  * RECHERCHE
  ************************************************************/
 
-async function rechercherClasse() {
+function rechercher() {
 
   const classe =
     document
@@ -572,9 +366,7 @@ async function rechercherClasse() {
       .value;
 
 
-  if (
-    !classe
-  ) {
+  if (!classe) {
 
     alert(
       'Veuillez sélectionner une classe.'
@@ -585,116 +377,78 @@ async function rechercherClasse() {
   }
 
 
+  afficherLoading();
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(resultat) {
+
+        afficherResultats(
+          resultat
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(erreur) {
+
+        afficherErreur(
+          erreur
+        );
+
+      }
+    )
+
+    .rechercherClasse(
+      classe,
+      etablissement
+    );
+
+}
+
+
+/************************************************************
+ * FORMAT
+ ************************************************************/
+
+function formatMontant(
+  valeur
+) {
+
+  const montant =
+    Number(valeur) || 0;
+
+
   if (
-    !navigator.onLine
+    montant === 0
   ) {
 
-    alert(
-      'Une connexion Internet est nécessaire pour consulter une classe.'
-    );
-
-    return;
+    return '';
 
   }
 
 
-  document
-    .getElementById(
-      'loading'
-    )
-    .style.display =
-    'block';
+  return (
+    montant.toLocaleString(
+      'fr-FR'
+    ) +
+    ' Ar'
+  );
+
+}
 
 
-  document
-    .getElementById(
-      'resultCard'
-    )
-    .style.display =
-    'none';
+function echapperHTML(v) {
 
-
-  document
-    .getElementById(
-      'emptyMessage'
-    )
-    .style.display =
-    'none';
-
-
-  try {
-
-    const response =
-      await fetch(
-        APPS_SCRIPT_URL,
-        {
-
-          method: 'POST',
-
-          headers: {
-
-            'Content-Type':
-              'text/plain;charset=utf-8'
-
-          },
-
-          body:
-            JSON.stringify({
-
-              action:
-                'rechercherClasse',
-
-              classe:
-                classe,
-
-              etablissement:
-                etablissement
-
-            })
-
-        }
-      );
-
-
-    const resultat =
-      await response.json();
-
-
-    if (
-      !resultat.success
-    ) {
-
-      throw new Error(
-        resultat.message
-      );
-
-    }
-
-
-    afficherResultats(
-      resultat
-    );
-
-
-  } catch (erreur) {
-
-    alert(
-      'Une erreur est survenue : ' +
-      (
-        erreur.message ||
-        erreur
-      )
-    );
-
-  }
-
-
-  document
-    .getElementById(
-      'loading'
-    )
-    .style.display =
-    'none';
+  return String(v ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 
 }
 
@@ -704,23 +458,47 @@ async function rechercherClasse() {
  ************************************************************/
 
 function afficherResultats(
-  resultat
+  lignes
 ) {
 
-  const etudiants =
-    resultat.etudiants || [];
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+
+  const tbody =
+    document.getElementById(
+      'classeTable'
+    );
+
+
+  tbody.innerHTML =
+    '';
 
 
   if (
-    etudiants.length === 0
+    !lignes ||
+    lignes.length === 0
   ) {
 
     document
       .getElementById(
-        'emptyMessage'
+        'tableContainer'
+      )
+      .style.display =
+      'none';
+
+
+    document
+      .getElementById(
+        'empty'
       )
       .style.display =
       'block';
+
 
     return;
 
@@ -729,89 +507,22 @@ function afficherResultats(
 
   document
     .getElementById(
-      'resultCard'
+      'empty'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'tableContainer'
     )
     .style.display =
     'block';
 
 
-  document
-    .getElementById(
-      'badgeClasse'
-    )
-    .textContent =
-    'Classe : ' +
-    resultat.classe;
-
-
-  document
-    .getElementById(
-      'badgeEtablissement'
-    )
-    .textContent =
-    resultat.etablissement
-      ? resultat.etablissement
-      : 'Tous les établissements';
-
-
-  document
-    .getElementById(
-      'nombreEtudiants'
-    )
-    .textContent =
-    etudiants.length +
-    (
-      etudiants.length > 1
-        ? ' étudiants'
-        : ' étudiant'
-    );
-
-
-  const colonnes =
-    resultat.colonnes;
-
-
-  const header =
-    document.getElementById(
-      'tableHeader'
-    );
-
-
-  header.innerHTML = '';
-
-
-  colonnes.forEach(
-    function(colonne) {
-
-      const th =
-        document.createElement(
-          'th'
-        );
-
-
-      th.textContent =
-        colonne;
-
-
-      header.appendChild(
-        th
-      );
-
-    }
-  );
-
-
-  const body =
-    document.getElementById(
-      'tableBody'
-    );
-
-
-  body.innerHTML = '';
-
-
-  etudiants.forEach(
-    function(etudiant) {
+  lignes.forEach(
+    function(row) {
 
       const tr =
         document.createElement(
@@ -819,68 +530,62 @@ function afficherResultats(
         );
 
 
-      colonnes.forEach(
-        function(colonne) {
+      tr.innerHTML = `
 
-          const td =
-            document.createElement(
-              'td'
-            );
+        <td>
+          <strong>
+            ${echapperHTML(row.matricule)}
+          </strong>
+        </td>
 
+        <td>
+          <strong>
+            ${echapperHTML(row.nom)}
+          </strong>
+        </td>
 
-          const valeur =
-            etudiant[colonne] || '';
+        <td>${formatMontant(row.droit)}</td>
 
+        <td>${formatMontant(row.fraisGeneraux)}</td>
 
-          td.textContent =
-            valeur;
+        <td>${formatMontant(row.fram)}</td>
 
+        <td>${formatMontant(row.teeShirt)}</td>
 
-          if (
-            colonne ===
-            'Etablissement'
-          ) {
+        <td>${formatMontant(row.cravate)}</td>
 
-            td.className =
-              'etablissement';
+        <td>${formatMontant(row.short)}</td>
 
-          }
+        <td>${formatMontant(row.extra)}</td>
 
+        <td>${formatMontant(row.septembre)}</td>
 
-          if (
-            [
-              'Septembre',
-              'Octobre',
-              'Novembre',
-              'Décembre',
-              'Janvier',
-              'Février',
-              'Mars',
-              'Avril',
-              'Mai',
-              'Juin'
-            ].includes(
-              colonne
-            )
-          ) {
+        <td>${formatMontant(row.octobre)}</td>
 
-            td.className =
-              'mois';
+        <td>${formatMontant(row.novembre)}</td>
 
-          }
+        <td>${formatMontant(row.decembre)}</td>
 
+        <td>${formatMontant(row.janvier)}</td>
 
-          tr.appendChild(
-            td
-          );
+        <td>${formatMontant(row.fevrier)}</td>
 
-        }
-      );
+        <td>${formatMontant(row.mars)}</td>
+
+        <td>${formatMontant(row.avril)}</td>
+
+        <td>${formatMontant(row.mai)}</td>
+
+        <td>${formatMontant(row.juin)}</td>
+
+        <td>
+          ${echapperHTML(row.etablissement)}
+        </td>
+
+      `;
 
 
-      body.appendChild(
-        tr
-      );
+      tbody.appendChild(tr);
 
     }
   );
@@ -889,18 +594,76 @@ function afficherResultats(
 
 
 /************************************************************
- * NAVIGATION
+ * LOADING
  ************************************************************/
 
-function retourPaiements() {
+function afficherLoading() {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'block';
+
+
+  document
+    .getElementById(
+      'empty'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'tableContainer'
+    )
+    .style.display =
+    'none';
+
+}
+
+
+/************************************************************
+ * ERREUR
+ ************************************************************/
+
+function afficherErreur(
+  erreur
+) {
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+
+  alert(
+    'Erreur : ' +
+    (
+      erreur.message ||
+      erreur
+    )
+  );
+
+}
+
+
+/************************************************************
+ * RETOUR
+ ************************************************************/
+
+function retourIndex() {
 
   window.location.href =
-    'paiements.html';
+    'index.html';
 
 }
 
 </script>
 
 </body>
-
 </html>
