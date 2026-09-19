@@ -1,5 +1,9 @@
+/************************************************************
+ * SERVICE WORKER
+ ************************************************************/
+
 const CACHE_NAME =
-  'gestion-paiement-v3';
+  'gestion-paiement-v4';
 
 
 const FILES_TO_CACHE = [
@@ -16,6 +20,10 @@ const FILES_TO_CACHE = [
 
 ];
 
+
+/************************************************************
+ * INSTALLATION
+ ************************************************************/
 
 self.addEventListener(
   'install',
@@ -46,6 +54,10 @@ self.addEventListener(
 );
 
 
+/************************************************************
+ * ACTIVATION
+ ************************************************************/
+
 self.addEventListener(
   'activate',
   function(event) {
@@ -63,11 +75,14 @@ self.addEventListener(
                 .filter(
                   function(name) {
 
-                    return name !==
-                      CACHE_NAME;
+                    return (
+                      name !==
+                      CACHE_NAME
+                    );
 
                   }
                 )
+
                 .map(
                   function(name) {
 
@@ -92,25 +107,79 @@ self.addEventListener(
 );
 
 
+/************************************************************
+ * REQUÊTES
+ ************************************************************/
+
 self.addEventListener(
   'fetch',
   function(event) {
 
     /*
-     * Les requêtes Google Apps Script
-     * ne sont jamais mises en cache.
+     * Apps Script :
+     *
+     * JAMAIS de cache.
      */
 
     if (
+
       event.request.url.includes(
         'script.google.com'
       )
+
     ) {
 
       return;
 
     }
 
+
+    /*
+     * Navigation HTML :
+     *
+     * priorité au cache.
+     *
+     * Cela permet d'ouvrir
+     * l'application hors connexion.
+     */
+
+    if (
+      event.request.mode ===
+      'navigate'
+    ) {
+
+      event.respondWith(
+
+        caches
+          .match(
+            './index.html'
+          )
+          .then(
+            function(cached) {
+
+              return (
+                cached ||
+                fetch(
+                  event.request
+                )
+              );
+
+            }
+          )
+
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * Autres fichiers :
+     *
+     * cache d'abord,
+     * réseau ensuite.
+     */
 
     event.respondWith(
 
