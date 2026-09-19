@@ -4,357 +4,793 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
 
 <title>Gestion des paiements</title>
 
 <style>
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
   background:
-    linear-gradient(135deg, #fdf2f5, #f8fafc 45%, #fff7ed);
-  color: #1e293b;
-  min-height: 100vh;
-  padding: 20px;
+    radial-gradient(
+      circle at top left,
+      #f8dbe5,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #ffe8d6,
+      transparent 35%
+    ),
+    #f8f1f4;
+
+  color:#1e293b;
+
+  min-height:100vh;
+
+  padding:20px;
+
 }
 
 .container {
-  max-width: 1100px;
-  margin: auto;
+
+  max-width:1100px;
+
+  margin:auto;
+
 }
 
 .header {
+
   background:
-    linear-gradient(135deg, #5b0b20, #8f1d3e 55%, #b8325a);
-  color: white;
-  padding: 22px 25px;
-  border-radius: 18px;
-  margin-bottom: 18px;
-  box-shadow: 0 12px 30px rgba(107,16,38,.22);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+    linear-gradient(
+      135deg,
+      #5b0b20,
+      #8f1d3e,
+      #b8325a
+    );
+
+  color:white;
+
+  padding:20px 25px;
+
+  border-radius:18px;
+
+  margin-bottom:18px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  box-shadow:
+    0 12px 30px
+    rgba(107,16,38,.25);
+
 }
 
 .header h1 {
-  font-size: 25px;
-  margin-bottom: 5px;
+
+  font-size:25px;
+
 }
 
 .header p {
-  opacity: .85;
-  font-size: 13px;
+
+  font-size:13px;
+
+  opacity:.85;
+
+  margin-top:4px;
+
 }
 
 .header-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+
+  display:flex;
+
+  gap:8px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+}
+
+.btn {
+
+  border:none;
+
+  border-radius:10px;
+
+  padding:11px 15px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  transition:.2s;
+
+}
+
+.btn:hover {
+
+  transform:translateY(-1px);
+
 }
 
 .btn-navigation {
-  border: none;
-  background: rgba(255,255,255,.15);
-  color: white;
-  padding: 11px 15px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
+
+  background:
+    rgba(255,255,255,.16);
+
+  color:white;
+
 }
 
-.btn-navigation:hover {
-  background: rgba(255,255,255,.25);
+.btn-sync {
+
+  background:#fff;
+
+  color:#7f1734;
+
 }
 
-.sync-status {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(255,255,255,.12);
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
+.btn-sync:disabled {
 
-.status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #22c55e;
-}
+  opacity:.65;
 
-.status-dot.pending {
-  background: #f59e0b;
+  cursor:wait;
+
 }
 
 .card {
-  background: rgba(255,255,255,.92);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 18px rgba(15,23,42,.07);
-  border: 1px solid #f1dce3;
+
+  background:
+    rgba(255,255,255,.95);
+
+  padding:20px;
+
+  border-radius:16px;
+
+  border:
+    1px solid #ead7df;
+
+  box-shadow:
+    0 5px 18px
+    rgba(15,23,42,.07);
+
+  margin-bottom:16px;
+
 }
 
 .card-title {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 16px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  margin-bottom:16px;
+
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: #f9e8ed;
-  color: #7f1734;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:10px;
+
+  background:#f9dce6;
+
+  color:#7f1734;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
 }
 
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 13px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:13px;
+
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+
+  display:flex;
+
+  flex-direction:column;
+
 }
 
 label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 6px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  color:#475569;
+
+  margin-bottom:6px;
+
 }
 
 input,
 select {
-  width: 100%;
-  height: 42px;
-  padding: 0 12px;
-  border: 1px solid #dbe2ea;
-  border-radius: 9px;
-  background: #f8fafc;
-  font-size: 13px;
-  outline: none;
+
+  width:100%;
+
+  height:42px;
+
+  padding:0 12px;
+
+  border:
+    1px solid #dbe2ea;
+
+  border-radius:9px;
+
+  background:#f8fafc;
+
+  font-size:13px;
+
+  outline:none;
+
 }
 
 input:focus,
 select:focus {
-  background: white;
-  border-color: #8f1d3e;
-  box-shadow: 0 0 0 3px rgba(143,29,62,.10);
+
+  background:white;
+
+  border-color:#8f1d3e;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(143,29,62,.10);
+
 }
 
+/************************************************
+ * RECHERCHE ELEVE
+ ************************************************/
+
+.search-box {
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #fff6f8
+    );
+
+}
+
+.search-grid {
+
+  display:grid;
+
+  grid-template-columns:
+    2fr 1fr 1fr auto;
+
+  gap:10px;
+
+  align-items:end;
+
+}
+
+.btn-search {
+
+  height:42px;
+
+  background:#8f1d3e;
+
+  color:white;
+
+}
+
+.search-results {
+
+  margin-top:15px;
+
+  display:none;
+
+}
+
+.result-item {
+
+  width:100%;
+
+  border:
+    1px solid #ead7df;
+
+  background:white;
+
+  border-radius:10px;
+
+  padding:12px;
+
+  margin-top:8px;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  transition:.2s;
+
+}
+
+.result-item:hover {
+
+  border-color:#b8325a;
+
+  background:#fff5f8;
+
+  transform:translateX(2px);
+
+}
+
+.result-name {
+
+  font-weight:700;
+
+  color:#7f1734;
+
+}
+
+.result-info {
+
+  font-size:12px;
+
+  color:#64748b;
+
+  margin-top:3px;
+
+}
+
+/************************************************
+ * FRAIS
+ ************************************************/
+
 .frais-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:12px;
+
 }
 
 .money-input {
-  position: relative;
+
+  position:relative;
+
 }
 
 .money-input input {
-  padding-right: 35px;
+
+  padding-right:35px;
+
 }
 
 .money-input span {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  font-size: 11px;
+
+  position:absolute;
+
+  right:10px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#94a3b8;
+
+  font-size:11px;
+
 }
 
+/************************************************
+ * ECOLAGE
+ ************************************************/
+
 .ecolage-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:12px;
+
 }
 
 .toggle-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
 }
 
 .switch {
-  position: relative;
-  width: 48px;
-  height: 25px;
+
+  position:relative;
+
+  width:48px;
+
+  height:25px;
+
 }
 
 .switch input {
-  display: none;
+
+  display:none;
+
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background: #cbd5e1;
-  border-radius: 30px;
-  transition: .25s;
+
+  position:absolute;
+
+  inset:0;
+
+  cursor:pointer;
+
+  background:#cbd5e1;
+
+  border-radius:30px;
+
+  transition:.25s;
+
 }
 
 .slider:before {
-  content: "";
-  position: absolute;
-  width: 19px;
-  height: 19px;
-  left: 3px;
-  top: 3px;
-  background: white;
-  border-radius: 50%;
-  transition: .25s;
+
+  content:"";
+
+  position:absolute;
+
+  width:19px;
+
+  height:19px;
+
+  left:3px;
+
+  top:3px;
+
+  background:white;
+
+  border-radius:50%;
+
+  transition:.25s;
+
+  box-shadow:
+    0 2px 5px
+    rgba(0,0,0,.15);
+
 }
 
 .switch input:checked + .slider {
-  background: #8f1d3e;
+
+  background:#7f1734;
+
 }
 
 .switch input:checked + .slider:before {
-  transform: translateX(23px);
+
+  transform:
+    translateX(23px);
+
 }
 
 .toggle-text {
-  font-weight: 700;
-  font-size: 13px;
-  color: #64748b;
+
+  font-weight:700;
+
+  font-size:13px;
+
+  color:#64748b;
+
 }
 
 .toggle-text.active {
-  color: #8f1d3e;
+
+  color:#7f1734;
+
 }
 
 .ecolage-fields {
-  display: none;
-  grid-template-columns: 1fr 1fr;
-  gap: 13px;
-  padding-top: 15px;
+
+  display:none;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:13px;
+
 }
 
 .ecolage-fields.visible {
-  display: grid;
+
+  display:grid;
+
 }
 
+/************************************************
+ * TOTAL
+ ************************************************/
+
 .total-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #171923, #35101d);
-  color: white;
-  padding: 17px 20px;
-  border-radius: 14px;
-  margin-top: 15px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #450817,
+      #7f1734
+    );
+
+  color:white;
+
+  padding:17px 20px;
+
+  border-radius:14px;
+
+  margin-top:15px;
+
 }
 
 .total-label {
-  font-size: 12px;
-  color: #cbd5e1;
+
+  font-size:12px;
+
+  color:#ead7df;
+
 }
 
 .total-value {
-  font-size: 24px;
-  font-weight: 700;
+
+  font-size:24px;
+
+  font-weight:700;
+
 }
 
-.currency {
-  font-size: 13px;
-  color: #94a3b8;
+/************************************************
+ * SYNCHRONISATION
+ ************************************************/
+
+.sync-status {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  font-size:12px;
+
+  font-weight:700;
+
 }
+
+.status-dot {
+
+  width:11px;
+
+  height:11px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(34,197,94,.12);
+
+}
+
+.status-dot.pending {
+
+  background:#f59e0b;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(245,158,11,.12);
+
+}
+
+.status-text {
+
+  color:#166534;
+
+}
+
+.status-text.pending {
+
+  color:#b45309;
+
+}
+
+/************************************************
+ * BOUTON
+ ************************************************/
 
 .btn-submit {
-  width: 100%;
-  height: 48px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 11px;
-  background: linear-gradient(135deg,#7f1734,#a5264e);
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
+
+  width:100%;
+
+  height:46px;
+
+  margin-top:15px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7f1734,
+      #a5224d
+    );
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
 }
 
 .btn-submit:disabled {
-  opacity: .6;
-  cursor: wait;
+
+  opacity:.6;
+
+  cursor:wait;
+
 }
 
+/************************************************
+ * MESSAGE
+ ************************************************/
+
 .message {
-  display: none;
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 9px;
-  font-size: 13px;
+
+  display:none;
+
+  margin-top:12px;
+
+  padding:12px;
+
+  border-radius:9px;
+
+  font-size:13px;
+
 }
 
 .message.success {
-  display: block;
-  background: #ecfdf5;
-  color: #047857;
+
+  display:block;
+
+  background:#ecfdf5;
+
+  color:#047857;
+
 }
 
 .message.error {
-  display: block;
-  background: #fef2f2;
-  color: #b91c1c;
+
+  display:block;
+
+  background:#fef2f2;
+
+  color:#b91c1c;
+
 }
 
-@media(max-width:850px) {
-  .form-grid {
-    grid-template-columns: repeat(2,1fr);
+@media(max-width:900px) {
+
+  .form-grid,
+  .frais-grid {
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
 
-  .frais-grid {
-    grid-template-columns: repeat(2,1fr);
+  .search-grid {
+
+    grid-template-columns:
+      1fr 1fr;
+
   }
+
 }
 
 @media(max-width:600px) {
+
   body {
-    padding: 12px;
+
+    padding:12px;
+
   }
 
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
   }
 
   .header-actions {
-    width: 100%;
+
+    width:100%;
+
   }
 
-  .btn-navigation {
-    flex: 1;
+  .header-actions .btn {
+
+    flex:1;
+
   }
 
   .form-grid,
   .frais-grid,
+  .search-grid,
   .ecolage-fields {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:1fr;
+
   }
+
 }
 
 </style>
@@ -365,47 +801,64 @@ select:focus {
 
 <div class="container">
 
+<!-- HEADER -->
+
 <div class="header">
 
   <div>
+
     <h1>Gestion des paiements</h1>
-    <p>Enregistrement d'un nouveau paiement</p>
-  </div>
 
-  <div class="header-actions">
+    <p>
+      Enregistrement d'un nouveau paiement
+    </p>
 
-    <div class="sync-status">
+    <div
+      class="sync-status"
+      style="margin-top:9px;">
 
       <span
         class="status-dot"
         id="statusDot">
       </span>
 
-      <span id="statusText">
+      <span
+        class="status-text"
+        id="statusText">
         Synchronisé
       </span>
 
     </div>
 
+  </div>
+
+
+  <div class="header-actions">
+
     <button
-      class="btn-navigation"
-      onclick="synchroniserManuellement()">
+      class="btn btn-sync"
+      id="btnSync"
+      onclick="synchroniser()">
 
       🔄 Synchroniser
 
     </button>
-    <button
-    class="btn-navigation"
-    onclick="ouvrirClasses()">
 
-    📚 Paiements par classe
 
-    </button>
     <button
-      class="btn-navigation"
+      class="btn btn-navigation"
       onclick="ouvrirPaiements()">
 
-      💳 Consultation
+      💳 Paiements
+
+    </button>
+
+
+    <button
+      class="btn btn-navigation"
+      onclick="ouvrirClasse()">
+
+      📚 Par classe
 
     </button>
 
@@ -413,6 +866,105 @@ select:focus {
 
 </div>
 
+
+<!-- RECHERCHE -->
+
+<div class="card search-box">
+
+  <div class="card-title">
+
+    <div class="icon">🔎</div>
+
+    Rechercher un élève
+
+  </div>
+
+
+  <div class="search-grid">
+
+    <div class="form-group">
+
+      <label>Nom *</label>
+
+      <input
+        id="rechercheNom"
+        type="text"
+        placeholder="Ex : RAKOTONIAINA">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Classe</label>
+
+      <select id="rechercheClasse">
+
+        <option value="">
+          Toutes les classes
+        </option>
+
+        <option>PS</option>
+        <option>MS</option>
+        <option>12ème</option>
+        <option>11ème</option>
+        <option>10ème</option>
+        <option>9ème</option>
+        <option>8ème</option>
+        <option>7ème</option>
+        <option>6ème</option>
+        <option>5ème</option>
+        <option>4ème</option>
+        <option>3ème</option>
+        <option>2nde</option>
+        <option>1ère</option>
+        <option>Terminale</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Établissement</label>
+
+      <select id="rechercheEtablissement">
+
+        <option value="">
+          Tous
+        </option>
+
+        <option>LS1</option>
+        <option>LS2</option>
+        <option>LS3</option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="btn btn-search"
+      id="btnRecherche"
+      onclick="rechercherEleves()">
+
+      🔎 Rechercher
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="search-results"
+    id="searchResults">
+  </div>
+
+</div>
+
+
+<!-- INFORMATIONS -->
 
 <div class="card">
 
@@ -429,10 +981,21 @@ select:focus {
 
     <div class="form-group">
 
+      <label>Matricule</label>
+
+      <input
+        id="matricule"
+        readonly
+        placeholder="Généré automatiquement">
+
+    </div>
+
+
+    <div class="form-group">
+
       <label>Nom *</label>
 
       <input
-        type="text"
         id="nom"
         placeholder="Nom">
 
@@ -451,19 +1014,19 @@ select:focus {
 
         <option>PS</option>
         <option>MS</option>
-        <option>12</option>
-        <option>11</option>
-        <option>10</option>
-        <option>9</option>
-        <option>8</option>
-        <option>7</option>
-        <option>6</option>
-        <option>5</option>
-        <option>4</option>
-        <option>3</option>
-        <option>2</option>
-        <option>1</option>
-        <option>Tle</option>
+        <option>12ème</option>
+        <option>11ème</option>
+        <option>10ème</option>
+        <option>9ème</option>
+        <option>8ème</option>
+        <option>7ème</option>
+        <option>6ème</option>
+        <option>5ème</option>
+        <option>4ème</option>
+        <option>3ème</option>
+        <option>2nde</option>
+        <option>1ère</option>
+        <option>Terminale</option>
 
       </select>
 
@@ -493,6 +1056,8 @@ select:focus {
 </div>
 
 
+<!-- FRAIS -->
+
 <div class="card">
 
   <div class="card-title">
@@ -506,72 +1071,153 @@ select:focus {
 
   <div class="frais-grid">
 
+
     <div class="form-group">
+
       <label>Droit</label>
+
       <div class="money-input">
-        <input type="number" id="droit" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="droit"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Frais généraux</label>
+
       <div class="money-input">
-        <input type="number" id="fraisGeneraux" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="fraisGeneraux"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>FRAM</label>
+
       <div class="money-input">
-        <input type="number" id="fram" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="fram"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Tee-shirt</label>
+
       <div class="money-input">
-        <input type="number" id="teeShirt" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="teeShirt"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Cravate</label>
+
       <div class="money-input">
-        <input type="number" id="cravate" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="cravate"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Short</label>
+
       <div class="money-input">
-        <input type="number" id="short" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="short"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Extra</label>
+
       <div class="money-input">
-        <input type="number" id="extra" min="0" placeholder="0">
+
+        <input
+          type="number"
+          id="extra"
+          min="0"
+          placeholder="0">
+
         <span>Ar</span>
+
       </div>
+
     </div>
+
 
   </div>
 
 </div>
 
 
+<!-- ECOLAGE -->
+
 <div class="card">
 
   <div class="ecolage-header">
 
-    <div class="card-title" style="margin-bottom:0">
+    <div class="card-title"
+         style="margin-bottom:0;">
 
       <div class="icon">📚</div>
 
@@ -589,6 +1235,7 @@ select:focus {
         Non
 
       </span>
+
 
       <label class="switch">
 
@@ -609,6 +1256,7 @@ select:focus {
   <div
     class="ecolage-fields"
     id="ecolageFields">
+
 
     <div class="form-group">
 
@@ -642,10 +1290,13 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
+
+<!-- TOTAL -->
 
 <div class="total-box">
 
@@ -657,15 +1308,17 @@ select:focus {
 
     <div class="total-value">
 
-      <span id="total">0</span>
+      <span id="total">
+        0
+      </span>
 
-      <span class="currency">Ar</span>
+      Ar
 
     </div>
 
   </div>
 
-  <div>💰</div>
+  💰
 
 </div>
 
@@ -685,6 +1338,7 @@ select:focus {
   id="message">
 </div>
 
+
 </div>
 
 
@@ -694,6 +1348,10 @@ select:focus {
  * CONFIGURATION
  ************************************************************/
 
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzJBIds7jRI2DUTioirCcT23vHZQso4V8iqofmpU8fTbULaoNKlvHqcV0g-FIvgDHai/exec';
+
+
 const DB_NAME =
   'GestionPaiementDB';
 
@@ -702,12 +1360,40 @@ const DB_VERSION = 3;
 const STORE_PAIEMENTS =
   'paiements_en_attente';
 
-function ouvrirClasses() {
 
-  window.location.href =
-    'classe.html';
+/************************************************************
+ * SERVICE WORKER
+ ************************************************************/
+
+if (
+  'serviceWorker' in navigator
+) {
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      navigator.serviceWorker
+        .register(
+          './service-worker.js'
+        )
+        .catch(
+          function(erreur) {
+
+            console.warn(
+              'Service Worker :',
+              erreur
+            );
+
+          }
+        );
+
+    }
+  );
 
 }
+
+
 /************************************************************
  * INDEXED DB
  ************************************************************/
@@ -779,7 +1465,9 @@ function ouvrirDB() {
  * SAUVEGARDE LOCALE
  ************************************************************/
 
-async function sauvegarderPaiementLocal(data) {
+async function sauvegarderLocal(
+  data
+) {
 
   const db =
     await ouvrirDB();
@@ -804,7 +1492,8 @@ async function sauvegarderPaiementLocal(data) {
           data:data,
 
           dateCreation:
-            new Date().toISOString(),
+            new Date()
+              .toISOString(),
 
           synchronise:false
 
@@ -812,11 +1501,7 @@ async function sauvegarderPaiementLocal(data) {
 
 
       transaction.oncomplete =
-        function() {
-
-          resolve();
-
-        };
+        resolve;
 
 
       transaction.onerror =
@@ -835,10 +1520,10 @@ async function sauvegarderPaiementLocal(data) {
 
 
 /************************************************************
- * NOMBRE LOCAL
+ * COMPTER LOCAL
  ************************************************************/
 
-async function nombrePaiementsLocaux() {
+async function compterLocaux() {
 
   const db =
     await ouvrirDB();
@@ -847,12 +1532,15 @@ async function nombrePaiementsLocaux() {
   return new Promise(
     function(resolve,reject) {
 
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readonly'
+        );
+
+
       const request =
-        db
-          .transaction(
-            STORE_PAIEMENTS,
-            'readonly'
-          )
+        transaction
           .objectStore(
             STORE_PAIEMENTS
           )
@@ -885,73 +1573,76 @@ async function nombrePaiementsLocaux() {
 
 
 /************************************************************
- * STATUT
- ************************************************************/
-
-async function actualiserStatut() {
-
-  try {
-
-    const nombre =
-      await nombrePaiementsLocaux();
-
-
-    const dot =
-      document.getElementById(
-        'statusDot'
-      );
-
-    const text =
-      document.getElementById(
-        'statusText'
-      );
-
-
-    if (nombre > 0) {
-
-      dot.classList.add(
-        'pending'
-      );
-
-      text.textContent =
-        nombre +
-        ' paiement' +
-        (nombre > 1 ? 's' : '') +
-        ' non synchronisé' +
-        (nombre > 1 ? 's' : '');
-
-    } else {
-
-      dot.classList.remove(
-        'pending'
-      );
-
-      text.textContent =
-        'Synchronisé';
-
-    }
-
-  } catch(e) {}
-
-}
-
-
-/************************************************************
  * SYNCHRONISATION
  ************************************************************/
 
-async function synchroniserManuellement() {
+let synchronisationEnCours =
+  false;
 
-  if (!navigator.onLine) {
 
-    alert(
-      'Aucune connexion Internet.\n\n' +
-      'Les paiements restent enregistrés localement.'
+async function synchroniser() {
+
+  if (
+    synchronisationEnCours
+  ) {
+
+    return;
+
+  }
+
+
+  const nombre =
+    await compterLocaux();
+
+
+  if (
+    nombre === 0
+  ) {
+
+    mettreAJourStatut(
+      0
+    );
+
+    afficherMessage(
+      'Aucune donnée locale à synchroniser.',
+      'success'
     );
 
     return;
 
   }
+
+
+  if (
+    !navigator.onLine
+  ) {
+
+    afficherMessage(
+      'Aucune connexion Internet. Les données restent sur cet appareil.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  synchronisationEnCours =
+    true;
+
+
+  const bouton =
+    document.getElementById(
+      'btnSync'
+    );
+
+
+  bouton.disabled =
+    true;
+
+
+  bouton.textContent =
+    '⏳ Synchronisation...';
 
 
   try {
@@ -964,12 +1655,15 @@ async function synchroniserManuellement() {
       await new Promise(
         function(resolve,reject) {
 
+          const transaction =
+            db.transaction(
+              STORE_PAIEMENTS,
+              'readonly'
+            );
+
+
           const request =
-            db
-              .transaction(
-                STORE_PAIEMENTS,
-                'readonly'
-              )
+            transaction
               .objectStore(
                 STORE_PAIEMENTS
               )
@@ -999,123 +1693,152 @@ async function synchroniserManuellement() {
       );
 
 
-    if (
-      paiements.length === 0
-    ) {
-
-      alert(
-        'Aucune donnée locale à synchroniser.\n\n' +
-        'Vous êtes déjà synchronisé.'
-      );
-
-      actualiserStatut();
-
-      return;
-
-    }
-
-
-    let synchronises = 0;
-
-
     for (
-      const element of paiements
+      const element
+      of paiements
     ) {
 
-      try {
-
-        await new Promise(
-          function(resolve,reject) {
-
-            google.script.run
-
-              .withSuccessHandler(
-                function(resultat) {
-
-                  if (
-                    resultat &&
-                    resultat.success
-                  ) {
-
-                    supprimerPaiementLocal(
-                      element.id
-                    )
-                    .then(
-                      function() {
-
-                        synchronises++;
-
-                        resolve();
-
-                      }
-                    )
-                    .catch(reject);
-
-                  } else {
-
-                    reject(
-                      new Error(
-                        'Échec de synchronisation.'
-                      )
-                    );
-
-                  }
-
-                }
-              )
-
-              .withFailureHandler(
-                reject
-              )
-
-              .enregistrerPaiement(
-                element.data
-              );
-
-          }
+      const resultat =
+        await envoyerAuServeur(
+          element.data
         );
 
 
-      } catch(erreur) {
+      if (
+        resultat.success
+      ) {
 
-        break;
+        await supprimerLocal(
+          element.id
+        );
 
       }
 
     }
 
 
-    await actualiserStatut();
+    const restant =
+      await compterLocaux();
 
 
-    if (
-      synchronises ===
-      paiements.length
-    ) {
+    mettreAJourStatut(
+      restant
+    );
 
-      alert(
-        'Synchronisation terminée avec succès.'
-      );
 
-    } else {
+    afficherMessage(
 
-      alert(
-        synchronises +
-        ' paiement(s) synchronisé(s).\n\n' +
-        'Certains paiements restent encore en local.'
-      );
+      restant === 0
 
-    }
+        ? 'Synchronisation terminée avec succès.'
+
+        : (
+          restant +
+          ' paiement(s) restent en attente.'
+        ),
+
+      restant === 0
+        ? 'success'
+        : 'error'
+
+    );
 
 
   } catch(erreur) {
 
-    alert(
-      'Erreur de synchronisation : ' +
-      erreur.message
+    afficherMessage(
+
+      'La synchronisation a été interrompue : ' +
+      (
+        erreur.message ||
+        erreur
+      ),
+
+      'error'
+
+    );
+
+
+    const restant =
+      await compterLocaux();
+
+
+    mettreAJourStatut(
+      restant
+    );
+
+
+  } finally {
+
+    synchronisationEnCours =
+      false;
+
+
+    bouton.disabled =
+      false;
+
+
+    bouton.textContent =
+      '🔄 Synchroniser';
+
+  }
+
+}
+
+
+/************************************************************
+ * ENVOI SERVEUR
+ ************************************************************/
+
+async function envoyerAuServeur(
+  data
+) {
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'synchroniserPaiement',
+
+            data:data
+
+          })
+
+      }
+    );
+
+
+  const resultat =
+    await response.json();
+
+
+  if (
+    !resultat.success
+  ) {
+
+    throw new Error(
+      resultat.message ||
+      'Erreur serveur.'
     );
 
   }
+
+
+  return resultat;
 
 }
 
@@ -1124,7 +1847,9 @@ async function synchroniserManuellement() {
  * SUPPRESSION LOCALE
  ************************************************************/
 
-async function supprimerPaiementLocal(id) {
+async function supprimerLocal(
+  id
+) {
 
   const db =
     await ouvrirDB();
@@ -1148,11 +1873,7 @@ async function supprimerPaiementLocal(id) {
 
 
       transaction.oncomplete =
-        function() {
-
-          resolve();
-
-        };
+        resolve;
 
 
       transaction.onerror =
@@ -1171,7 +1892,627 @@ async function supprimerPaiementLocal(id) {
 
 
 /************************************************************
- * ENREGISTREMENT
+ * STATUT
+ ************************************************************/
+
+async function actualiserStatut() {
+
+  try {
+
+    const nombre =
+      await compterLocaux();
+
+
+    mettreAJourStatut(
+      nombre
+    );
+
+  } catch(erreur) {
+
+    console.error(erreur);
+
+  }
+
+}
+
+
+function mettreAJourStatut(
+  nombre
+) {
+
+  const dot =
+    document.getElementById(
+      'statusDot'
+    );
+
+
+  const texte =
+    document.getElementById(
+      'statusText'
+    );
+
+
+  if (
+    nombre > 0
+  ) {
+
+    dot.classList.add(
+      'pending'
+    );
+
+
+    texte.classList.add(
+      'pending'
+    );
+
+
+    texte.textContent =
+      nombre +
+      ' donnée(s) en attente';
+
+  } else {
+
+    dot.classList.remove(
+      'pending'
+    );
+
+
+    texte.classList.remove(
+      'pending'
+    );
+
+
+    texte.textContent =
+      'Synchronisé';
+
+  }
+
+}
+
+
+/************************************************************
+ * RECHERCHE ÉLÈVES
+ ************************************************************/
+
+async function rechercherEleves() {
+
+  const nom =
+    document
+      .getElementById(
+        'rechercheNom'
+      )
+      .value
+      .trim();
+
+
+  const classe =
+    document
+      .getElementById(
+        'rechercheClasse'
+      )
+      .value;
+
+
+  const etablissement =
+    document
+      .getElementById(
+        'rechercheEtablissement'
+      )
+      .value;
+
+
+  if (!nom) {
+
+    afficherMessage(
+      'Veuillez saisir un nom pour effectuer la recherche.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !navigator.onLine
+  ) {
+
+    afficherMessage(
+      'La recherche d’élève nécessite une connexion Internet.',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  const bouton =
+    document.getElementById(
+      'btnRecherche'
+    );
+
+
+  bouton.disabled =
+    true;
+
+
+  bouton.textContent =
+    '⏳ Recherche...';
+
+
+  try {
+
+    const response =
+      await fetch(
+        APPS_SCRIPT_URL,
+        {
+
+          method:'POST',
+
+          headers:{
+
+            'Content-Type':
+              'text/plain;charset=utf-8'
+
+          },
+
+          body:
+            JSON.stringify({
+
+              action:
+                'rechercherEleves',
+
+              nom:
+                nom,
+
+              classe:
+                classe,
+
+              etablissement:
+                etablissement
+
+            })
+
+        }
+      );
+
+
+    const resultat =
+      await response.json();
+
+
+    if (
+      !resultat.success
+    ) {
+
+      throw new Error(
+        resultat.message
+      );
+
+    }
+
+
+    afficherResultatsRecherche(
+      resultat.eleves || []
+    );
+
+
+  } catch(erreur) {
+
+    afficherMessage(
+      'Recherche impossible : ' +
+      (
+        erreur.message ||
+        erreur
+      ),
+      'error'
+    );
+
+  } finally {
+
+    bouton.disabled =
+      false;
+
+    bouton.textContent =
+      '🔎 Rechercher';
+
+  }
+
+}
+
+
+/************************************************************
+ * AFFICHAGE RÉSULTATS RECHERCHE
+ ************************************************************/
+
+function afficherResultatsRecherche(
+  eleves
+) {
+
+  const zone =
+    document.getElementById(
+      'searchResults'
+    );
+
+
+  zone.innerHTML =
+    '';
+
+
+  zone.style.display =
+    'block';
+
+
+  if (
+    !eleves ||
+    eleves.length === 0
+  ) {
+
+    zone.innerHTML =
+      '<div style="padding:12px;color:#64748b;">Aucun élève trouvé.</div>';
+
+    return;
+
+  }
+
+
+  eleves.forEach(
+    function(eleves) {
+
+      const bouton =
+        document.createElement(
+          'button'
+        );
+
+
+      bouton.className =
+        'result-item';
+
+
+      bouton.type =
+        'button';
+
+
+      bouton.innerHTML =
+
+        '<div class="result-name">' +
+
+        echapperHTML(
+          eleves.nom
+        ) +
+
+        '</div>' +
+
+        '<div class="result-info">' +
+
+        echapperHTML(
+          eleves.classe
+        ) +
+
+        ' · ' +
+
+        echapperHTML(
+          eleves.etablissement
+        ) +
+
+        '</div>';
+
+
+      bouton.onclick =
+        function() {
+
+          selectionnerEleve(
+            eleves
+          );
+
+        };
+
+
+      zone.appendChild(
+        bouton
+      );
+
+    }
+  );
+
+}
+
+
+/************************************************************
+ * SÉLECTION ÉLÈVE
+ ************************************************************/
+
+function selectionnerEleve(
+  eleve
+) {
+
+  document
+    .getElementById(
+      'matricule'
+    )
+    .value =
+    eleve.matricule || '';
+
+
+  document
+    .getElementById(
+      'nom'
+    )
+    .value =
+    eleve.nom || '';
+
+
+  document
+    .getElementById(
+      'classe'
+    )
+    .value =
+    eleve.classe || '';
+
+
+  document
+    .getElementById(
+      'etablissement'
+    )
+    .value =
+    eleve.etablissement || '';
+
+
+  document
+    .getElementById(
+      'searchResults'
+    )
+    .style.display =
+    'none';
+
+
+  afficherMessage(
+    'Élève sélectionné. Vous pouvez maintenant enregistrer le paiement.',
+    'success'
+  );
+
+}
+
+
+/************************************************************
+ * MATRICULE POUR NOUVEL ÉLÈVE
+ ************************************************************/
+
+function calculerMatriculeLocal() {
+
+  const nom =
+    document
+      .getElementById(
+        'nom'
+      )
+      .value
+      .trim();
+
+
+  const classe =
+    document
+      .getElementById(
+        'classe'
+      )
+      .value;
+
+
+  const etablissement =
+    document
+      .getElementById(
+        'etablissement'
+      )
+      .value;
+
+
+  if (
+    !nom ||
+    !classe ||
+    !etablissement
+  ) {
+
+    document
+      .getElementById(
+        'matricule'
+      )
+      .value =
+      '';
+
+    return;
+
+  }
+
+
+  const codes = {
+
+    'PS':'PS',
+    'MS':'MS',
+    '12ème':'12',
+    '11ème':'11',
+    '10ème':'10',
+    '9ème':'9',
+    '8ème':'8',
+    '7ème':'7',
+    '6ème':'6',
+    '5ème':'5',
+    '4ème':'4',
+    '3ème':'3',
+    '2nde':'2',
+    '1ère':'1',
+    'Terminale':'Tle'
+
+  };
+
+
+  document
+    .getElementById(
+      'matricule'
+    )
+    .value =
+
+      nom
+        .replace(
+          /\s+/g,
+          ' '
+        )
+        .toUpperCase() +
+
+      '-' +
+
+      codes[classe] +
+
+      '-' +
+
+      etablissement
+        .toUpperCase();
+
+}
+
+
+/************************************************************
+ * ECOLAGE
+ ************************************************************/
+
+function gererEcolage() {
+
+  const toggle =
+    document.getElementById(
+      'ecolageToggle'
+    );
+
+
+  const fields =
+    document.getElementById(
+      'ecolageFields'
+    );
+
+
+  const text =
+    document.getElementById(
+      'toggleText'
+    );
+
+
+  if (
+    toggle.checked
+  ) {
+
+    fields.classList.add(
+      'visible'
+    );
+
+
+    text.textContent =
+      'Oui';
+
+
+    text.classList.add(
+      'active'
+    );
+
+  } else {
+
+    fields.classList.remove(
+      'visible'
+    );
+
+
+    text.textContent =
+      'Non';
+
+
+    text.classList.remove(
+      'active'
+    );
+
+  }
+
+
+  calculerTotal();
+
+}
+
+
+/************************************************************
+ * TOTAL
+ ************************************************************/
+
+function valeur(id) {
+
+  return Number(
+    document
+      .getElementById(
+        id
+      )
+      .value
+  ) || 0;
+
+}
+
+
+function calculerTotal() {
+
+  let total = 0;
+
+
+  [
+    'droit',
+    'fraisGeneraux',
+    'fram',
+    'teeShirt',
+    'cravate',
+    'short',
+    'extra'
+
+  ].forEach(
+    function(id) {
+
+      total +=
+        valeur(id);
+
+    }
+  );
+
+
+  if (
+    document
+      .getElementById(
+        'ecolageToggle'
+      )
+      .checked
+  ) {
+
+    total +=
+
+      valeur(
+        'montantEcolage'
+      )
+
+      *
+
+      valeur(
+        'nombreMois'
+      );
+
+  }
+
+
+  document
+    .getElementById(
+      'total'
+    )
+    .textContent =
+
+      total.toLocaleString(
+        'fr-FR'
+      );
+
+}
+
+
+/************************************************************
+ * ENREGISTRER
  ************************************************************/
 
 async function enregistrer() {
@@ -1181,21 +2522,35 @@ async function enregistrer() {
 
   const nom =
     document
-      .getElementById('nom')
+      .getElementById(
+        'nom'
+      )
       .value
       .trim();
 
 
   const classe =
     document
-      .getElementById('classe')
+      .getElementById(
+        'classe'
+      )
       .value;
 
 
   const etablissement =
     document
-      .getElementById('etablissement')
+      .getElementById(
+        'etablissement'
+      )
       .value;
+
+
+  const ecolage =
+    document
+      .getElementById(
+        'ecolageToggle'
+      )
+      .checked;
 
 
   if (
@@ -1214,51 +2569,30 @@ async function enregistrer() {
   }
 
 
-  const ecolage =
-    document
-      .getElementById(
-        'ecolageToggle'
-      )
-      .checked;
-
-
-  const valeur =
-    function(id) {
-
-      return Number(
-        document
-          .getElementById(id)
-          .value
-      ) || 0;
-
-    };
-
-
   const total =
-
     valeur('droit') +
-
     valeur('fraisGeneraux') +
-
     valeur('fram') +
-
     valeur('teeShirt') +
-
     valeur('cravate') +
-
     valeur('short') +
-
     valeur('extra') +
 
     (
+
       ecolage
+
         ? valeur('montantEcolage') *
           valeur('nombreMois')
+
         : 0
+
     );
 
 
-  if (total <= 0) {
+  if (
+    total <= 0
+  ) {
 
     afficherMessage(
       'Veuillez renseigner au moins un montant.',
@@ -1271,24 +2605,30 @@ async function enregistrer() {
 
 
   if (
-    ecolage &&
-    (
-      valeur('montantEcolage') <= 0 ||
-      valeur('nombreMois') <= 0
-    )
+    ecolage
   ) {
 
-    afficherMessage(
-      'Veuillez renseigner le montant mensuel et le nombre de mois.',
-      'error'
-    );
+    if (
+      valeur('montantEcolage') <= 0 ||
+      valeur('nombreMois') <= 0
+    ) {
 
-    return;
+      afficherMessage(
+        'Veuillez renseigner le montant mensuel et le nombre de mois d’écolage.',
+        'error'
+      );
+
+      return;
+
+    }
 
   }
 
 
   const data = {
+
+    idPaiement:
+      genererIdPaiement(),
 
     nom:
       nom,
@@ -1341,193 +2681,105 @@ async function enregistrer() {
   bouton.disabled =
     true;
 
+
   bouton.textContent =
     '⏳ Enregistrement...';
 
 
+  /*
+   * IMPORTANT :
+   *
+   * L'enregistrement normal
+   * est LOCAL EN PREMIER.
+   *
+   * Aucun fetch ici.
+   */
+
   try {
 
-    /*
-     * Toujours local d'abord.
-     */
-
-    await sauvegarderPaiementLocal(
+    await sauvegarderLocal(
       data
     );
 
 
+    await actualiserStatut();
+
+
     afficherMessage(
-      'Paiement enregistré localement. Il sera envoyé lors de la synchronisation.',
+      'Paiement enregistré sur cet appareil. Cliquez sur « Synchroniser » pour envoyer les données vers Google Sheets.',
       'success'
     );
 
 
-    reinitialiserFormulaire();
-
-
-    await actualiserStatut();
+    nettoyerFormulaire();
 
 
   } catch(erreur) {
 
     afficherMessage(
       'Impossible d’enregistrer localement : ' +
-      erreur.message,
+      (
+        erreur.message ||
+        erreur
+      ),
       'error'
     );
 
+  } finally {
+
+    bouton.disabled =
+      false;
+
+
+    bouton.textContent =
+      '✓ Enregistrer le paiement';
+
   }
-
-
-  bouton.disabled =
-    false;
-
-  bouton.textContent =
-    '✓ Enregistrer le paiement';
 
 }
 
 
 /************************************************************
- * ECOLAGE
+ * ID PAIEMENT
  ************************************************************/
 
-function gererEcolage() {
-
-  const toggle =
-    document.getElementById(
-      'ecolageToggle'
-    );
-
-
-  const fields =
-    document.getElementById(
-      'ecolageFields'
-    );
-
-
-  const text =
-    document.getElementById(
-      'toggleText'
-    );
-
-
-  if (toggle.checked) {
-
-    fields.classList.add(
-      'visible'
-    );
-
-    text.textContent =
-      'Oui';
-
-    text.classList.add(
-      'active'
-    );
-
-  } else {
-
-    fields.classList.remove(
-      'visible'
-    );
-
-    text.textContent =
-      'Non';
-
-    text.classList.remove(
-      'active'
-    );
-
-  }
-
-
-  calculerTotal();
-
-}
-
-
-/************************************************************
- * TOTAL
- ************************************************************/
-
-function calculerTotal() {
-
-  const valeur =
-    function(id) {
-
-      return Number(
-        document
-          .getElementById(id)
-          .value
-      ) || 0;
-
-    };
-
-
-  let total =
-
-    valeur('droit') +
-
-    valeur('fraisGeneraux') +
-
-    valeur('fram') +
-
-    valeur('teeShirt') +
-
-    valeur('cravate') +
-
-    valeur('short') +
-
-    valeur('extra');
-
+function genererIdPaiement() {
 
   if (
-    document
-      .getElementById(
-        'ecolageToggle'
-      )
-      .checked
+    crypto &&
+    crypto.randomUUID
   ) {
 
-    total +=
-      valeur('montantEcolage') *
-      valeur('nombreMois');
+    return crypto.randomUUID();
 
   }
 
 
-  document
-    .getElementById('total')
-    .textContent =
-    total.toLocaleString('fr-FR');
+  return (
+
+    Date.now() +
+
+    '-' +
+
+    Math.random()
+      .toString(36)
+      .substring(2,10)
+
+  );
 
 }
 
 
-document
-  .querySelectorAll(
-    'input[type="number"]'
-  )
-  .forEach(
-    function(input) {
-
-      input.addEventListener(
-        'input',
-        calculerTotal
-      );
-
-    }
-  );
-
-
 /************************************************************
- * REINITIALISATION
+ * NETTOYAGE
  ************************************************************/
 
-function reinitialiserFormulaire() {
+function nettoyerFormulaire() {
 
   [
+
     'nom',
+    'matricule',
     'droit',
     'fraisGeneraux',
     'fram',
@@ -1537,12 +2789,14 @@ function reinitialiserFormulaire() {
     'extra',
     'montantEcolage',
     'nombreMois'
+
   ].forEach(
     function(id) {
 
       document
         .getElementById(id)
-        .value = '';
+        .value =
+        '';
 
     }
   );
@@ -1552,26 +2806,27 @@ function reinitialiserFormulaire() {
     .getElementById(
       'classe'
     )
-    .value = '';
+    .value =
+    '';
 
 
   document
     .getElementById(
       'etablissement'
     )
-    .value = '';
+    .value =
+    '';
 
 
   document
     .getElementById(
       'ecolageToggle'
     )
-    .checked = false;
+    .checked =
+    false;
 
 
   gererEcolage();
-
-  calculerTotal();
 
 }
 
@@ -1594,8 +2849,11 @@ function afficherMessage(
   message.textContent =
     texte;
 
+
   message.className =
-    'message ' + type;
+    'message ' +
+    type;
+
 
   message.style.display =
     'block';
@@ -1605,11 +2863,13 @@ function afficherMessage(
 
 function cacherMessage() {
 
-  document
-    .getElementById(
+  const message =
+    document.getElementById(
       'message'
-    )
-    .style.display =
+    );
+
+
+  message.style.display =
     'none';
 
 }
@@ -1622,7 +2882,15 @@ function cacherMessage() {
 function ouvrirPaiements() {
 
   window.location.href =
-    'paiements.html';
+    './paiements.html';
+
+}
+
+
+function ouvrirClasse() {
+
+  window.location.href =
+    './classe.html';
 
 }
 
@@ -1631,9 +2899,64 @@ function ouvrirPaiements() {
  * INITIALISATION
  ************************************************************/
 
-calculerTotal();
+document
+  .querySelectorAll(
+    'input[type="number"]'
+  )
+  .forEach(
+    function(input) {
 
-actualiserStatut();
+      input.addEventListener(
+        'input',
+        calculerTotal
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    'nom'
+  )
+  .addEventListener(
+    'input',
+    calculerMatriculeLocal
+  );
+
+
+document
+  .getElementById(
+    'classe'
+  )
+  .addEventListener(
+    'change',
+    calculerMatriculeLocal
+  );
+
+
+document
+  .getElementById(
+    'etablissement'
+  )
+  .addEventListener(
+    'change',
+    calculerMatriculeLocal
+  );
+
+
+window.addEventListener(
+  'load',
+  function() {
+
+    actualiserStatut();
+
+    gererEcolage();
+
+    calculerTotal();
+
+  }
+);
 
 </script>
 
