@@ -1,10 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta
   name="viewport"
   content="width=device-width,initial-scale=1.0"
@@ -89,13 +89,19 @@ body {
 }
 
 .header h1 {
+
   font-size:25px;
+
 }
 
 .header p {
+
   font-size:13px;
+
   opacity:.85;
+
   margin-top:4px;
+
 }
 
 .header-actions {
@@ -127,7 +133,9 @@ body {
 }
 
 .btn:hover {
+
   transform:translateY(-1px);
+
 }
 
 .btn-navigation {
@@ -277,7 +285,6 @@ select:focus {
 
 }
 
-
 /************************************************
  * RECHERCHE ELEVE
  ************************************************/
@@ -375,7 +382,6 @@ select:focus {
 
 }
 
-
 /************************************************
  * FRAIS
  ************************************************/
@@ -392,11 +398,15 @@ select:focus {
 }
 
 .money-input {
+
   position:relative;
+
 }
 
 .money-input input {
+
   padding-right:35px;
+
 }
 
 .money-input span {
@@ -414,7 +424,6 @@ select:focus {
   font-size:11px;
 
 }
-
 
 /************************************************
  * ECOLAGE
@@ -453,7 +462,9 @@ select:focus {
 }
 
 .switch input {
+
   display:none;
+
 }
 
 .slider {
@@ -539,9 +550,10 @@ select:focus {
 }
 
 .ecolage-fields.visible {
-  display:grid;
-}
 
+  display:grid;
+
+}
 
 /************************************************
  * TOTAL
@@ -588,7 +600,6 @@ select:focus {
 
 }
 
-
 /************************************************
  * SYNCHRONISATION
  ************************************************/
@@ -634,13 +645,16 @@ select:focus {
 }
 
 .status-text {
+
   color:#166534;
+
 }
 
 .status-text.pending {
-  color:#b45309;
-}
 
+  color:#b45309;
+
+}
 
 /************************************************
  * BOUTON
@@ -683,7 +697,6 @@ select:focus {
 
 }
 
-
 /************************************************
  * MESSAGE
  ************************************************/
@@ -722,11 +735,6 @@ select:focus {
 
 }
 
-
-/************************************************
- * MOBILE
- ************************************************/
-
 @media(max-width:900px) {
 
   .form-grid,
@@ -749,7 +757,9 @@ select:focus {
 @media(max-width:600px) {
 
   body {
+
     padding:12px;
+
   }
 
   .header {
@@ -767,7 +777,9 @@ select:focus {
   }
 
   .header-actions .btn {
+
     flex:1;
+
   }
 
   .form-grid,
@@ -789,18 +801,13 @@ select:focus {
 
 <div class="container">
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- HEADER -->
 
 <div class="header">
 
   <div>
 
-    <h1>
-      Gestion des paiements
-    </h1>
+    <h1>Gestion des paiements</h1>
 
     <p>
       Enregistrement d'un nouveau paiement
@@ -818,9 +825,7 @@ select:focus {
       <span
         class="status-text"
         id="statusText">
-
         Synchronisé
-
       </span>
 
     </div>
@@ -862,17 +867,13 @@ select:focus {
 </div>
 
 
-<!-- =====================================================
-     RECHERCHE ELEVE
-===================================================== -->
+<!-- RECHERCHE -->
 
 <div class="card search-box">
 
   <div class="card-title">
 
-    <div class="icon">
-      🔎
-    </div>
+    <div class="icon">🔎</div>
 
     Rechercher un élève
 
@@ -881,12 +882,9 @@ select:focus {
 
   <div class="search-grid">
 
-
     <div class="form-group">
 
-      <label>
-        Nom *
-      </label>
+      <label>Nom *</label>
 
       <input
         id="rechercheNom"
@@ -898,9 +896,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Classe
-      </label>
+      <label>Classe</label>
 
       <select id="rechercheClasse">
 
@@ -931,9 +927,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Établissement
-      </label>
+      <label>Établissement</label>
 
       <select id="rechercheEtablissement">
 
@@ -962,9 +956,6 @@ select:focus {
   </div>
 
 
-  <!-- Les résultats apparaissent ici,
-       directement sous la barre -->
-
   <div
     class="search-results"
     id="searchResults">
@@ -973,17 +964,13 @@ select:focus {
 </div>
 
 
-<!-- =====================================================
-     INFORMATIONS ETUDIANT
-===================================================== -->
+<!-- INFORMATIONS -->
 
 <div class="card">
 
   <div class="card-title">
 
-    <div class="icon">
-      👤
-    </div>
+    <div class="icon">👤</div>
 
     Informations de l'étudiant
 
@@ -992,12 +979,9 @@ select:focus {
 
   <div class="form-grid">
 
-
     <div class="form-group">
 
-      <label>
-        Matricule
-      </label>
+      <label>Matricule</label>
 
       <input
         id="matricule"
@@ -1009,9 +993,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Nom *
-      </label>
+      <label>Nom *</label>
 
       <input
         id="nom"
@@ -1022,9 +1004,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Classe *
-      </label>
+      <label>Classe *</label>
 
       <select id="classe">
 
@@ -1055,9 +1035,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Établissement *
-      </label>
+      <label>Établissement *</label>
 
       <select id="etablissement">
 
@@ -1078,17 +1056,13 @@ select:focus {
 </div>
 
 
-<!-- =====================================================
-     FRAIS
-===================================================== -->
+<!-- FRAIS -->
 
 <div class="card">
 
   <div class="card-title">
 
-    <div class="icon">
-      💰
-    </div>
+    <div class="icon">💰</div>
 
     Frais à payer
 
@@ -1230,26 +1204,22 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     ECOLAGE
-===================================================== -->
+<!-- ECOLAGE -->
 
 <div class="card">
 
   <div class="ecolage-header">
 
-    <div
-      class="card-title"
-      style="margin-bottom:0;">
+    <div class="card-title"
+         style="margin-bottom:0;">
 
-      <div class="icon">
-        📚
-      </div>
+      <div class="icon">📚</div>
 
       Écolage
 
@@ -1290,9 +1260,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Montant mensuel
-      </label>
+      <label>Montant mensuel</label>
 
       <div class="money-input">
 
@@ -1311,9 +1279,7 @@ select:focus {
 
     <div class="form-group">
 
-      <label>
-        Nombre de mois
-      </label>
+      <label>Nombre de mois</label>
 
       <input
         type="number"
@@ -1324,14 +1290,13 @@ select:focus {
 
     </div>
 
+
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     TOTAL
-===================================================== -->
+<!-- TOTAL -->
 
 <div class="total-box">
 
@@ -1390,8 +1355,7 @@ const APPS_SCRIPT_URL =
 const DB_NAME =
   'GestionPaiementDB';
 
-const DB_VERSION =
-  3;
+const DB_VERSION = 3;
 
 const STORE_PAIEMENTS =
   'paiements_en_attente';
@@ -1609,109 +1573,6 @@ async function compterLocaux() {
 
 
 /************************************************************
- * SUPPRESSION LOCAL
- ************************************************************/
-
-async function supprimerLocal(
-  id
-) {
-
-  const db =
-    await ouvrirDB();
-
-
-  return new Promise(
-    function(resolve,reject) {
-
-      const transaction =
-        db.transaction(
-          STORE_PAIEMENTS,
-          'readwrite'
-        );
-
-
-      transaction
-        .objectStore(
-          STORE_PAIEMENTS
-        )
-        .delete(id);
-
-
-      transaction.oncomplete =
-        resolve;
-
-
-      transaction.onerror =
-        function() {
-
-          reject(
-            transaction.error
-          );
-
-        };
-
-    }
-  );
-
-}
-
-
-/************************************************************
- * ENVOI AU SERVEUR
- ************************************************************/
-
-async function envoyerAuServeur(
-  data
-) {
-
-  const response =
-    await fetch(
-      APPS_SCRIPT_URL,
-      {
-
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-            'text/plain;charset=utf-8'
-        },
-
-        body:
-          JSON.stringify({
-
-            action:
-              'synchroniserPaiement',
-
-            data:data
-
-          })
-
-      }
-    );
-
-
-  const resultat =
-    await response.json();
-
-
-  if (
-    !resultat.success
-  ) {
-
-    throw new Error(
-      resultat.message ||
-      'Erreur serveur.'
-    );
-
-  }
-
-
-  return resultat;
-
-}
-
-
-/************************************************************
  * SYNCHRONISATION
  ************************************************************/
 
@@ -1738,7 +1599,9 @@ async function synchroniser() {
     nombre === 0
   ) {
 
-    mettreAJourStatut(0);
+    mettreAJourStatut(
+      0
+    );
 
     afficherMessage(
       'Aucune donnée locale à synchroniser.',
@@ -1776,6 +1639,7 @@ async function synchroniser() {
 
   bouton.disabled =
     true;
+
 
   bouton.textContent =
     '⏳ Synchronisation...';
@@ -1830,7 +1694,8 @@ async function synchroniser() {
 
 
     for (
-      const element of paiements
+      const element
+      of paiements
     ) {
 
       const resultat =
@@ -1867,9 +1732,10 @@ async function synchroniser() {
 
         ? 'Synchronisation terminée avec succès.'
 
-        :
+        : (
           restant +
-          ' paiement(s) restent en attente.',
+          ' paiement(s) restent en attente.'
+        ),
 
       restant === 0
         ? 'success'
@@ -1877,37 +1743,150 @@ async function synchroniser() {
 
     );
 
+
   } catch(erreur) {
 
     afficherMessage(
+
       'La synchronisation a été interrompue : ' +
       (
         erreur.message ||
         erreur
       ),
+
       'error'
+
     );
 
 
     const restant =
       await compterLocaux();
 
+
     mettreAJourStatut(
       restant
     );
+
 
   } finally {
 
     synchronisationEnCours =
       false;
 
+
     bouton.disabled =
       false;
+
 
     bouton.textContent =
       '🔄 Synchroniser';
 
   }
+
+}
+
+
+/************************************************************
+ * ENVOI SERVEUR
+ ************************************************************/
+
+async function envoyerAuServeur(
+  data
+) {
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+            'text/plain;charset=utf-8'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              'synchroniserPaiement',
+
+            data:data
+
+          })
+
+      }
+    );
+
+
+  const resultat =
+    await response.json();
+
+
+  if (
+    !resultat.success
+  ) {
+
+    throw new Error(
+      resultat.message ||
+      'Erreur serveur.'
+    );
+
+  }
+
+
+  return resultat;
+
+}
+
+
+/************************************************************
+ * SUPPRESSION LOCALE
+ ************************************************************/
+
+async function supprimerLocal(
+  id
+) {
+
+  const db =
+    await ouvrirDB();
+
+
+  return new Promise(
+    function(resolve,reject) {
+
+      const transaction =
+        db.transaction(
+          STORE_PAIEMENTS,
+          'readwrite'
+        );
+
+
+      transaction
+        .objectStore(
+          STORE_PAIEMENTS
+        )
+        .delete(id);
+
+
+      transaction.oncomplete =
+        resolve;
+
+
+      transaction.onerror =
+        function() {
+
+          reject(
+            transaction.error
+          );
+
+        };
+
+    }
+  );
 
 }
 
@@ -1922,6 +1901,7 @@ async function actualiserStatut() {
 
     const nombre =
       await compterLocaux();
+
 
     mettreAJourStatut(
       nombre
@@ -1945,6 +1925,7 @@ function mettreAJourStatut(
       'statusDot'
     );
 
+
   const texte =
     document.getElementById(
       'statusText'
@@ -1959,9 +1940,11 @@ function mettreAJourStatut(
       'pending'
     );
 
+
     texte.classList.add(
       'pending'
     );
+
 
     texte.textContent =
       nombre +
@@ -1973,9 +1956,11 @@ function mettreAJourStatut(
       'pending'
     );
 
+
     texte.classList.remove(
       'pending'
     );
+
 
     texte.textContent =
       'Synchronisé';
@@ -1986,50 +1971,7 @@ function mettreAJourStatut(
 
 
 /************************************************************
- * ECHAPPER HTML
- *
- * Important : cette fonction était absente
- * dans la version qui provoquait l'erreur.
- ************************************************************/
-
-function echapperHTML(
-  valeur
-) {
-
-  return String(
-    valeur ?? ''
-  )
-
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-
-    .replace(
-      /</g,
-      '&lt;'
-    )
-
-    .replace(
-      />/g,
-      '&gt;'
-    )
-
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-
-    .replace(
-      /'/g,
-      '&#039;'
-    );
-
-}
-
-
-/************************************************************
- * RECHERCHE ELEVE
+ * RECHERCHE ÉLÈVES
  ************************************************************/
 
 async function rechercherEleves() {
@@ -2059,9 +2001,7 @@ async function rechercherEleves() {
       .value;
 
 
-  if (
-    !nom
-  ) {
+  if (!nom) {
 
     afficherMessage(
       'Veuillez saisir un nom pour effectuer la recherche.',
@@ -2096,6 +2036,7 @@ async function rechercherEleves() {
   bouton.disabled =
     true;
 
+
   bouton.textContent =
     '⏳ Recherche...';
 
@@ -2110,8 +2051,10 @@ async function rechercherEleves() {
           method:'POST',
 
           headers:{
+
             'Content-Type':
               'text/plain;charset=utf-8'
+
           },
 
           body:
@@ -2144,8 +2087,7 @@ async function rechercherEleves() {
     ) {
 
       throw new Error(
-        resultat.message ||
-        'Erreur lors de la recherche.'
+        resultat.message
       );
 
     }
@@ -2181,7 +2123,7 @@ async function rechercherEleves() {
 
 
 /************************************************************
- * AFFICHAGE RESULTATS
+ * AFFICHAGE RÉSULTATS RECHERCHE
  ************************************************************/
 
 function afficherResultatsRecherche(
@@ -2196,6 +2138,7 @@ function afficherResultatsRecherche(
 
   zone.innerHTML =
     '';
+
 
   zone.style.display =
     'block';
@@ -2215,7 +2158,7 @@ function afficherResultatsRecherche(
 
 
   eleves.forEach(
-    function(eleve) {
+    function(eleves) {
 
       const bouton =
         document.createElement(
@@ -2226,6 +2169,7 @@ function afficherResultatsRecherche(
       bouton.className =
         'result-item';
 
+
       bouton.type =
         'button';
 
@@ -2235,7 +2179,7 @@ function afficherResultatsRecherche(
         '<div class="result-name">' +
 
         echapperHTML(
-          eleve.nom
+          eleves.nom
         ) +
 
         '</div>' +
@@ -2243,13 +2187,13 @@ function afficherResultatsRecherche(
         '<div class="result-info">' +
 
         echapperHTML(
-          eleve.classe
+          eleves.classe
         ) +
 
         ' · ' +
 
         echapperHTML(
-          eleve.etablissement
+          eleves.etablissement
         ) +
 
         '</div>';
@@ -2259,7 +2203,7 @@ function afficherResultatsRecherche(
         function() {
 
           selectionnerEleve(
-            eleve
+            eleves
           );
 
         };
@@ -2276,7 +2220,7 @@ function afficherResultatsRecherche(
 
 
 /************************************************************
- * SELECTION ELEVE
+ * SÉLECTION ÉLÈVE
  ************************************************************/
 
 function selectionnerEleve(
@@ -2323,9 +2267,6 @@ function selectionnerEleve(
     'none';
 
 
-  calculerMatriculeLocal();
-
-
   afficherMessage(
     'Élève sélectionné. Vous pouvez maintenant enregistrer le paiement.',
     'success'
@@ -2335,7 +2276,7 @@ function selectionnerEleve(
 
 
 /************************************************************
- * MATRICULE
+ * MATRICULE POUR NOUVEL ÉLÈVE
  ************************************************************/
 
 function calculerMatriculeLocal() {
@@ -2419,10 +2360,7 @@ function calculerMatriculeLocal() {
 
       '-' +
 
-      (
-        codes[classe] ||
-        classe
-      ) +
+      codes[classe] +
 
       '-' +
 
@@ -2443,10 +2381,12 @@ function gererEcolage() {
       'ecolageToggle'
     );
 
+
   const fields =
     document.getElementById(
       'ecolageFields'
     );
+
 
   const text =
     document.getElementById(
@@ -2462,8 +2402,10 @@ function gererEcolage() {
       'visible'
     );
 
+
     text.textContent =
       'Oui';
+
 
     text.classList.add(
       'active'
@@ -2475,8 +2417,10 @@ function gererEcolage() {
       'visible'
     );
 
+
     text.textContent =
       'Non';
+
 
     text.classList.remove(
       'active'
@@ -2491,34 +2435,21 @@ function gererEcolage() {
 
 
 /************************************************************
- * VALEUR
+ * TOTAL
  ************************************************************/
 
-function valeur(
-  id
-) {
-
-  const element =
-    document.getElementById(
-      id
-    );
-
-
-  if (!element) {
-    return 0;
-  }
-
+function valeur(id) {
 
   return Number(
-    element.value
+    document
+      .getElementById(
+        id
+      )
+      .value
   ) || 0;
 
 }
 
-
-/************************************************************
- * TOTAL
- ************************************************************/
 
 function calculerTotal() {
 
@@ -2553,9 +2484,13 @@ function calculerTotal() {
   ) {
 
     total +=
+
       valeur(
         'montantEcolage'
-      ) *
+      )
+
+      *
+
       valeur(
         'nombreMois'
       );
@@ -2577,36 +2512,7 @@ function calculerTotal() {
 
 
 /************************************************************
- * ID PAIEMENT
- ************************************************************/
-
-function genererIdPaiement() {
-
-  if (
-    window.crypto &&
-    crypto.randomUUID
-  ) {
-
-    return crypto.randomUUID();
-
-  }
-
-
-  return (
-
-    Date.now() +
-    '-' +
-    Math.random()
-      .toString(36)
-      .substring(2,10)
-
-  );
-
-}
-
-
-/************************************************************
- * ENREGISTREMENT LOCAL
+ * ENREGISTRER
  ************************************************************/
 
 async function enregistrer() {
@@ -2664,7 +2570,6 @@ async function enregistrer() {
 
 
   const total =
-
     valeur('droit') +
     valeur('fraisGeneraux') +
     valeur('fram') +
@@ -2674,10 +2579,14 @@ async function enregistrer() {
     valeur('extra') +
 
     (
+
       ecolage
+
         ? valeur('montantEcolage') *
           valeur('nombreMois')
+
         : 0
+
     );
 
 
@@ -2696,38 +2605,30 @@ async function enregistrer() {
 
 
   if (
-    ecolage &&
-    (
-      valeur('montantEcolage') <= 0 ||
-      valeur('nombreMois') <= 0
-    )
+    ecolage
   ) {
 
-    afficherMessage(
-      'Veuillez renseigner le montant mensuel et le nombre de mois d’écolage.',
-      'error'
-    );
+    if (
+      valeur('montantEcolage') <= 0 ||
+      valeur('nombreMois') <= 0
+    ) {
 
-    return;
+      afficherMessage(
+        'Veuillez renseigner le montant mensuel et le nombre de mois d’écolage.',
+        'error'
+      );
+
+      return;
+
+    }
 
   }
-
-
-  const matricule =
-    document
-      .getElementById(
-        'matricule'
-      )
-      .value;
 
 
   const data = {
 
     idPaiement:
       genererIdPaiement(),
-
-    matricule:
-      matricule,
 
     nom:
       nom,
@@ -2780,9 +2681,19 @@ async function enregistrer() {
   bouton.disabled =
     true;
 
+
   bouton.textContent =
     '⏳ Enregistrement...';
 
+
+  /*
+   * IMPORTANT :
+   *
+   * L'enregistrement normal
+   * est LOCAL EN PREMIER.
+   *
+   * Aucun fetch ici.
+   */
 
   try {
 
@@ -2802,6 +2713,7 @@ async function enregistrer() {
 
     nettoyerFormulaire();
 
+
   } catch(erreur) {
 
     afficherMessage(
@@ -2818,10 +2730,42 @@ async function enregistrer() {
     bouton.disabled =
       false;
 
+
     bouton.textContent =
       '✓ Enregistrer le paiement';
 
   }
+
+}
+
+
+/************************************************************
+ * ID PAIEMENT
+ ************************************************************/
+
+function genererIdPaiement() {
+
+  if (
+    crypto &&
+    crypto.randomUUID
+  ) {
+
+    return crypto.randomUUID();
+
+  }
+
+
+  return (
+
+    Date.now() +
+
+    '-' +
+
+    Math.random()
+      .toString(36)
+      .substring(2,10)
+
+  );
 
 }
 
@@ -2849,12 +2793,10 @@ function nettoyerFormulaire() {
   ].forEach(
     function(id) {
 
-      const element =
-        document.getElementById(id);
-
-      if (element) {
-        element.value = '';
-      }
+      document
+        .getElementById(id)
+        .value =
+        '';
 
     }
   );
@@ -2935,10 +2877,6 @@ function cacherMessage() {
 
 /************************************************************
  * NAVIGATION
- *
- * IMPORTANT :
- * On utilise les fichiers locaux du GitHub Pages.
- * Ne pas remplacer par l'URL Apps Script.
  ************************************************************/
 
 function ouvrirPaiements() {
@@ -3024,4 +2962,3 @@ window.addEventListener(
 
 </body>
 </html>
-```
