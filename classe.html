@@ -4,7 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
 
 <title>Paiements par classe</title>
 
@@ -17,158 +21,271 @@
 }
 
 body {
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:linear-gradient(135deg,#fdf2f5,#f8fafc,#fff7ed);
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #f8dbe5,
+      transparent 35%
+    ),
+    #f8f1f4;
+
   color:#1e293b;
+
   min-height:100vh;
+
   padding:20px;
+
 }
 
 .container {
-  max-width:1500px;
+
+  max-width:1600px;
+
   margin:auto;
+
 }
 
 .header {
-  background:linear-gradient(135deg,#5b0b20,#8f1d3e,#b8325a);
+
+  background:
+    linear-gradient(
+      135deg,
+      #5b0b20,
+      #8f1d3e,
+      #b8325a
+    );
+
   color:white;
+
   padding:20px 25px;
-  border-radius:17px;
+
+  border-radius:18px;
+
   margin-bottom:18px;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:15px;
-  box-shadow:0 12px 30px rgba(107,16,38,.22);
+
 }
 
 .header h1 {
+
   font-size:24px;
+
 }
 
 .header p {
+
   font-size:13px;
+
   opacity:.85;
+
   margin-top:4px;
+
 }
 
 .btn {
+
   border:none;
+
   border-radius:10px;
+
   padding:11px 15px;
+
   cursor:pointer;
-  font-weight:600;
+
+  font-weight:700;
+
 }
 
 .btn-back {
-  background:rgba(255,255,255,.16);
+
+  background:
+    rgba(255,255,255,.16);
+
   color:white;
+
 }
 
 .card {
-  background:rgba(255,255,255,.94);
+
+  background:
+    rgba(255,255,255,.96);
+
   padding:20px;
-  border-radius:15px;
-  border:1px solid #f1dce3;
-  box-shadow:0 5px 18px rgba(15,23,42,.07);
+
+  border-radius:16px;
+
+  border:
+    1px solid #ead7df;
+
+  box-shadow:
+    0 5px 18px
+    rgba(15,23,42,.07);
+
   margin-bottom:16px;
+
 }
 
 .filters {
+
   display:grid;
-  grid-template-columns:1fr 1fr auto;
+
+  grid-template-columns:
+    1fr 1fr auto;
+
   gap:13px;
+
   align-items:end;
+
 }
 
 .form-group {
+
   display:flex;
+
   flex-direction:column;
+
 }
 
 label {
+
   font-size:12px;
-  font-weight:600;
+
+  font-weight:700;
+
   color:#475569;
+
   margin-bottom:6px;
+
 }
 
 select {
-  height:42px;
-  border:1px solid #dbe2ea;
-  border-radius:9px;
-  background:#f8fafc;
-  padding:0 12px;
-  outline:none;
-}
 
-select:focus {
-  border-color:#8f1d3e;
-  background:white;
+  height:42px;
+
+  border:
+    1px solid #dbe2ea;
+
+  border-radius:9px;
+
+  background:#f8fafc;
+
+  padding:0 12px;
+
+  outline:none;
+
 }
 
 .btn-search {
+
   height:42px;
+
   background:#8f1d3e;
+
   color:white;
+
 }
 
 .table-wrapper {
+
   overflow:auto;
+
   border-radius:10px;
+
 }
 
 table {
+
   width:100%;
+
   border-collapse:collapse;
+
   min-width:1450px;
+
 }
 
 th {
+
   background:#651029;
+
   color:white;
+
   padding:11px 9px;
+
   font-size:11px;
+
   text-align:left;
+
   white-space:nowrap;
+
 }
 
 td {
+
   padding:9px;
-  border-bottom:1px solid #edf0f3;
+
+  border-bottom:
+    1px solid #edf0f3;
+
   font-size:11px;
-  white-space:nowrap;
+
+  white-space:pre-line;
+
+  vertical-align:top;
+
 }
 
 tr:nth-child(even) td {
+
   background:#fff8fa;
+
 }
 
-.amount {
-  text-align:right;
-}
+.loading,
+.empty {
 
-.empty,
-.loading {
   display:none;
+
   text-align:center;
+
   padding:30px;
+
   color:#64748b;
+
 }
 
-@media(max-width:750px) {
+@media(max-width:700px) {
 
   .header {
+
     flex-direction:column;
+
     align-items:flex-start;
+
   }
 
   .filters {
+
     grid-template-columns:1fr;
+
   }
 
   .btn-search {
+
     width:100%;
+
   }
 
 }
@@ -188,7 +305,7 @@ tr:nth-child(even) td {
     <h1>Paiements par classe</h1>
 
     <p>
-      Consultation directe des données Google Sheets
+      Consultation directe de Google Sheets
     </p>
 
   </div>
@@ -198,7 +315,7 @@ tr:nth-child(even) td {
     class="btn btn-back"
     onclick="retourIndex()">
 
-    ← Retour à l'accueil
+    ← Accueil
 
   </button>
 
@@ -211,12 +328,12 @@ tr:nth-child(even) td {
 
     <div class="form-group">
 
-      <label>Classe</label>
+      <label>Classe *</label>
 
       <select id="classe">
 
         <option value="">
-          Sélectionner une classe
+          Sélectionner
         </option>
 
         <option>PS</option>
@@ -261,6 +378,7 @@ tr:nth-child(even) td {
 
     <button
       class="btn btn-search"
+      id="btnRecherche"
       onclick="rechercher()">
 
       🔎 Chercher
@@ -293,7 +411,7 @@ tr:nth-child(even) td {
 <div
   class="card"
   id="tableContainer"
-  style="display:none">
+  style="display:none;">
 
   <div class="table-wrapper">
 
@@ -312,7 +430,6 @@ tr:nth-child(even) td {
           <th>Cravate</th>
           <th>Short</th>
           <th>Extra</th>
-
           <th>Septembre</th>
           <th>Octobre</th>
           <th>Novembre</th>
@@ -323,14 +440,15 @@ tr:nth-child(even) td {
           <th>Avril</th>
           <th>Mai</th>
           <th>Juin</th>
-
-          <th>Établissement</th>
+          <th>Etablissement</th>
 
         </tr>
 
       </thead>
 
-      <tbody id="classeTable"></tbody>
+      <tbody
+        id="classeTable">
+      </tbody>
 
     </table>
 
@@ -338,18 +456,43 @@ tr:nth-child(even) td {
 
 </div>
 
-
 </div>
 
 
 <script>
 
 /************************************************************
- * URL GOOGLE APPS SCRIPT
+ * CONFIGURATION
  ************************************************************/
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbyGgGPsX0HAZUTnPKXomTCEIZ3ba26w8YJeCpwbqJMJaCGg4ZlT2L908O-EXuQiUSRI/exec';
+  'https://script.google.com/macros/s/AKfycbzJBIds7jRI2DUTioirCcT23vHZQso4V8iqofmpU8fTbULaoNKlvHqcV0g-FIvgDHai/exec';
+
+
+/************************************************************
+ * SERVICE WORKER
+ ************************************************************/
+
+if (
+  'serviceWorker' in navigator
+) {
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      navigator.serviceWorker
+        .register(
+          './service-worker.js'
+        )
+        .catch(
+          console.warn
+        );
+
+    }
+  );
+
+}
 
 
 /************************************************************
@@ -360,13 +503,17 @@ async function rechercher() {
 
   const classe =
     document
-      .getElementById('classe')
+      .getElementById(
+        'classe'
+      )
       .value;
 
 
   const etablissement =
     document
-      .getElementById('etablissement')
+      .getElementById(
+        'etablissement'
+      )
       .value;
 
 
@@ -381,7 +528,34 @@ async function rechercher() {
   }
 
 
+  if (
+    !navigator.onLine
+  ) {
+
+    alert(
+      'La recherche par classe nécessite une connexion Internet.'
+    );
+
+    return;
+
+  }
+
+
   afficherLoading();
+
+
+  const bouton =
+    document.getElementById(
+      'btnRecherche'
+    );
+
+
+  bouton.disabled =
+    true;
+
+
+  bouton.textContent =
+    '⏳ Recherche...';
 
 
   try {
@@ -391,9 +565,9 @@ async function rechercher() {
         APPS_SCRIPT_URL,
         {
 
-          method: 'POST',
+          method:'POST',
 
-          headers: {
+          headers:{
 
             'Content-Type':
               'text/plain;charset=utf-8'
@@ -422,28 +596,35 @@ async function rechercher() {
       await response.json();
 
 
-    if (!resultat.success) {
+    if (
+      !resultat.success
+    ) {
 
       throw new Error(
-        resultat.message ||
-        'Erreur lors de la recherche.'
+        resultat.message
       );
 
     }
 
 
     afficherResultats(
-      resultat.lignes ||
-      resultat.paiements ||
-      []
+      resultat.lignes || []
     );
 
 
-  } catch (erreur) {
+  } catch(erreur) {
 
     afficherErreur(
       erreur
     );
+
+  } finally {
+
+    bouton.disabled =
+      false;
+
+    bouton.textContent =
+      '🔎 Chercher';
 
   }
 
@@ -451,19 +632,29 @@ async function rechercher() {
 
 
 /************************************************************
- * FORMAT MONTANT
+ * FORMAT
  ************************************************************/
 
 function formatMontant(
   valeur
 ) {
 
-  const montant =
-    Number(valeur) || 0;
-
+  /*
+   * Les cellules de classe peuvent
+   * maintenant contenir :
+   *
+   * 50000 Ar
+   * Payé
+   * 16/09/2026
+   *
+   * Donc on ne transforme pas
+   * les cellules texte.
+   */
 
   if (
-    montant === 0
+    valeur === null ||
+    valeur === undefined ||
+    valeur === ''
   ) {
 
     return '';
@@ -471,28 +662,59 @@ function formatMontant(
   }
 
 
-  return (
-    montant.toLocaleString(
-      'fr-FR'
-    ) +
-    ' Ar'
+  if (
+    typeof valeur === 'number'
+  ) {
+
+    return (
+      valeur.toLocaleString(
+        'fr-FR'
+      ) +
+      ' Ar'
+    );
+
+  }
+
+
+  return String(
+    valeur
   );
 
 }
 
 
-/************************************************************
- * PROTECTION HTML
- ************************************************************/
+function echapperHTML(
+  valeur
+) {
 
-function echapperHTML(v) {
+  return String(
+    valeur ?? ''
+  )
 
-  return String(v ?? '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
 
 }
 
@@ -578,119 +800,115 @@ function afficherResultats(
 
         <td>
           <strong>
-            ${echapperHTML(
-              row.matricule
-            )}
+            ${echapperHTML(row.matricule)}
           </strong>
         </td>
 
         <td>
           <strong>
-            ${echapperHTML(
-              row.nom
-            )}
+            ${echapperHTML(row.nom)}
           </strong>
         </td>
 
         <td>
-          ${formatMontant(
-            row.droit
+          ${echapperHTML(
+            formatMontant(row.droit)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.fraisGeneraux
+          ${echapperHTML(
+            formatMontant(row.fraisGeneraux)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.fram
+          ${echapperHTML(
+            formatMontant(row.fram)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.teeShirt
+          ${echapperHTML(
+            formatMontant(row.teeShirt)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.cravate
+          ${echapperHTML(
+            formatMontant(row.cravate)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.short
+          ${echapperHTML(
+            formatMontant(row.short)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.extra
+          ${echapperHTML(
+            formatMontant(row.extra)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.septembre
+          ${echapperHTML(
+            formatMontant(row.septembre)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.octobre
+          ${echapperHTML(
+            formatMontant(row.octobre)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.novembre
+          ${echapperHTML(
+            formatMontant(row.novembre)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.decembre
+          ${echapperHTML(
+            formatMontant(row.decembre)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.janvier
+          ${echapperHTML(
+            formatMontant(row.janvier)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.fevrier
+          ${echapperHTML(
+            formatMontant(row.fevrier)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.mars
+          ${echapperHTML(
+            formatMontant(row.mars)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.avril
+          ${echapperHTML(
+            formatMontant(row.avril)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.mai
+          ${echapperHTML(
+            formatMontant(row.mai)
           )}
         </td>
 
         <td>
-          ${formatMontant(
-            row.juin
+          ${echapperHTML(
+            formatMontant(row.juin)
           )}
         </td>
 
@@ -761,14 +979,6 @@ function afficherErreur(
     'none';
 
 
-  document
-    .getElementById(
-      'empty'
-    )
-    .style.display =
-    'none';
-
-
   alert(
     'Erreur : ' +
     (
@@ -787,11 +997,12 @@ function afficherErreur(
 function retourIndex() {
 
   window.location.href =
-    'index.html';
+    './index.html';
 
 }
 
 </script>
 
 </body>
+
 </html>
