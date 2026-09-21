@@ -1,210 +1,91 @@
-/************************************************************
- * SERVICE WORKER
- ************************************************************/
-
-const CACHE_NAME =
-  'gestion-paiement-v4';
-
+const CACHE_NAME = 'gestion-paiement-v4';
 
 const FILES_TO_CACHE = [
-
   './',
-
   './index.html',
-
   './paiements.html',
-
   './classe.html',
-
   './service-worker.js'
-
 ];
 
+self.addEventListener('install', event => {
 
-/************************************************************
- * INSTALLATION
- ************************************************************/
+  event.waitUntil(
 
-self.addEventListener(
-  'install',
-  function(event) {
+    caches
+      .open(CACHE_NAME)
+      .then(cache => cache.addAll(FILES_TO_CACHE))
 
-    event.waitUntil(
+  );
 
-      caches
-        .open(
-          CACHE_NAME
-        )
-        .then(
-          function(cache) {
+  self.skipWaiting();
 
-            return cache.addAll(
-              FILES_TO_CACHE
-            );
-
-          }
-        )
-
-    );
+});
 
 
-    self.skipWaiting();
+self.addEventListener('activate', event => {
 
-  }
-);
+  event.waitUntil(
 
+    caches
+      .keys()
+      .then(names =>
 
-/************************************************************
- * ACTIVATION
- ************************************************************/
+        Promise.all(
 
-self.addEventListener(
-  'activate',
-  function(event) {
+          names
+            .filter(name => name !== CACHE_NAME)
+            .map(name => caches.delete(name))
 
-    event.waitUntil(
-
-      caches
-        .keys()
-        .then(
-          function(names) {
-
-            return Promise.all(
-
-              names
-                .filter(
-                  function(name) {
-
-                    return (
-                      name !==
-                      CACHE_NAME
-                    );
-
-                  }
-                )
-
-                .map(
-                  function(name) {
-
-                    return caches.delete(
-                      name
-                    );
-
-                  }
-                )
-
-            );
-
-          }
         )
 
-    );
-
-
-    self.clients.claim();
-
-  }
-);
-
-
-/************************************************************
- * REQUÊTES
- ************************************************************/
-
-self.addEventListener(
-  'fetch',
-  function(event) {
-
-    /*
-     * Apps Script :
-     *
-     * JAMAIS de cache.
-     */
-
-    if (
-
-      event.request.url.includes(
-        'script.google.com'
       )
 
-    ) {
+  );
 
-      return;
+  self.clients.claim();
 
-    }
-
-
-    /*
-     * Navigation HTML :
-     *
-     * priorité au cache.
-     *
-     * Cela permet d'ouvrir
-     * l'application hors connexion.
-     */
-
-    if (
-      event.request.mode ===
-      'navigate'
-    ) {
-
-      event.respondWith(
-
-        caches
-          .match(
-            './index.html'
-          )
-          .then(
-            function(cached) {
-
-              return (
-                cached ||
-                fetch(
-                  event.request
-                )
-              );
-
-            }
-          )
-
-      );
-
-      return;
-
-    }
+});
 
 
-    /*
-     * Autres fichiers :
-     *
-     * cache d'abord,
-     * réseau ensuite.
-     */
+self.addEventListener('fetch', event => {
 
-    event.respondWith(
+  /*
+   * Les appels Google Apps Script
+   * ne doivent jamais être mis dans le cache.
+   */
 
-      caches
-        .match(
-          event.request
-        )
-        .then(
-          function(cached) {
+  if (
+    event.request.url.includes('script.google.com')
+  ) {
 
-            if (cached) {
-
-              return cached;
-
-            }
-
-
-            return fetch(
-              event.request
-            );
-
-          }
-        )
-
-    );
+    return;
 
   }
-);
+
+
+  /*
+   * Pour les fichiers de l'application :
+   * on utilise le cache s'il existe,
+   * sinon on demande le fichier au réseau.
+   */
+
+  event.respondWith(
+
+    caches
+      .match(event.request)
+      .then(cached => {
+
+        if (cached) {
+
+          return cached;
+
+        }
+
+        return fetch(event.request);
+
+      })
+
+  );
+
+});
